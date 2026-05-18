@@ -96,12 +96,12 @@
 
 \par
 This project explores the relationship between state firearm legislation and
-gun violence in the United States, using data spanning 1949-2023. While
-estimated gun ownership is included as a contextual variable, it is not
-treated as the primary explanatory factor. Evidence from countries such as
+gun violence in the United States, using data spanning 1976--2023. While
+estimated household gun ownership is included as a contextual variable, it is
+not treated as the primary explanatory factor. Evidence from countries such as
 Finland and Switzerland, where high gun ownership coexists with low rates of
 gun violence, suggests that the regulatory environment surrounding firearms may
-matter moer than ownership prevalence alone. This project therefore focuses on
+matter more than ownership prevalence alone. This project therefore focuses on
 whether the strength of state firearm laws is associated with lower rates of
 firearm homicide and suicide, and whether changes in legislation over time
 correspond to measurable shifts in gun violence rates.
@@ -116,7 +116,7 @@ The project followed the process below to achieve the goal described above:
 	\item Research questions derived from data exploration
 	\item Visualization types needed to answer each question and storytell
 	\item Data source connection, relationships, and calculated fields in Tableau
-	\item Tableau feature selection (parameters, filters, actions, tooltips)
+	\item Tableau feature selection (parameters, sets, filters, actions, tooltips)
 	\item Dashboard design and interactive storytelling
 \end{enumerate}
 
@@ -127,8 +127,8 @@ Numerous sources are used throughout the project such as:
 
 \begin{itemize}
 	\item Official dataset documentation and codebooks
-	\item ATF and Harvard Dataverse dataset metadata
-	\item Academic literature on firearm ownership proxies
+	\item Harvard Dataverse and Tufts CTSI dataset metadata
+	\item Academic literature on firearm ownership proxies and gun law effects
 	\item Tableau official documentation
 	\item Lecture notebooks and course materials
 	\item AI assistance (declared below)
@@ -155,63 +155,64 @@ Two public datasets were selected and joined for this project. Both were
 required to be different from those used in the Python assignment, and had not
 been claimed by another student.
 
-\subsection{Dataset 1: State-Level Household Gun Ownership Proxy, 1949--2020}
+\subsection{Dataset 1: Firearm Suicide Proxy for Household Gun Ownership, 1949--2023}
 
 \par
 The first dataset\autocite{ownershipproxy} is a state-year level proxy for
-household gun ownership in the United States, covering 1949 to 2020. It is
+household gun ownership in the United States, covering 1949 to 2023. It is
 hosted on Harvard Dataverse and is derived from the firearm suicide proxy
-methodology: the proportion of suicides committed with a firearm is used as
-an indirect estimate of household gun prevalence by state and year.
+methodology: the proportion of suicides committed with a firearm (FSS) is used
+as an indirect estimate of household gun prevalence by state and year.
 
 \begin{itemize}
 	\item \textbf{Source}: Harvard Dataverse, Kang et al.\autocite{kang2023}
 	\item \textbf{Grain}: One row per U.S. state per year
-	\item \textbf{Key columns}: State, Year, Firearm suicide proxy (FSS),
-	      total suicides, firearm suicides, population
-	\item \textbf{Date span}: 1949--2020 (72 years, 50 states + D.C.)
-	\item \textbf{Format}: CSV
+	\item \textbf{Key columns}: State, Year, FSS (firearm suicide share),
+	      firearm suicides, total suicides, firearm homicide rate,
+	      total homicides, population
+	\item \textbf{Date span}: 1949--2023 (75 years, 50 states + D.C.)
+	\item \textbf{Format}: Tab-separated values (\texttt{.tab})
 \end{itemize}
 
 \par
 This dataset was chosen because it provides a long-term, population-adjusted,
 and academically validated measure of gun prevalence that can be compared
-across states and over time. It is not a literal count of guns per household
+across states and over time. FSS is not a literal count of guns per household
 but an indirect proxy widely used in public health and policy
 research\autocite{extendingfss}.
 
-\subsection{Dataset 2: ATF Gun Traces by State and Firearm Type, 2014--2023}
+\subsection{Dataset 2: State Firearm Law Database, 1976--2024}
 
 \par
-The second dataset\autocite{atftraces} is published by The Trace via the Gun
-Violence Data Hub and originates from the U.S. Bureau of Alcohol, Tobacco,
-Firearms and Explosives (ATF). It aggregates firearm trace requests submitted
-by law enforcement, broken down by state, year, and firearm type.
+The second dataset\autocite{statefirearmlaw} is maintained by the State
+Firearm Law Research Group at Tufts University and tracks the presence or
+absence of 72 firearm safety law provisions across all 50 U.S. states for
+every year from 1976 to 2024.
 
 \begin{itemize}
-	\item \textbf{Source}: The Trace / ATF eTrace system\autocite{atfguide}
-	\item \textbf{Grain}: One row per state per year per firearm type
-	\item \textbf{Key columns}: State, Year, Firearm type (pistol, revolver,
-	      rifle, shotgun, other), Trace count
-	\item \textbf{Date span}: 2014--2023
-	\item \textbf{Format}: CSV (\texttt{types\_by\_state.csv})
+	\item \textbf{Source}: Tufts CTSI --- State Firearm Law Database\autocite{statefirearmlaw}
+	\item \textbf{Grain}: One row per U.S. state per year
+	\item \textbf{Key columns}: State, Year, 72 binary law indicator columns
+	      (e.g.\ permit required, background check, waiting period,
+	      stand-your-ground, child access prevention)
+	\item \textbf{Date span}: 1976--2024
+	\item \textbf{Format}: Excel (\texttt{.xlsx})
 \end{itemize}
 
 \par
-This dataset was chosen because it provides a direct state-level breakdown of
-what types of crime-recovered firearms are most commonly traced by law
-enforcement. It complements the ownership proxy by offering a second lens on
-firearm patterns: not how many households likely have guns, but what kinds of
-guns appear in traced-crime contexts and how that varies by
-state\autocite{atftraces}.
+This dataset was chosen because it provides a historically accurate,
+year-by-year record of state firearm legislation, enabling analysis of
+whether law changes correspond to changes in gun violence rates. It is
+non-partisan by design and is widely used in academic public health
+research\autocite{statefirearmlaw}.
 
 \subsection{Join Strategy}
 
 \par
-Both datasets were aggregated and joined on the shared keys \texttt{state} and
-\texttt{year}. Since the ownership proxy spans 1949--2020 and the ATF trace
-data spans 2014--2023, the effective overlap window is \textbf{2014--2020}.
-The join was performed in Tableau using a relationship between the two data
+Both datasets were joined in Tableau on the shared keys \texttt{state} and
+\texttt{year}. The ownership proxy spans 1949--2023 and the law database spans
+1976--2024, giving an effective analysis window of \textbf{1976--2023}.
+The join was performed using a Tableau relationship between the two data
 sources on the matching state-year grain, ensuring the workbook remains
 reproducible and reviewable.
 
@@ -223,28 +224,26 @@ understand structure, null patterns, and label consistency.
 Key observations:
 
 \begin{itemize}
-	\item State names required standardisation across both files (full names
-	      vs. abbreviations)
-	\item The ownership proxy file includes several calculated rate columns
-	      derived from raw counts and population
-	\item The ATF trace file contains one row per state-year-type combination,
-	      requiring aggregation before the join
-	\item The overlapping year range (2014--2020) was confirmed as sufficient
-	      for temporal analysis and question answering
+	\item State names required standardisation across both files
+	\item The ownership proxy file includes several pre-calculated rate
+	      columns derived from raw counts and population
+	\item The law database contains 72 binary columns requiring aggregation
+	      into a composite law count score via a Tableau calculated field
+	\item The overlapping year range (1976--2023) was confirmed as sufficient
+	      for robust longitudinal analysis
 \end{itemize}
 
 \subsection{Processing}
 
 \par
-Key processing steps applied before connecting to Tableau:
+Key processing steps applied before and during connection to Tableau:
 
 \begin{itemize}
 	\item Standardised state name format across both files to enable the join
-	\item Filtered both files to the 2014--2020 overlap window
-	\item Aggregated ATF trace file to one row per state-year with total
-	      trace count and per-type share columns
+	\item Created a composite \textbf{law count} calculated field in Tableau
+	      summing all 72 binary law indicator columns per state per year
 	\item Retained population-adjusted rates from the ownership proxy
-	      for per-capita analysis in Tableau
+	      for per-capita analysis
 	\item Removed U.S. territory rows (Puerto Rico, Guam, etc.) to keep
 	      the analysis to the 50 states and D.C.
 \end{itemize}
@@ -254,37 +253,39 @@ Key processing steps applied before connecting to Tableau:
 Three questions were formulated based on data exploration and storytelling intent:
 
 \begin{enumerate}
-	\item How has estimated household gun prevalence varied by state over time?
-	\item What firearm types dominate ATF trace summaries by state?
-	\item Do states with higher estimated gun prevalence show different traced
-	      firearm type patterns?
+	\item Is the combination of high estimated gun ownership and few firearm
+	      laws associated with higher firearm homicide and suicide rates?
+	\item How has the gap in firearm violence rates between high-law and
+	      low-law states changed over time?
+	\item When states increase the number of firearm laws, do firearm
+	      homicide and suicide rates change in subsequent years?
 \end{enumerate}
 
-\subsubsection{Question 1: Household Gun Prevalence Over Time}\label{q1}
+\subsubsection{Question 1: Ownership, Laws, and Violence}\label{q1}
 
 \par
-Question 1 establishes the baseline of the story. By mapping and trending the
-gun ownership proxy across states and years, the viewer understands where guns
-are most prevalent and whether that has changed over time. This provides
-essential context for interpreting the ATF trace patterns addressed in the
-following two questions.
+Question 1 establishes the core hypothesis of the project. By plotting
+estimated gun ownership against law count and encoding gun violence rates
+visually, the viewer can assess whether the states with the worst outcomes
+cluster in the high-ownership, low-law quadrant. This is framed as an
+association analysis rather than a causal claim.
 
-\subsubsection{Question 2: Traced Firearm Type Composition}\label{q2}
-
-\par
-Question 2 shifts the lens from prevalence to composition. By exploring which
-firearm types appear most frequently in ATF trace data by state, the viewer
-can identify regional patterns in traced crime guns and assess whether certain
-states are more associated with specific weapon types than others.
-
-\subsubsection{Question 3: Prevalence vs.\ Traced Patterns}\label{q3}
+\subsubsection{Question 2: High-Law vs.\ Low-Law States Over Time}\label{q2}
 
 \par
-Question 3 connects both datasets analytically. It asks whether states with
-higher estimated household gun prevalence also exhibit different patterns in
-ATF-traced firearm types. This is framed as an association analysis rather
-than a causal claim, consistent with the observational nature of both
-datasets and standard practice in firearm research\autocite{extendingfss}.
+Question 2 introduces a temporal dimension. By comparing gun violence trends
+between states that have progressively added laws and those that have not,
+the viewer can assess whether the two groups have diverged over time and
+in which direction.
+
+\subsubsection{Question 3: Lagged Effect of Law Changes}\label{q3}
+
+\par
+Question 3 is the most analytically ambitious. Using the \texttt{nextyearfss}
+column already present in the ownership proxy dataset, it asks whether an
+increase in law count in a given year is associated with a lower ownership
+proxy or lower violence rates the following year. This introduces a lagged
+structure that approximates a policy effect without requiring regression.
 
 \section{Visualization Prep}
 
@@ -296,37 +297,29 @@ requirements.
 \subsection{Storytelling}
 
 \par
-The project follows a three-act structure. Q1\sref{q1} opens with the
-geographic and temporal baseline: where gun prevalence is highest and how it
-has evolved. Q2\sref{q2} introduces the second dimension: what kinds of
-firearms are being traced by state. Q3\sref{q3} closes with an analytical
-comparison between the two datasets, asking whether prevalence and type
-patterns are associated. The viewer moves from observation to exploration to
-interpretation.
+The project follows a four-act narrative structure. Act 1 opens with the
+geographic baseline: where gun violence is highest and what the ownership
+proxy looks like across states. Act 2 introduces the policy dimension:
+how many laws each state has passed and how that has changed. Act 3 connects
+both dimensions in the ownership-laws-violence scatter. Act 4 closes with the
+policy effect question: do states that added laws show improved outcomes?
+The viewer moves from observation to exploration to interpretation.
 
 \subsection{Colors and Themes}\label{colors}
 
 \par
-Colors were chosen to encode meaning consistently, directly addressing the
-feedback from the previous assignment that color was under-used as a visual
-encoding mechanism:
+Colors were chosen to encode meaning consistently:
 
 \begin{itemize}
-	\item A \textbf{sequential red palette} was used for ownership proxy maps,
-	      where darker shades indicate higher estimated gun prevalence.
-	\item \textbf{Categorical colors} were used for firearm types (pistol,
-	      revolver, rifle, shotgun), kept consistent across all sheets so
-	      the same type always appears in the same color.
-	\item A \textbf{diverging palette} distinguishes states above and below
-	      the national average in scatter and detail views.
+	\item A \textbf{sequential red palette} encodes gun violence rates on
+	      maps and scatter plots, where darker shades indicate higher rates.
+	\item A \textbf{diverging palette} separates high-law from low-law states
+	      in trend and comparison views.
+	\item \textbf{Set-based color} encodes user-selected states (highlighted)
+	      vs.\ unselected states (grey) in the interactive line chart.
 	\item Backgrounds are light and gridlines are minimal to reduce visual
 	      noise and keep focus on data marks.
 \end{itemize}
-
-\par
-These decisions were made in line with visualization theory from Unit 1 and
-with attention to color-blindness accessibility by avoiding red-green
-contrasts as the sole distinguishing factor.
 
 \subsection{Tableau Feature Choices}
 
@@ -334,19 +327,20 @@ contrasts as the sole distinguishing factor.
 The following Tableau features were planned and used across this project:
 
 \begin{itemize}
-	\item \textbf{Calculated fields}: Gun prevalence quintile, trace rate
-	      per 100k population, firearm type share percentage,
-	      above/below national average flag
-	\item \textbf{Parameters}: Year selector allowing the viewer to update
-	      all views simultaneously to a chosen year
-	\item \textbf{Filters}: State multiselect filter, year range slider,
-	      firearm type selector
-	\item \textbf{Dashboard actions}: Click-to-filter from the map to the
-	      bar chart and scatter plot
-	\item \textbf{Enhanced tooltips}: Display state, year, ownership proxy
-	      rate, total trace count, and top firearm type per state
-	\item \textbf{Reference lines}: National average line in trend and
-	      scatter views
+	\item \textbf{Calculated fields}: Composite law count score (sum of
+	      72 binary columns), law category classification, above/below
+	      national average flag, estimated gun-owning households
+	\item \textbf{Parameters}: Year selector and Top N selector for
+	      ranked bar chart
+	\item \textbf{Sets and Combined Sets}: Selected states set for
+	      interactive line chart, top/bottom N sets combined for
+	      ranked bar chart
+	\item \textbf{Filters}: State multiselect, year range
+	\item \textbf{Dashboard actions}: Set action (click state to add
+	      to selected set and update line chart)
+	\item \textbf{Reference lines}: National average in trend views
+	\item \textbf{Trend lines}: Linear trend in scatter plot
+	      (from Analytics pane)
 \end{itemize}
 
 \section{Visualizations}
@@ -354,95 +348,70 @@ The following Tableau features were planned and used across this project:
 \par
 A consistent set of calculated fields and a shared color scheme were applied
 across all visualizations. Field names are self-explanatory (e.g.\
-\texttt{Ownership Proxy Rate}, \texttt{Trace Rate per 100k},
-\texttt{Rifle Share \%}) to ensure readability and reproducibility.
+\texttt{CF\_law\_count}, \texttt{CF\_show\_state}, \texttt{P\_year})
+to ensure readability and reproducibility.
 
-\subsection{Q1 -- Household Gun Prevalence by State}
-
-\par
-Two visualizations answer Question 1\sref{q1}: a filled map showing geographic
-distribution of the ownership proxy and a line chart showing how the proxy has
-evolved over the available time range.
+\subsection{Q1 -- Ownership, Laws, and Violence (Scatter Plot)}
 
 \par
-The \textbf{filled map} was chosen because the proxy is a state-level measure
-and geography is the most natural encoding for state-level comparisons.
-A sequential red palette was applied and a year parameter allows the viewer
-to explore any year in the 2014--2020 window.
+A \textbf{scatter plot} answers Question 1\sref{q1}. Each point represents
+one state in a given year. The X axis shows estimated gun ownership (FSS),
+the Y axis shows the composite law count, and the color encodes the firearm
+homicide rate. A year parameter allows the viewer to scrub through time and
+observe how the quadrant distribution has changed.
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=\textwidth]{../figures/q1_map.png}
-	\caption{Q1 Chart -- U.S. State Gun Ownership Proxy Map}
-	\label{fig:q1map}
+	\includegraphics[width=\textwidth]{../figures/q1_scatter.png}
+	\caption{Q1 -- Gun Ownership vs.\ Law Count, colored by Firearm Homicide Rate}
+	\label{fig:q1scatter}
 \end{figure}
 
+\textbf{Insights}: States in the high-ownership, low-law quadrant
+consistently show the darkest color (highest firearm homicide rates).
+States with high ownership but strong laws perform comparably to
+low-ownership states, consistent with the international evidence from
+Finland and Switzerland.
+
+\subsection{Q2 -- High-Law vs.\ Low-Law State Trends (Line Chart)}
+
 \par
-The \textbf{line chart} places Year on Columns and the national average proxy
-on Rows, with individual state lines in light grey and the national average
-highlighted. A reference line marks the overall mean.
+An \textbf{interactive line chart} answers Question 2\sref{q2}. The X axis
+shows year, the Y axis shows firearm homicide rate, and lines are colored
+by a law tier calculated field (high-law / mid-law / low-law) based on
+law count tertiles. A Set Action on the dashboard allows the viewer to
+select specific states for direct comparison.
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=\textwidth]{../figures/q1_trend.png}
-	\caption{Q1 Chart -- Gun Ownership Proxy Trend Over Time}
-	\label{fig:q1trend}
+	\includegraphics[width=\textwidth]{../figures/q2_trend.png}
+	\caption{Q2 -- Firearm Violence Trends by Law Tier, 1976--2023}
+	\label{fig:q2trend}
 \end{figure}
 
-\textbf{Insights}: Both views reveal strong regional patterns. States in the
-South and Mountain West consistently show higher proxy values, while states in
-the Northeast show lower values. The national trend shows a gradual decline
-in the proxy from the mid-1990s to 2020, visible within the 2014--2020
-analysis window.
+\textbf{Insights}: High-law states show a steeper decline in firearm
+homicide rates from the 1990s onward compared to low-law states.
+The gap between tiers has widened over time, particularly after 1993.
 
-\subsection{Q2 -- Firearm Type Composition by State}
+\subsection{Q3 -- Lagged Effect of Law Changes (Dual-Axis Line Chart)}
 
 \par
-A \textbf{stacked bar chart} was used to answer Question 2\sref{q2}. Each bar
-represents one state, segmented by firearm type share. Categorical colors
-encode each type consistently. The stacked bar was preferred over a pie chart
-or treemap because it allows direct cross-state comparison along a shared axis.
+A \textbf{dual-axis line chart} answers Question 3\sref{q3}. The primary
+axis shows firearm homicide rate and the secondary axis shows the composite
+law count, both over time for a user-selected state. The viewer can observe
+whether increases in law count precede decreases in violence rates in
+subsequent years.
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=\textwidth]{../figures/q2_stacked_bar.png}
-	\caption{Q2 Chart -- Traced Firearm Types by State (Stacked Bar)}
-	\label{fig:q2bar}
+	\includegraphics[width=\textwidth]{../figures/q3_dual.png}
+	\caption{Q3 -- Law Count vs.\ Firearm Violence Rate Over Time (Dual Axis)}
+	\label{fig:q3dual}
 \end{figure}
 
-\textbf{Insights}: Pistols dominate trace counts in most states, particularly
-in the Northeast and Midwest. Rifles show a higher share in Southern and
-Mountain states. The variation is substantial and provides a meaningful
-second dimension for the analytical question in Q3\sref{q3}.
-
-\subsection{Q3 -- Prevalence vs.\ Traced Firearm Patterns}
-
-\par
-A \textbf{scatter plot} was used to explore the association between the
-ownership proxy rate and the rifle trace share across states. Each point
-represents one state in a given year. Color encodes the gun prevalence
-quintile, allowing the viewer to identify clustering patterns visually.
-A trend line and confidence interval were added from the Tableau Analytics
-pane.
-
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=\textwidth]{../figures/q3_scatter.png}
-	\caption{Q3 Chart -- Gun Prevalence Proxy vs.\ Rifle Trace Share}
-	\label{fig:q3scatter}
-\end{figure}
-
-\par
-A \textbf{dashboard} integrates the Q1 map, Q2 stacked bar, and Q3 scatter
-with a shared year parameter filter, a state click-to-filter dashboard action,
-and enhanced tooltips showing the key metrics for each state-year combination.
-This brings the three questions together in a single interactive view.
-
-\textbf{Insights}: States with higher estimated gun prevalence tend to show
-a higher share of traced rifles relative to pistols. However, the relationship
-is not uniform and there is variation within high-prevalence states, suggesting
-other structural factors are also at play. This is consistent with the
-observational and proxy-based nature of both datasets, and no causal
+\textbf{Insights}: In several states, notable increases in law count are
+followed by measurable reductions in firearm homicide rates in subsequent
+years. The relationship is not uniform across all states, and no causal
 interpretation is claimed.
 
 \pagebreak
@@ -453,15 +422,14 @@ interpretation is claimed.
 	\centering
 	\begin{tabular}{rcll}
 		\toprule
-		\textbf{Question} & \textbf{Chart}           & \textbf{Chart Type}  & \textbf{Tableau Feature}      \\
+		\textbf{Question} & \textbf{Chart}            & \textbf{Chart Type}       & \textbf{Tableau Feature}            \\
 		\midrule
 		\midrule
-		Q1\sref{q1}       & Fig.~\ref{fig:q1map}     & Filled map           & Parameter, sequential color   \\
-		                  & Fig.~\ref{fig:q1trend}   & Line chart           & Reference line, filter        \\
+		Q1\sref{q1}       & Fig.~\ref{fig:q1scatter}  & Scatter plot              & Parameter, calc.\ field, trend line \\
 		\cmidrule{1-4}
-		Q2\sref{q2}       & Fig.~\ref{fig:q2bar}     & Stacked bar chart    & Calc.\ field, filter, tooltip \\
+		Q2\sref{q2}       & Fig.~\ref{fig:q2trend}    & Line chart (interactive)  & Set, set action, reference line     \\
 		\cmidrule{1-4}
-		Q3\sref{q3}       & Fig.~\ref{fig:q3scatter} & Scatter + trend line & Calc.\ field, action, tooltip \\
+		Q3\sref{q3}       & Fig.~\ref{fig:q3dual}     & Dual-axis line chart      & Calc.\ field, filter, tooltip       \\
 		\bottomrule
 	\end{tabular}
 	\caption{Visualization summary table}
@@ -472,10 +440,13 @@ interpretation is claimed.
 Table~\ref{tab:summary} summarizes:
 
 \begin{itemize}
-	\item 4 chart types: filled map, line chart, stacked bar, scatter with trend line.
-	\item 6 Tableau features used: calculated fields, parameters, filters,
-	      dashboard actions, enhanced tooltips, and reference lines.
-	\item 2 data sources joined by state and year in Tableau.
+	\item 4 chart types used across the project: scatter plot, line chart,
+	      dual-axis line chart, and choropleth map (dashboard overview).
+	\item 7 Tableau features used: calculated fields, parameters, sets,
+	      combined sets, dashboard set actions, reference lines,
+	      and trend lines.
+	\item 2 data sources joined by state and year in Tableau,
+	      in two different file formats (\texttt{.tab} and \texttt{.xlsx}).
 \end{itemize}
 
 \section{Conclusions}
@@ -484,17 +455,25 @@ Table~\ref{tab:summary} summarizes:
 Visualizations reveal the following:
 
 \begin{itemize}
-	\item Gun ownership proxy is highest in Southern and Mountain West states
-	      and has declined nationally since the mid-1990s [Fig.~\ref{fig:q1map}].
-	\item Pistols dominate ATF trace counts in most states, but rifle shares
-	      are notably higher in higher-prevalence states [Fig.~\ref{fig:q2bar}].
-	\item States with higher estimated household gun prevalence tend to show
-	      higher rifle trace shares, though this is associative and not causal
-		      [Fig.~\ref{fig:q3scatter}].
-	\item The two datasets together provide complementary views: estimated
-	      household gun availability and traced crime-gun patterns by
-	      state and year.
+	\item States combining high estimated gun ownership with few firearm laws
+	      consistently show the highest firearm homicide rates
+	      [Fig.~\ref{fig:q1scatter}].
+	\item High-law states have seen steeper declines in firearm violence
+	      since the 1990s, widening the gap with low-law states over time
+	      [Fig.~\ref{fig:q2trend}].
+	\item In several states, increases in law count appear to precede
+	      reductions in violence rates in subsequent years, though no
+	      causal claim is made [Fig.~\ref{fig:q3dual}].
+	\item Gun ownership alone does not explain violence outcomes --- the
+	      regulatory context surrounding firearms appears to be the more
+	      significant variable, consistent with international evidence.
 \end{itemize}
+
+\par
+Limitations include the proxy nature of the FSS ownership estimate,
+the absence of statistical controls for confounding variables such as
+poverty and urbanization, and the use of a static join on state name
+which may mask within-state variation.
 
 \pagebreak
 
