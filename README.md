@@ -1,6 +1,6 @@
 # DV_Tableau
 
-Tableau Data Visualization Assignment — *State-level household gun prevalence and ATF traced firearm patterns in the U.S.*
+Tableau Data Visualization Assignment — *The effect of gun laws on gun violence in the United States*
 
 **Author:** Itziar Morales Rodríguez
 
@@ -10,7 +10,7 @@ Tableau Data Visualization Assignment — *State-level household gun prevalence 
 
 ```
 DV_Tableau/
-├── data/               # Raw and processed CSV datasets
+├── data/               # Raw datasets (.tab and .xlsx)
 ├── docs/               # LaTeX report source (report.tex + report.bib)
 ├── figures/            # Exported chart images referenced in the report
 ├── videolink.txt       # Link to the submission video
@@ -21,20 +21,20 @@ DV_Tableau/
 
 ## Datasets
 
-| Dataset | Source | Grain |
-|---|---|---|
-| State-Level Household Gun Ownership Proxy, 1949–2020 | [Harvard Dataverse](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/QVYDUD) | State × Year |
-| ATF Gun Traces by State and Firearm Type, 2014–2023 | [The Trace / Gun Violence Data Hub](https://datahub.thetrace.org/dataset/atf-gun-traces-data/) | State × Year × Type |
+| Dataset | Format | Source | Grain |
+|---|---|---|---|
+| Firearm Suicide Proxy for Household Gun Ownership, 1949–2023 | `.tab` | [Harvard Dataverse — doi:10.7910/DVN/QVYDUD](https://doi.org/10.7910/DVN/QVYDUD) | State × Year |
+| State Firearm Law Database, 1976–2024 | `.xlsx` | [Tufts CTSI — statefirearmlaws.org](https://www.tuftsctsi.org/state-firearm-laws/) | State × Year |
 
-Both datasets are joined in Tableau on `state` + `year`. The effective analysis window is **2014–2020**.
+Both datasets are joined in Tableau on `state` + `year`. The effective analysis window is **1976–2023**.
 
 ---
 
 ## Research Questions
 
-1. How has estimated household gun prevalence varied by state over time?
-2. What firearm types dominate ATF trace summaries by state?
-3. Do states with higher estimated gun prevalence show different traced firearm type patterns?
+1. Is the combination of high estimated gun ownership and few firearm laws associated with higher firearm homicide and suicide rates?
+2. How has the gap in firearm violence rates between high-law and low-law states changed over time?
+3. When states increase the number of firearm laws, do firearm homicide and suicide rates change in subsequent years?
 
 ---
 
