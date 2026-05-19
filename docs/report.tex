@@ -151,18 +151,19 @@ guidance, and was not used to generate data or conclusions directly.
 \section{Datasets}
 
 \par
-Two public datasets were selected and joined for this project. Both were
-required to be different from those used in the Python assignment, and had not
-been claimed by another student.
+Two public datasets were selected and used in conjunction for this project.
+Both are accessible through their corresponding links and are available in
+different formats.
 
 \subsection{Dataset 1: Firearm Suicide Proxy for Household Gun Ownership, 1949--2023}
 
 \par
 The first dataset\autocite{ownershipproxy} is a state-year level proxy for
-household gun ownership in the United States, covering 1949 to 2023. It is
-hosted on Harvard Dataverse and is derived from the firearm suicide proxy
-methodology: the proportion of suicides committed with a firearm (FSS) is used
-as an indirect estimate of household gun prevalence by state and year.
+household gun ownership in the United States. Direct gun ownership data is
+not publicly available at the state level, so this dataset uses the firearm
+suicide proxy methodology: the proportion of suicides committed with a firearm
+(FSS) is used as an indirect estimate of household gun prevalence by state and
+year. It is hosted on Harvard Dataverse.
 
 \begin{itemize}
 	\item \textbf{Source}: Harvard Dataverse, Kang et al.\autocite{kang2023}
@@ -171,7 +172,7 @@ as an indirect estimate of household gun prevalence by state and year.
 	      firearm suicides, total suicides, firearm homicide rate,
 	      total homicides, population
 	\item \textbf{Date span}: 1949--2023 (75 years, 50 states + D.C.)
-	\item \textbf{Format}: Tab-separated values (\texttt{.tab})
+	\item \textbf{Format}: Comma-separated values (\texttt{.csv})
 \end{itemize}
 
 \par
@@ -179,7 +180,12 @@ This dataset was chosen because it provides a long-term, population-adjusted,
 and academically validated measure of gun prevalence that can be compared
 across states and over time. FSS is not a literal count of guns per household
 but an indirect proxy widely used in public health and policy
-research\autocite{extendingfss}.
+research\autocite{extendingfss}. However, since FSS is derived from suicide
+data, it is not used as an outcome variable in this project, doing so would
+introduce circularity when analysing the effect of gun laws on violence.
+Instead, FSS is retained as a contextual indicator of estimated gun prevalence,
+while \texttt{firearm\_homicide\_rate} serves as the primary outcome measure
+for policy effect analysis.
 
 \subsection{Dataset 2: State Firearm Law Database, 1976--2024}
 
@@ -422,14 +428,14 @@ interpretation is claimed.
 	\centering
 	\begin{tabular}{rcll}
 		\toprule
-		\textbf{Question} & \textbf{Chart}            & \textbf{Chart Type}       & \textbf{Tableau Feature}            \\
+		\textbf{Question} & \textbf{Chart}           & \textbf{Chart Type}      & \textbf{Tableau Feature}            \\
 		\midrule
 		\midrule
-		Q1\sref{q1}       & Fig.~\ref{fig:q1scatter}  & Scatter plot              & Parameter, calc.\ field, trend line \\
+		Q1\sref{q1}       & Fig.~\ref{fig:q1scatter} & Scatter plot             & Parameter, calc.\ field, trend line \\
 		\cmidrule{1-4}
-		Q2\sref{q2}       & Fig.~\ref{fig:q2trend}    & Line chart (interactive)  & Set, set action, reference line     \\
+		Q2\sref{q2}       & Fig.~\ref{fig:q2trend}   & Line chart (interactive) & Set, set action, reference line     \\
 		\cmidrule{1-4}
-		Q3\sref{q3}       & Fig.~\ref{fig:q3dual}     & Dual-axis line chart      & Calc.\ field, filter, tooltip       \\
+		Q3\sref{q3}       & Fig.~\ref{fig:q3dual}    & Dual-axis line chart     & Calc.\ field, filter, tooltip       \\
 		\bottomrule
 	\end{tabular}
 	\caption{Visualization summary table}
@@ -457,10 +463,10 @@ Visualizations reveal the following:
 \begin{itemize}
 	\item States combining high estimated gun ownership with few firearm laws
 	      consistently show the highest firearm homicide rates
-	      [Fig.~\ref{fig:q1scatter}].
+		      [Fig.~\ref{fig:q1scatter}].
 	\item High-law states have seen steeper declines in firearm violence
 	      since the 1990s, widening the gap with low-law states over time
-	      [Fig.~\ref{fig:q2trend}].
+		      [Fig.~\ref{fig:q2trend}].
 	\item In several states, increases in law count appear to precede
 	      reductions in violence rates in subsequent years, though no
 	      causal claim is made [Fig.~\ref{fig:q3dual}].
