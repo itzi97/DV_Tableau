@@ -11,15 +11,21 @@ laws  = pd.read_excel(BytesIO(requests.get(LAW_URL).content))
 rates = pd.read_csv(RATE_URL)
 
 # ── Merge
-df = laws.merge(rates[['year','state','firearm_homicide_rate']], on=['year','state'], how='inner')
+df = laws.merge(rates[['year','state','firearm_homicide_rate','total_population']], on=['year','state'], how='inner')
 
-# ── Law group scores (row-level)
-# Popular : red flag (gvro) + assault weapons ban  [removed universal/background checks]
-# Evidence: permit-to-purchase + waiting + DV restriction + universal background checks
-df['public_score']   = df['gvro']   + df['assault']
-df['evidence_score'] = df['permit'] + df['waiting'] + df['mcdv'] + df['universal']
+# ── Filter: large states only (avg population >= 2M)
+avg_pop = df.groupby('state')['total_population'].mean()
+large_states = avg_pop[avg_pop >= 2_000_000].index.tolist()
+df = df[df['state'].isin(large_states)].copy()
+print(f"States retained: {len(large_states)}")
 
-# ── Find first year each state adopts at least 1 law from each group
+# ── Law group scores (row-level, 5 laws each)
+# Popular  : red flag + assault ban + one-per-month + magazine ban + stand-your-ground present
+# Evidence : permit-to-purchase + waiting period + DV misdemeanor + universal background checks + DV restraining order
+df['public_score']   = df['gvro'] + df['assault'] + df['onepermonth'] + df['magazine'] + (1 - df['nosyg'])
+df['evidence_score'] = df['permit'] + df['waiting'] + df['mcdv'] + df['universal'] + df['dvro']
+
+# ── Find first year each state adopts >= 1 law from each group
 def get_adoption_year(df, score_col, threshold=1):
     results = []
     for state, grp in df.groupby('state'):
@@ -31,6 +37,8 @@ def get_adoption_year(df, score_col, threshold=1):
 
 public_adopt   = get_adoption_year(df, 'public_score')
 evidence_adopt = get_adoption_year(df, 'evidence_score')
+print(f"Popular adopting states: {len(public_adopt)}")
+print(f"Evidence adopting states: {len(evidence_adopt)}")
 
 # ── Build event-time dataset (±15 years around adoption)
 def build_event_study(df, adopt_df, label, window=(-15, 15)):
@@ -63,7 +71,7 @@ def normalize_to_year0(df_es):
 
 combined_norm = normalize_to_year0(combined)
 
-# ── Aggregate: mean ± 95% CI
+# ── Aggregate: mean ± 95% CI per event_year x law_group
 avg = combined_norm.groupby(['law_group','event_year'])['rate_change'] \
                    .agg(['mean','sem','count']).reset_index()
 avg.columns = ['law_group','event_year','mean_change','sem','n_states']
@@ -73,4 +81,4 @@ avg['ci_lower'] = avg['mean_change'] - 1.96 * avg['sem']
 # ── Export
 avg.to_csv('data/event_study_results.csv', index=False)
 combined_norm.to_csv('data/event_study_raw.csv', index=False)
-print('Saved: data/event_study_results.csv')
+print('Saved: data/event_study_results.csv and data/event_study_raw.csv')
