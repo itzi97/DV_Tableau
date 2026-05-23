@@ -3643,8 +3643,8 @@
         <devicelayout auto-generated='true' name='Phone'>
           <size maxheight='1300' minheight='1300' sizing-mode='vscroll' />
           <zones>
-            <zone h='100000' id='35' type-v2='layout-basic' w='100000' x='0' y='0'>
-              <zone h='98000' id='34' param='vert' type-v2='layout-flow' w='98666' x='667' y='1000'>
+            <zone h='100000' id='37' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='98000' id='36' param='vert' type-v2='layout-flow' w='98666' x='667' y='1000'>
                 <zone fixed-size='52' h='9000' id='5' type-v2='text' w='98334' x='833' y='1250'>
                   <formatted-text>
                     <run fontcolor='#000000' fontsize='22'>Do Firearm Laws Reduce Homicide Rates?</run>
