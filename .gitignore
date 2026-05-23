@@ -30,5 +30,13 @@ latex.out/
 # Tableau packaged workbook backups
 *.twbx.bak
 
+# Tableau autosave/recovery files
+*.twbr
+~*.twbr
+
+# Tableau temp files
+*.twb.bak
+*.twbx.tmp
+
 # Data files that are too large for git
 *.csv.gz
