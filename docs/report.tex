@@ -154,7 +154,7 @@ prompt used.
 
 \par
 AI was used during this project in a critical and supervised manner. All
-AI-generated suggestions were reviewed and scrutinized before being applied,
+AI generated suggestions were reviewed and scrutinized before being applied,
 with particular attention to the risk of hallucination.
 Specifically, AI was used for the following tasks:
 
@@ -267,13 +267,13 @@ Key observations:
 \begin{itemize}
 	\item Both datasets use identical full state name format
 	      (e.g.\ \texttt{Alabama}, \texttt{North Carolina}),
-	      requiring no pre-processing to enable the join
+	      allowing for a join on state
 	\item The ownership proxy file includes several pre calculated rate
 	      columns derived from raw counts and population
 	\item The law database contains 72 binary columns but it also includes
 	      a total law count column that can be used
 	\item Both datasets include a sufficient overlapping year window between
-	      1976--2023 that can be used
+	      1976--2023 that can be used to join
 \end{itemize}
 
 \subsection{Processing}
@@ -285,12 +285,6 @@ Key processing steps applied before and during connection to Tableau:
 	\item The District of Columbia was excluded via a Tableau filter, as it
 	      is present in the ownership proxy dataset but absent from the
 	      state firearm laws dataset, preventing a valid join for that entity
-	\item Created a composite \textbf{law count} calculated field in Tableau
-	      summing all 72 binary law indicator columns per state per year
-	\item Retained population-adjusted rates from the ownership proxy
-	      for per-capita analysis
-	\item Removed U.S. territory rows (Puerto Rico, Guam, etc.) to keep
-	      the analysis to the 50 states and D.C.
 \end{itemize}
 
 \subsection{Research Questions}
