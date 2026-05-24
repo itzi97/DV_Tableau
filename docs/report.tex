@@ -178,35 +178,34 @@
 % ======================================================================
 
 \par
-This project studies the relationship between firearm laws and gun violence in
-the United States from 1976 to 2023. Estimated household gun ownership is
-included as background context, but it is not treated as the main explanatory
-factor. Some countries, such as Finland and Switzerland, show that high gun
-ownership can exist alongside relatively low gun violence. For that reason,
-this project focuses mainly on whether the strength and type of state firearm
-laws are associated with lower firearm homicide rates, and whether changes in
-those laws are followed by changes in a state's level of gun violence.
+This project looks at how firearm laws relate to gun violence across U.S.\
+states from 1976 to 2023. Estimated household gun ownership is included as
+background context, but it is not the main focus. Countries like Finland and
+Switzerland show that high ownership does not automatically mean high violence.
+The central question is whether the type and strength of a state's firearm laws
+are associated with lower homicide rates, and whether legislative changes
+correspond to visible shifts over time.
 
 \subsection{Methodology}
 
 \par
-The project was developed through the following steps:
+The project followed these steps in order:
 \begin{enumerate}
 	\item Select the datasets and plan the join strategy
 	\item Explore the data outside Tableau
 	\item Define the research questions
-	\item Choose chart types that answer each question clearly
-	\item Connect the data sources and create the required calculated fields in Tableau
-	\item Add Tableau features such as parameters, sets, filters, actions, and tooltips
-	\item Build dashboards for interactive storytelling
-	\item Use AI only for repetitive or mechanical tasks
+	\item Choose chart types suited to each question
+	\item Connect the data in Tableau and build calculated fields
+	\item Add interactive features: parameters, sets, filters, actions, and tooltips
+	\item Build dashboards
+	\item Use AI for repetitive or mechanical tasks only
 	      (see Section~\ref{sec:ai})
 \end{enumerate}
 
 \subsection{Sources}
 
 \par
-The project uses several types of sources:
+The project draws on the following sources:
 
 \begin{itemize}
 	\item Official dataset documentation and codebooks~\autocite{ownershipproxy,statefirearmlaw}
@@ -219,19 +218,18 @@ The project uses several types of sources:
 \end{itemize}
 
 \par
-All sources are referenced in the bibliography. When AI was used, the model and
-prompt are stated explicitly in the report.
+All sources appear in the bibliography. AI use is documented with the model
+name and the exact prompt at each point of use.
 
 \subsection{AI Usage Declaration}\label{sec:ai}
 
 \par
-AI was used only for repetitive, mechanical, or formatting-related tasks.
-All output was reviewed before being included. AI did not produce the
-analytical conclusions, the Tableau visualizations, or the interpretation of
-the results. In all cases, the model used was \textbf{Claude Sonnet 4.6},
-accessed through the Perplexity AI assistant. The exact prompts and short
-response summaries are included where relevant, and Table~\ref{tab:ai}
-provides an overview.
+AI was used only for repetitive, mechanical, or formatting tasks. Every output
+was reviewed before being included in the project. The analytical conclusions,
+Tableau visualizations, and interpretation of results are entirely my own. The
+model used throughout was \textbf{Claude Sonnet 4.6}, accessed via the
+Perplexity AI assistant. Prompts and short response summaries are noted at
+each point of use; Table~\ref{tab:ai} lists them in one place.
 
 \begin{table}[H]
 	\centering
@@ -260,9 +258,9 @@ provides an overview.
 \subsubsection{Document Labelling and Cross-Referencing}\label{sec:ai:labels}
 
 \par
-Adding labels and references across a long LaTeX document is repetitive and
-easy to get wrong. This made it a suitable task for AI support, since it did
-not require analytical judgement.
+Applying \texttt{\textbackslash label} and \texttt{\textbackslash ref} tags
+consistently across a long document is tedious and error-prone. It does not
+require any analytical judgement, so it was a reasonable task to delegate to AI.
 
 \begin{quote}
 	\textbf{Prompt:} \textit{Add labels to questions Q1, Q2 and Q3 in the document
@@ -273,16 +271,15 @@ not require analytical judgement.
 \begin{quote}
 	\textbf{Response summary:} Added \texttt{\textbackslash label\{q1\}},
 	\texttt{\textbackslash label\{q2\}}, and \texttt{\textbackslash label\{q3\}}
-	to the question headings, then inserted matching cross-references in the
-	question list, conclusions, and visualization summary table.
+	to the question headings, then inserted matching cross-references throughout
+	the question list, conclusions, and visualization summary table.
 \end{quote}
 
 \subsubsection{Report Structuring and LaTeX Formatting}\label{sec:ai:latex}
 
 \par
-AI was also used for LaTeX structure, figure placement, and page breaks.
-These are technical formatting tasks and do not affect the interpretation of
-the data.
+AI was also used for page layout and figure placement. These are formatting
+details with no effect on the content or analysis.
 
 \begin{quote}
 	\textbf{Prompt:} \textit{For visualizations, make it so each of them is on a
@@ -293,8 +290,8 @@ the data.
 \begin{quote}
 	\textbf{Response summary:} Added \texttt{\textbackslash usepackage\{float\}},
 	inserted \texttt{\textbackslash newpage} before each visualization subsection,
-	and changed figure placement from \texttt{[h]} to \texttt{[H]} so figures stay
-	in the intended position.
+	and switched figure placement from \texttt{[h]} to \texttt{[H]} so figures
+	appear exactly where they are defined.
 \end{quote}
 
 % ======================================================================
@@ -302,10 +299,9 @@ the data.
 % ======================================================================
 
 \par
-This project uses two public datasets. Both are available online and have a
-state-year structure, which makes them suitable to combine in Tableau. The
-first dataset was chosen independently. AI was then used to help identify a
-second dataset that matched it well in scope and format.
+Two public datasets were used. Both are available online and share a
+state-year structure, making them straightforward to combine in Tableau.
+The first dataset was chosen independently; AI helped identify the second one.
 
 \begin{quote}
 	\textbf{Prompt:} \textit{I already have a state-year level dataset on
@@ -317,17 +313,17 @@ second dataset that matched it well in scope and format.
 \begin{quote}
 	\textbf{Response summary:} Recommended the Tufts CTSI State Firearm Law
 	Database because it tracks firearm laws by state and year, matches the grain
-	of the ownership proxy dataset, and is widely used in public health research.
+	of the ownership proxy dataset, and is widely cited in public health research.
 \end{quote}
 
 \subsection{Dataset 1: Firearm Suicide Proxy for Household Gun Ownership, 1949--2023}
 
 \par
-The first dataset\autocite{ownershipproxy} is a state-year level proxy for
-household gun ownership in the United States. Direct state-level gun ownership
-data is not publicly available, so this dataset uses the firearm suicide proxy
-method: the share of suicides committed with a firearm (FSS) is used as an
-indirect estimate of household gun prevalence. The dataset is hosted on Harvard
+The first dataset\autocite{ownershipproxy} provides a state-year estimate of
+household gun ownership across the United States. Since direct ownership data
+is not publicly available at the state level, the dataset uses the firearm
+suicide proxy method: the share of suicides committed with a firearm (FSS)
+serves as an indirect measure of gun prevalence. It is hosted on Harvard
 Dataverse.
 
 \begin{itemize}
@@ -340,144 +336,139 @@ Dataverse.
 \end{itemize}
 
 \par
-This dataset was chosen because it gives a long-term, population-adjusted,
-and widely used measure of gun prevalence. FSS is not a direct count of guns,
-but it is a common proxy in public health and policy research\autocite{extendingfss}.
-In this project, FSS is used only as contextual background in the scatter plot.
-The main outcome variable is firearm homicide rate.
+FSS is not a literal count of guns; it is a proxy measure with a long track
+record in public health and policy research\autocite{extendingfss}. In this
+project it appears only as background context in the scatter plot. The primary
+outcome variable throughout is firearm homicide rate.
 
 \subsection{Dataset 2: State Firearm Law Database, 1976--2024}
 
 \par
 The second dataset\autocite{statefirearmlaw} is maintained by the State
-Firearm Law Research Group at Tufts University. It records whether 72 firearm
-law provisions were in effect in each U.S. state for every year from 1976 to
-2024.
+Firearm Law Research Group at Tufts University. It records whether each of 72
+firearm law provisions was in effect in each U.S.\ state for every year from
+1976 to 2024.
 
 \begin{itemize}
 	\item \textbf{Source}: Tufts CTSI --- State Firearm Law Database\autocite{statefirearmlaw}
 	\item \textbf{Grain}: One row per U.S. state per year
-	\item \textbf{Key columns}: State, Year, 72 binary law indicators,
-	      such as permit requirements, background checks, waiting periods,
-	      stand-your-ground laws, and child access prevention laws
+	\item \textbf{Key columns}: State, Year, 72 binary law indicators
+	      (e.g.\ permit requirements, background checks, waiting periods,
+	      stand-your-ground laws, child access prevention)
 	\item \textbf{Date span}: 1976--2024
 	\item \textbf{Format}: Excel (\texttt{.xlsx})
 \end{itemize}
 
 \par
-This dataset was chosen because it provides a yearly record of state firearm
-laws over a long period. That makes it useful for studying whether changes in
-legislation are associated with changes in gun violence. It is also widely used
-in academic public health research\autocite{statefirearmlaw}.
+This dataset was chosen because it gives a year-by-year picture of state
+legislation over nearly five decades, making it well-suited for studying how
+law changes relate to homicide trends. It is widely cited in academic public
+health research\autocite{statefirearmlaw}.
 
 \subsection{Join Strategy}
 
 \par
 The two datasets were connected in Tableau using a \textbf{relationship} on
-\texttt{state} and \texttt{year}. The relationship was set to
-\textbf{many-to-many} with \textbf{some records match} referential integrity
-on both sides. This setup is appropriate because both tables have the same
-state-year grain, and neither one acts as a separate dimension table. It also
-allows Tableau to aggregate each table first and then combine the results,
-which helps avoid row duplication. Because the two datasets overlap only from
-1976 to 2023, that is the final analysis period used in the project.
+\texttt{state} and \texttt{year}, configured as \textbf{many-to-many} with
+\textbf{some records match} on both sides. Both tables share the same
+state-year grain, so many-to-many is the correct setting. The ``some records
+match'' option prevents Tableau from dropping rows where a key exists in one
+table but not the other. Tableau aggregates each table independently before
+combining results, which avoids row duplication. The overlapping date range
+gives a final analysis window of \textbf{1976--2023}.
 
 \subsection{Analysis}
 
 \par
-Before connecting the data in Tableau, both files were checked to understand
-their structure, labels, and possible issues. The main observations were:
+Both files were inspected before connecting them in Tableau to check structure,
+labels, and any potential issues. Key findings:
 
 \begin{itemize}
-	\item Both datasets use the same full state names, so they can be joined on state
-	\item The ownership proxy dataset already includes several rate variables
-	\item The firearm law dataset includes 72 binary law fields and a total law count field (\texttt{lawtotal})
-	\item Both datasets overlap for the years 1976--2023
+	\item Both datasets use identical full state names, so joining on state works without any transformation
+	\item The ownership proxy dataset already contains pre-calculated rate columns
+	\item The law dataset includes 72 binary law columns and a total law count field (\texttt{lawtotal})
+	\item The overlapping year range is 1976--2023
 \end{itemize}
 
 \subsection{Processing}
 
 \par
-The raw data files were used directly in Tableau. No external cleaning,
-renaming, or deduplication was needed. The only structural adjustment was to
-exclude the District of Columbia, because it appears in the ownership dataset
-but not in the firearm law dataset. All visualizations were also limited to the
-years 1976--2023, which is the period covered by both sources.
+Both files were loaded into Tableau without any external pre-processing. No
+cleaning, renaming, or deduplication was needed. The only change was to exclude
+the District of Columbia, which appears in the ownership dataset but not in the
+law dataset. All charts are also filtered to 1976--2023, the period shared by
+both sources.
 
 \subsection{Research Questions}
 
 \par
-Three research questions were defined after the initial data exploration:
+Three questions were defined after exploring the data:
 
 \begin{enumerate}
 	\item Is a state's firearm homicide rate associated with the number
 	      and type of firearm laws it has in place?\sref{q1}
-	\item How have firearm homicide rates changed over time depending on
-	      the firearm laws passed in each state, whether measured by
-	      the quantity of laws or by the type of laws?\sref{q2}
-	\item For a specific state, does passing more firearm laws correspond
-	      to a reduction in firearm homicide rates, and how does this
-	      affect its ranking relative to other states?\sref{q3}
+	\item How have firearm homicide rates changed over time across states
+	      grouped by the quantity or type of laws they have passed?\sref{q2}
+	\item For a specific state, does an increase in firearm laws correspond
+	      to a lower homicide rate and a better ranking relative to other states?\sref{q3}
 \end{enumerate}
 
 \subsubsection{Question 1: Homicide Rates and the Law Landscape}\label{q1}
 
 \par
-Q1 is the starting point of the analysis. Before looking at changes over time,
-it is useful to see whether a cross-sectional pattern already exists. In other
-words, do states with more laws, or different types of laws, tend to have lower
-firearm homicide rates? FSS is included only to give background context about
-estimated ownership, not as an outcome or a direct cause.
+Q1 is the starting point. Before examining trends over time, the aim is to
+check whether a pattern already exists in the cross-sectional data: do states
+with more laws, or different types of laws, tend to have lower firearm homicide
+rates? FSS is included only as background context on estimated ownership.
 
 \subsubsection{Question 2: Homicide Trends by Law Profile Over Time}\label{q2}
 
 \par
-Q2 builds on Q1 by adding the time dimension. States are grouped by their law
-profile, either by quantity tier or by law type category
-(see Section~\ref{sec:lawcat}). This makes it possible to compare how firearm
-homicide rates changed over time across different groups of states.
+Q2 extends Q1 by adding the time dimension. States are grouped by their law
+profile --- either by quantity tier or by law type category
+(see Section~\ref{sec:lawcat}) --- and their homicide rate trends are compared
+across the full 1976--2023 period.
 
 \subsubsection{Question 3: State-Level Law History and Homicide Standing}\label{q3}
 
 \par
-Q3 moves from the national picture to the state level. It lets the viewer focus
-on one state and explore how its law history relates to its firearm homicide
-standing compared with other states. This makes the analysis more personal and
-more interactive, while still staying connected to the broader patterns shown
-in Q1 and Q2.
+Q3 brings the analysis down to a single state. The viewer can pick any state
+and see how its law history compares with its firearm homicide ranking relative
+to the rest of the country. This connects the broad national patterns from Q1
+and Q2 to something more concrete and personally relevant.
 
 % ======================================================================
 \section{Visualization Prep}
 % ======================================================================
 
 \par
-Before building the charts in Tableau, several design decisions were made so
-the visualizations would be clear, consistent, and aligned with the analysis.
+Several design decisions were made before building the charts in Tableau to
+ensure consistency across the project.
 
 % -----------------------------------------------------------------------
 \subsection{Storytelling}
 % -----------------------------------------------------------------------
 
 \par
-The project follows a four-act structure. Act~1 introduces the geographic and
-cross-sectional view by showing where firearm homicide is highest and how this
-relates to the law landscape. Act~2 adds time, showing how homicide trends
-change across the law categories defined in Section~\ref{sec:lawcat}. Act~3
-narrows the focus to individual states, linking each state's law history to its
-position relative to the rest of the country. Act~4 looks more closely at the
-selected law groups and compares their average homicide trends.
+The project is structured as four acts. Act~1 sets the scene with a geographic
+and cross-sectional view of homicide rates and the law landscape. Act~2 adds
+time, comparing how rates have evolved across the law categories in
+Section~\ref{sec:lawcat}. Act~3 zooms into individual states to connect each
+one's law history to its homicide standing. Act~4 compares the two law
+groups --- Popular and Evidence-Based --- directly, to see which one shows a
+stronger association with lower homicide rates.
 
 % -----------------------------------------------------------------------
 \subsection{Law Categorization}\label{sec:lawcat}
 % -----------------------------------------------------------------------
 
 \par
-Two grouping systems are used throughout the visualizations. A shared
-parameter allows the viewer to switch between them.
+Two grouping schemes are used across the visualizations. A shared parameter
+lets the viewer switch between them at any point.
 
 \par
-\textbf{By quantity} --- states are grouped by their total law count
-(\texttt{lawtotal}) into three levels:
+\textbf{By quantity} --- states are divided into three tiers based on their
+total law count (\texttt{lawtotal}):
 
 \begin{itemize}
 	\item \textbf{Low}
@@ -486,11 +477,11 @@ parameter allows the viewer to switch between them.
 \end{itemize}
 
 \par
-\textbf{By type} --- instead of comparing all 72 laws, the analysis focuses on
-a smaller subset: the three most common laws (``Popular'') and the three laws
-with the strongest evidence base in the literature (``Evidence-Based''). States
-are then placed into four categories depending on whether they have at least
-two laws from either group:
+\textbf{By type} --- rather than using all 72 laws, the analysis uses a
+smaller subset: the three most commonly adopted laws (``Popular'') and the
+three with the strongest evidence base in the research literature
+(``Evidence-Based''). States fall into one of four categories depending on
+how many laws from each group they have adopted:
 
 \begin{itemize}
 	\item \textbf{Weak} --- fewer than two Popular laws and fewer than two Evidence-Based laws
@@ -504,14 +495,15 @@ two laws from either group:
 % -----------------------------------------------------------------------
 
 \par
-Colors were chosen to keep the charts clear and avoid adding political bias.
+Color choices were kept deliberate and minimal:
 
 \begin{itemize}
-	\item \textbf{Neutral colors} were used to avoid suggesting a political position.
-	      Grey was used for states with weaker law profiles or less notable change.
-	\item \textbf{Orange gradient} was used for value scales such as firearm homicide
-	      rate, where darker shades represent higher values.
-	\item \textbf{Gridlines} were kept minimal so attention stays on the data rather than the chart frame.
+	\item \textbf{Neutral colors} throughout to avoid implying a political stance.
+	      Grey marks states with weaker law profiles or little legislative change.
+	\item \textbf{Orange gradient} for rate-based scales such as firearm homicide
+	      rate, where darker means higher.
+	\item \textbf{Minimal gridlines} so the data marks stay in focus rather than
+	      the chart frame.
 \end{itemize}
 
 % ======================================================================
@@ -519,8 +511,8 @@ Colors were chosen to keep the charts clear and avoid adding political bias.
 % ======================================================================
 
 \par
-All visualizations follow the same color logic described in Section~\ref{colors}
-and use the law categories defined in Section~\ref{sec:lawcat}.
+All charts follow the color scheme from Section~\ref{colors} and the law
+categories from Section~\ref{sec:lawcat}.
 
 % --- Q1 -----------------------------------------------------------------
 \newpage
@@ -528,16 +520,15 @@ and use the law categories defined in Section~\ref{sec:lawcat}.
 
 \par
 Two charts answer Q1\sref{q1}. The first is a \textbf{choropleth map}
-(Figure~\ref{fig:q1chart1}) showing firearm homicide rate by state for a
-selected year. The map uses an orange gradient, where darker states have
-higher rates. A \textbf{parameter} controls the year, and a \textbf{calculated
-field} provides the two-letter state abbreviations shown on the map.
+(Figure~\ref{fig:q1chart1}) showing the firearm homicide rate by state for a
+selected year. Darker states have higher rates. A \textbf{year parameter}
+controls the view, and a \textbf{calculated field} displays two-letter state
+abbreviations on each mark.
 
 \par
-The calculated field for state abbreviations was created with AI support
-(Claude Sonnet 4.6; see Section~\ref{sec:ai}). Writing all 50 cases by hand
-would have been repetitive and easy to mistype. The prompt and response are
-shown below (Prompt~\ref{prompt:abbr}).
+Writing all 50 CASE clauses by hand would have been error-prone with no
+analytical value, so this field was generated with AI
+(Claude Sonnet 4.6; see Section~\ref{sec:ai}).
 
 \begin{quote}\label{prompt:abbr}
 	\textbf{Prompt:} \textit{Generate a Tableau calculated field using a CASE
@@ -566,11 +557,11 @@ shown below (Prompt~\ref{prompt:abbr}).
 \end{figure}
 
 \par
-The second chart (Figure~\ref{fig:q1chart2}) is a \textbf{scatter plot}.
-Each point is a state. The X axis shows estimated gun ownership (FSS), the Y
-axis shows total law count (\texttt{lawtotal}), and color reflects the selected
-law profile. A \textbf{parameter} allows the viewer to switch between the
-quantity-based and type-based groupings defined in Section~\ref{sec:lawcat}.
+The second chart (Figure~\ref{fig:q1chart2}) is a \textbf{scatter plot} where
+each point is a state. The X axis shows estimated gun ownership (FSS), the Y
+axis shows total law count (\texttt{lawtotal}), and color encodes the selected
+law profile. A \textbf{parameter} switches between the quantity-based and
+type-based groupings from Section~\ref{sec:lawcat}.
 
 \begin{figure}[H]
 	\centering
@@ -579,21 +570,20 @@ quantity-based and type-based groupings defined in Section~\ref{sec:lawcat}.
 	\label{fig:q1chart2}
 \end{figure}
 
-\textbf{Insights}: States with fewer laws tend to cluster around higher
-firearm homicide rates. The FSS axis adds ownership context, but the main
-focus remains on law count and law type.
+\textbf{Insights}: States with fewer laws tend to cluster at higher firearm
+homicide rates. FSS provides ownership context, but law count and law type
+are the main analytical lenses.
 
 % --- Q2 -----------------------------------------------------------------
 \newpage
 \subsection{Q2 -- Homicide Trends by Law Profile Over Time}\label{sec:viz:q2}
 
 \par
-Q2\sref{q2} is answered with an \textbf{interactive line chart}
-(Figure~\ref{fig:q2chart}). The X axis shows year from 1976 to 2023, and the Y
-axis shows firearm homicide rate. Each line represents a group of states based
-on the active law grouping parameter, which is shared with Figure~\ref{fig:q1chart2}.
-When the parameter is set to quantity, the groups are Low, Medium, and High.
-When it is set to type, the groups are Weak, Popular, Evidence, and Both.
+Q2\sref{q2} uses an \textbf{interactive line chart} (Figure~\ref{fig:q2chart}).
+The X axis covers 1976--2023, the Y axis shows firearm homicide rate, and each
+line represents a group of states. The grouping is controlled by the same
+law-group \textbf{parameter} as Figure~\ref{fig:q1chart2}: quantity mode shows
+Low, Medium, and High; type mode shows Weak, Popular, Evidence, and Both.
 A vertical \textbf{reference line} marks notable legislative periods.
 
 \begin{figure}[H]
@@ -603,9 +593,9 @@ A vertical \textbf{reference line} marks notable legislative periods.
 	\label{fig:q2chart}
 \end{figure}
 
-\textbf{Insights}: States in the higher-law groups show a clearer decline in
-firearm homicide rates from the 1990s onward. The gap between groups also grows
-over time, and this pattern appears under both grouping systems.
+\textbf{Insights}: Higher-law groups show a more pronounced decline in
+firearm homicide rates from the 1990s onward, and the gap between groups
+widens over time. The pattern holds under both grouping modes.
 
 % --- Q3 -----------------------------------------------------------------
 \newpage
@@ -613,15 +603,14 @@ over time, and this pattern appears under both grouping systems.
 
 \par
 Two charts answer Q3\sref{q3}. The first (Figure~\ref{fig:q3chart1}) is a
-\textbf{line chart} that shows the total number of firearm laws in effect over
-time for a selected state. A \textbf{parameter} controls which state is shown.
-This helps identify periods when the state's legal framework changed the most.
-The second chart (Figure~\ref{fig:q3chart2}) is a \textbf{bar chart} ranking
-all states by firearm homicide rate in a selected year. Bars are colored by law
-category, and the selected state is highlighted with a \textbf{set}. A national
-average \textbf{reference line} gives extra context. Together, these two charts
-show how a state's law history relates to its position compared with other
-states.
+\textbf{line chart} showing how the total number of firearm laws in a selected
+state has changed over time. A \textbf{state parameter} drives the selection.
+The second (Figure~\ref{fig:q3chart2}) is a \textbf{bar chart} that ranks all
+states by firearm homicide rate for a chosen year. Bars are colored by law
+category, the selected state is highlighted using a \textbf{set}, and a
+national average \textbf{reference line} is overlaid for context. Viewed
+together, the two charts make it easy to see whether legislative growth in a
+state coincides with an improvement in its homicide ranking.
 
 \begin{figure}[H]
 	\centering
@@ -637,25 +626,26 @@ states.
 	\label{fig:q3chart2}
 \end{figure}
 
-\textbf{Insights}: In several states, a steady increase in the number of laws
-is associated with a better position in the homicide ranking. This pattern is
-not identical in every state, so no causal claim is made.
+\textbf{Insights}: In several states, sustained legislative growth aligns with
+a better position in the homicide ranking. The pattern is not uniform, so no
+causal claim is made.
 
 % --- Dashboards ---------------------------------------------------------
 \newpage
 \subsection{Dashboards}\label{sec:dashboards}
 
 \par
-Two dashboards combine the individual charts into a more complete interactive
-view.
+Two dashboards bring the individual charts together into a unified interactive
+experience.
 
 \par
 \textbf{Dashboard 1} (Figure~\ref{fig:db1}) combines the choropleth map
 (Figure~\ref{fig:q1chart1}), the scatter plot (Figure~\ref{fig:q1chart2}),
-and the line chart for Q2 (Figure~\ref{fig:q2chart}). It addresses Q1\sref{q1}
-and Q2\sref{q2} together. A \textbf{dashboard set action} on the map highlights
+and the Q2 line chart (Figure~\ref{fig:q2chart}), covering Q1\sref{q1} and
+Q2\sref{q2} in one view. A \textbf{dashboard set action} on the map highlights
 the selected state in the scatter plot and updates the line chart. The shared
-law-group \textbf{parameter} also changes the grouping across all three views.
+law-group \textbf{parameter} applies the same grouping across all three views
+simultaneously.
 
 \begin{figure}[H]
 	\centering
@@ -665,12 +655,11 @@ law-group \textbf{parameter} also changes the grouping across all three views.
 \end{figure}
 
 \par
-\textbf{Dashboard 2} (Figure~\ref{fig:db2}) focuses on Q3\sref{q3} while also
-connecting back to Q1\sref{q1} and Q2\sref{q2}. It combines the choropleth map
-(Figure~\ref{fig:q1chart1}), the state ranking bar chart
-(Figure~\ref{fig:q3chart2}), and the state law history line chart
-(Figure~\ref{fig:q3chart1}). The shared state \textbf{parameter} controls both
-the line chart and the highlighted state in the ranking chart.
+\textbf{Dashboard 2} (Figure~\ref{fig:db2}) is built around Q3\sref{q3},
+with the choropleth map (Figure~\ref{fig:q1chart1}) kept as a geographic
+reference. The bar chart (Figure~\ref{fig:q3chart2}) and the state law history
+line chart (Figure~\ref{fig:q3chart1}) are linked by the shared state
+\textbf{parameter}, so selecting any state updates both views at once.
 
 \begin{figure}[H]
 	\centering
@@ -719,12 +708,13 @@ the line chart and the highlighted state in the ranking chart.
 \end{table}
 
 \par
-Table~\ref{tab:summary} shows the main visual elements used in the project:
+Across the project, Table~\ref{tab:summary} shows:
 
 \begin{itemize}
-	\item Four chart types: choropleth map, scatter plot, line chart, and bar chart
-	\item Tableau features such as calculated fields, parameters, sets, dashboard actions, reference lines, filters, and tooltips
-	\item Two data sources connected by state and year, using two different file formats (\texttt{.csv} and \texttt{.xlsx})
+	\item Four distinct chart types: choropleth map, scatter plot, line chart, bar chart
+	\item Tableau features used: calculated fields, parameters, sets, dashboard set actions,
+	      reference lines, filters, and custom tooltips
+	\item Two data sources joined by state and year, in two different formats (\texttt{.csv} and \texttt{.xlsx})
 \end{itemize}
 
 % ======================================================================
@@ -732,20 +722,28 @@ Table~\ref{tab:summary} shows the main visual elements used in the project:
 % ======================================================================
 
 \par
-The visualizations suggest the following main patterns:
+The visualizations point to the following patterns:
 
 \begin{itemize}
-	\item Q1\sref{q1}: States with fewer firearm laws tend to show higher firearm homicide rates in both the geographic and cross-sectional views (Figure~\ref{fig:q1chart2}).
-	\item Q2\sref{q2}: States with more laws, whether measured by quantity or by type, show a stronger decline in firearm homicide rates from the 1990s onward (Figure~\ref{fig:q2chart}).
-	\item Q3\sref{q3}: In several states, growth in the number of laws is associated with a better position in the homicide ranking, although this is not consistent enough to support a causal claim (Figures~\ref{fig:q3chart1} and~\ref{fig:q3chart2}).
-	\item FSS is useful as background context, but the main analytical focus of the project remains the legal environment rather than ownership itself.
+	\item Q1\sref{q1}: States with fewer firearm laws tend to have higher firearm
+	      homicide rates, visible in both the map and the scatter plot
+	      (Figure~\ref{fig:q1chart2}).
+	\item Q2\sref{q2}: States with more laws --- by quantity or by type --- show
+	      a stronger decline in firearm homicide from the 1990s onward
+	      (Figure~\ref{fig:q2chart}).
+	\item Q3\sref{q3}: In several states, legislative growth aligns with an
+	      improvement in homicide ranking, though the pattern is not consistent
+	      enough to support a causal claim
+	      (Figures~\ref{fig:q3chart1} and~\ref{fig:q3chart2}).
+	\item FSS serves as useful background context, but the regulatory environment
+	      is the main lens throughout the project.
 \end{itemize}
 
 \par
-This project also has some limitations. FSS is only a proxy for gun ownership,
-not a direct measure. The analysis does not control for other factors such as
-poverty or urbanization. In addition, the state-level join may hide variation
-within states.
+Some limitations are worth noting. FSS is a proxy, not a direct measure of
+ownership. The analysis does not control for confounding factors like poverty
+or urbanization. The state-level join also means any within-state variation
+is not captured.
 
 \newpage
 
