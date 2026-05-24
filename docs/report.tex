@@ -238,7 +238,7 @@ each point of use, and Table~\ref{tab:ai} lists them in one place.
 	\renewcommand{\arraystretch}{1.35}
 	\begin{tabular}{p{8.0cm} p{3.6cm} p{1.6cm}}
 		\toprule
-		\rowcolor{utaddark}
+		\rowcolor{utadark}
 		\color{white}\textbf{Task}               &
 		\color{white}\textbf{Model}              &
 		\color{white}\textbf{Section}                                                      \\
@@ -735,7 +735,7 @@ law history line, providing a seamless single-state deep-dive experience.
 	\renewcommand{\arraystretch}{1.35}
 	\begin{tabular}{p{1.0cm} p{1.0cm} p{3.6cm} p{10.0cm}}
 		\toprule
-		\rowcolor{utaddark}
+		\rowcolor{utadark}
 		\color{white}\textbf{Q}          &
 		\color{white}\textbf{Chart}      &
 		\color{white}\textbf{Chart Type} &
@@ -843,40 +843,34 @@ laws.
 \section{Conclusions}
 % ======================================================================
 
-\subsection*{Main findings across Q1--Q3 and the supplementary analysis}
+\subsection*{Main findings}
+
+\begin{itemize}
+	\item \textbf{Law strength and homicide rates}: States with fewer or weaker
+	      firearm laws tend to have higher firearm homicide rates, while states
+	      with stronger, more comprehensive laws sit at the lower end of the rate
+	      distribution\sref{q1}.
+	\item \textbf{Trends over time}: From the 1990s onward, groups of states with
+	      more and stronger laws show larger and more sustained declines in
+	      firearm homicide rates than groups with weaker law profiles\sref{q2}.
+	\item \textbf{State-level patterns}: For many individual states, periods of
+	      growth in firearm legislation align with improvements in their
+	      homicide ranking relative to other states, even if the effect of any
+	      single law is hard to isolate\sref{q3}.
+	\item \textbf{Popular vs evidence-based laws}: The supplementary event-study
+	      chart (Figure~\ref{fig:lawadoption}) suggests that evidence-based laws
+	      are associated with steeper and more persistent post-adoption declines
+	      in firearm homicide rates than more popular but weaker laws.
+	\item \textbf{Role of ownership}: FSS is useful as a proxy for firearm
+	      ownership, but the results indicate that policy design and enforcement
+	      matter at least as much as the underlying level of gun prevalence.
+\end{itemize}
 
 \par
-Taken together, the Tableau visualizations and the supplementary event-study
-chart point in the same direction. States with fewer firearm laws generally
-have higher firearm homicide rates\sref{q1}, and states that adopt more laws,
-particularly evidence-based ones, tend to see larger and more sustained
-declines in those rates over time\sref{q2}. At the state level, increases in
-law counts often align with improvements in homicide rankings, even if the
-impact of any single law is hard to isolate\sref{q3}.
-
-\par
-FSS is useful as a proxy for firearm ownership, but the patterns in this
-project suggest that policy design matters at least as much as the underlying
-level of gun prevalence. States that pair higher ownership with strong,
-evidence-based legislation can maintain relatively low homicide rates, while
-states with weaker law profiles tend to sit at the higher end of the homicide
-spectrum.
-
-\par
-The supplementary event-study analysis around law adoption uses the same data
-sources as the Tableau dashboards but re-organizes time around each law's
-first adoption year in each state (Figure~\ref{fig:lawadoption}). This
-alignment is difficult to implement cleanly inside Tableau, so AI was used to
-pre-process the data and generate the Plotly code based on the prompt in
-Section~\ref{sec:supp}. That chart reinforces the dashboard results: passing
-firearm laws is associated with meaningful reductions in firearm homicide
-rates, and laws with a stronger evidence base show the clearest improvements.
-
-\par
-Overall, the project does not prove causality or control for all possible
-confounders, but across multiple visualizations and groupings the main story is
-consistent: the type and strength of firearm legislation appear closely linked
-to how often guns are used to kill.
+This project does not prove causality or control for every possible
+confounder, but across multiple visualizations and groupings the same story
+emerges: how a state chooses to regulate firearms is closely linked to how
+often guns are used to kill.
 
 \newpage
 
