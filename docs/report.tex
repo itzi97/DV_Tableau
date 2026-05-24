@@ -228,21 +228,23 @@ figures to appear exactly at their source position rather than floating.
 \par
 Two public datasets were selected and used in conjunction for this project.
 Both are accessible through their corresponding links and are available in
-different formats. Dataset research and pairing strategy were partially
-AI-assisted (Claude Sonnet 4.6; see Section~\ref{sec:ai}).
+different formats. The first dataset was identified independently; finding a
+compatible second dataset was AI-assisted (Claude Sonnet 4.6;
+see Section~\ref{sec:ai}).
 
 \begin{quote}
-\textbf{Prompt:} \textit{I need two datasets that can be joined at the
-state-year level to analyse the relationship between firearm legislation and
-gun violence in the US. What publicly available datasets would you recommend?}
+\textbf{Prompt:} \textit{I already have a state-year level dataset on
+estimated household gun ownership in the US. I need a second dataset that
+contains information about firearm legislation on a state-year basis so I
+can join them easily. What publicly available datasets would you recommend?}
 \end{quote}
 
 \begin{quote}
-\textbf{Response summary:} Suggested pairing the Harvard Dataverse firearm
-suicide proxy dataset (Kang et al.) for estimated gun ownership with the
-Tufts CTSI State Firearm Law Database for legislation, noting that both
-share a state--year grain and an overlapping 1976--2023 window suitable
-for a longitudinal join.
+\textbf{Response summary:} Recommended the Tufts CTSI State Firearm Law
+Database, noting that it tracks 72 binary law provisions per U.S.\ state
+per year from 1976 to 2024, shares the same state--year grain as the
+ownership proxy dataset, and is widely used in public health research,
+making it a straightforward join candidate.
 \end{quote}
 
 \subsection{Dataset 1: Firearm Suicide Proxy for Household Gun Ownership, 1949--2023}
@@ -488,15 +490,65 @@ and error-prone.
 \begin{quote}
 \textbf{Prompt:} \textit{Generate a Tableau calculated field using a CASE
 statement that maps each U.S.\ state's full name to its two-letter
-abbreviation for all 50 states.}
+abbreviation for all 50 states. Only output the code.}
 \end{quote}
 
 \begin{quote}
-\textbf{Response summary:} Produced a complete
-\texttt{CASE [State] WHEN ``Alabama'' THEN ``AL'' \ldots END} expression
-covering all 50 states, which was copied directly into Tableau's
-calculated field editor and verified to return the correct abbreviation
-for every state in the dataset.
+\textbf{Response:}
+\begin{verbatim}
+CASE [State]
+  WHEN "Alabama" THEN "AL"
+  WHEN "Alaska" THEN "AK"
+  WHEN "Arizona" THEN "AZ"
+  WHEN "Arkansas" THEN "AR"
+  WHEN "California" THEN "CA"
+  WHEN "Colorado" THEN "CO"
+  WHEN "Connecticut" THEN "CT"
+  WHEN "Delaware" THEN "DE"
+  WHEN "Florida" THEN "FL"
+  WHEN "Georgia" THEN "GA"
+  WHEN "Hawaii" THEN "HI"
+  WHEN "Idaho" THEN "ID"
+  WHEN "Illinois" THEN "IL"
+  WHEN "Indiana" THEN "IN"
+  WHEN "Iowa" THEN "IA"
+  WHEN "Kansas" THEN "KS"
+  WHEN "Kentucky" THEN "KY"
+  WHEN "Louisiana" THEN "LA"
+  WHEN "Maine" THEN "ME"
+  WHEN "Maryland" THEN "MD"
+  WHEN "Massachusetts" THEN "MA"
+  WHEN "Michigan" THEN "MI"
+  WHEN "Minnesota" THEN "MN"
+  WHEN "Mississippi" THEN "MS"
+  WHEN "Missouri" THEN "MO"
+  WHEN "Montana" THEN "MT"
+  WHEN "Nebraska" THEN "NE"
+  WHEN "Nevada" THEN "NV"
+  WHEN "New Hampshire" THEN "NH"
+  WHEN "New Jersey" THEN "NJ"
+  WHEN "New Mexico" THEN "NM"
+  WHEN "New York" THEN "NY"
+  WHEN "North Carolina" THEN "NC"
+  WHEN "North Dakota" THEN "ND"
+  WHEN "Ohio" THEN "OH"
+  WHEN "Oklahoma" THEN "OK"
+  WHEN "Oregon" THEN "OR"
+  WHEN "Pennsylvania" THEN "PA"
+  WHEN "Rhode Island" THEN "RI"
+  WHEN "South Carolina" THEN "SC"
+  WHEN "South Dakota" THEN "SD"
+  WHEN "Tennessee" THEN "TN"
+  WHEN "Texas" THEN "TX"
+  WHEN "Utah" THEN "UT"
+  WHEN "Vermont" THEN "VT"
+  WHEN "Virginia" THEN "VA"
+  WHEN "Washington" THEN "WA"
+  WHEN "West Virginia" THEN "WV"
+  WHEN "Wisconsin" THEN "WI"
+  WHEN "Wyoming" THEN "WY"
+END
+\end{verbatim}
 \end{quote}
 
 \begin{figure}[H]
@@ -559,25 +611,6 @@ user-selected state is highlighted so the viewer can immediately see where
 it stands relative to all others. Together, the two charts let the viewer
 judge whether periods of legislative growth in the selected state coincide
 with an improvement in its homicide ranking.
-
-\par
-One supplementary visualization for this section was produced outside of
-Tableau using AI-assisted code generation (Claude Sonnet 4.6;
-see Section~\ref{sec:ai}).
-
-\begin{quote}
-\textbf{Prompt:} \textit{Generate a Python script using Plotly that produces
-a ranked horizontal bar chart of firearm homicide rates by state for a given
-year, with the selected state highlighted in red and all others in grey.}
-\end{quote}
-
-\begin{quote}
-\textbf{Response summary:} Produced a self-contained Plotly script that
-accepts a state name and year as parameters, filters the dataset, sorts
-states by homicide rate, and renders a horizontal bar chart with the
-selected state colored distinctly. The output was reviewed, tested against
-the dataset, and included as a supplementary figure.
-\end{quote}
 
 \begin{figure}[H]
 	\centering
