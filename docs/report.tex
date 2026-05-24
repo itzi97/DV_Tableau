@@ -553,15 +553,15 @@ analytical value, so this field was generated with AI
 
 \begin{quote}
 	\textbf{Response:}
-\begin{Verbatim}[fontsize=\footnotesize,xleftmargin=0pt]
-CASE [State]
-WHEN "Alabama" THEN "AL"
-WHEN "Alaska"  THEN "AK"
-...
-WHEN "Wisconsin" THEN "WI"
-WHEN "Wyoming"   THEN "WY"
-END
-\end{Verbatim}
+	\begin{Verbatim}[fontsize=\footnotesize,xleftmargin=0pt]
+		CASE [State]
+		WHEN "Alabama" THEN "AL"
+		WHEN "Alaska"  THEN "AK"
+		...
+		WHEN "Wisconsin" THEN "WI"
+		WHEN "Wyoming"   THEN "WY"
+		END
+	\end{Verbatim}
 \end{quote}
 
 \begin{figure}[H]
@@ -648,7 +648,7 @@ complementing \texttt{P LawCategorization} from Figure~\ref{fig:q1chart2}.
 The second chart (Figure~\ref{fig:q3chart2}) is a \textbf{bar chart} that ranks
 all states by firearm homicide rate for a chosen year. The selected state is
 highlighted using a \textbf{set}, and a national average \textbf{reference
-line} is overlaid for context. The reference line feature was first used in
+	line} is overlaid for context. The reference line feature was first used in
 Figure~\ref{fig:q2chart} and is applied here in the same way. Viewed together,
 the two charts make it easy to see whether legislative growth in a state
 coincides with an improvement in its homicide ranking.
@@ -740,27 +740,27 @@ law history line, providing a seamless single-state deep-dive experience.
 		\color{white}\textbf{Q}          &
 		\color{white}\textbf{Chart}      &
 		\color{white}\textbf{Chart Type} &
-		\color{white}\textbf{Tableau Features}                                             \\
+		\color{white}\textbf{Tableau Features}                                                                                             \\
 		\midrule
 		\rowcolor{utadrow}
-		Q1\sref{q1} & Fig.~\ref{fig:q1chart1} & Choropleth map
-		            & P Year, CF StateAbbreviation, orange severity gradient               \\
-		Q1\sref{q1} & Fig.~\ref{fig:q1chart2} & Scatter plot
-		            & P LawCategorization (introduced here), color encoding                \\
+		Q1\sref{q1}                      & Fig.~\ref{fig:q1chart1}                                              & Choropleth map
+		                                 & P Year, CF StateAbbreviation, orange severity gradient                                          \\
+		Q1\sref{q1}                      & Fig.~\ref{fig:q1chart2}                                              & Scatter plot
+		                                 & P LawCategorization (introduced here), color encoding                                           \\
 		\rowcolor{utadrow}
-		Q2\sref{q2} & Fig.~\ref{fig:q2chart}  & Line chart (interactive)
-		            & P LawCategorization (reused), reference line (introduced here)       \\
-		Q3\sref{q3} & Fig.~\ref{fig:q3chart1} & Line chart (per state)
-		            & P State (introduced here), filter                                    \\
+		Q2\sref{q2}                      & Fig.~\ref{fig:q2chart}                                               & Line chart (interactive)
+		                                 & P LawCategorization (reused), reference line (introduced here)                                  \\
+		Q3\sref{q3}                      & Fig.~\ref{fig:q3chart1}                                              & Line chart (per state)
+		                                 & P State (introduced here), filter                                                               \\
 		\rowcolor{utadrow}
-		Q3\sref{q3} & Fig.~\ref{fig:q3chart2} & Bar chart (comparative)
-		            & Set, reference line (reused), set action, P State (reused)           \\
-		Q1+Q2       & Fig.~\ref{fig:db1}      & Dashboard
-		            & Filter action (map to scatter), P Year reference line in line chart,
-		              P LawCategorization (reused)                                          \\
+		Q3\sref{q3}                      & Fig.~\ref{fig:q3chart2}                                              & Bar chart (comparative)
+		                                 & Set, reference line (reused), set action, P State (reused)                                      \\
+		Q1+Q2                            & Fig.~\ref{fig:db1}                                                   & Dashboard
+		                                 & Filter action (map to scatter), P Year reference line in line chart,
+		P LawCategorization (reused)                                                                                                       \\
 		\rowcolor{utadrow}
-		Q3+Q1/Q2    & Fig.~\ref{fig:db2}      & Dashboard
-		            & P State (reused), filter action, map click action                    \\
+		Q3+Q1/Q2                         & Fig.~\ref{fig:db2}                                                   & Dashboard
+		                                 & P State (reused), filter action, map click action                                               \\
 		\bottomrule
 	\end{tabular}
 	\caption{Visualization summary}
@@ -861,7 +861,7 @@ years before to ten years after adoption.
 	\centering
 	\includegraphics[width=0.95\textwidth]{../figures/LawAdoptionChart.png}
 	\caption{Supplementary -- Average Firearm Homicide Rate Around Law Adoption
-	(Event Study, $-$5 to $+$10 years)}
+		(Event Study, $-$5 to $+$10 years)}
 	\label{fig:lawadoption}
 \end{figure}
 
