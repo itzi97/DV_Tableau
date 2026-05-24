@@ -96,15 +96,16 @@
 
 \par
 This project explores the relationship between state firearm legislation and
-gun violence in the United States, using data spanning 1976--2023. While
+gun violence in the United States using data spanning 1976--2023. While
 estimated household gun ownership is included as a contextual variable, it is
 not treated as the primary explanatory factor. Evidence from countries such as
-Finland and Switzerland, where high gun ownership coexists with low rates of
-gun violence, suggests that the regulatory environment surrounding firearms may
+Finland and Switzerland where high gun ownership coexists with low rates of gun
+violence, suggests that the regulatory environment surrounding firearms may
 matter more than ownership prevalence alone. This project therefore focuses on
 whether the strength of state firearm laws is associated with lower rates of
-firearm homicide and suicide, and whether changes in legislation over time
-correspond to measurable shifts in gun violence rates.
+firearm homicide (not FSS since that is used as an estimator for estimated gun
+ownership) and whether changes in legislation over time correspond to
+measurable shifts in gun violence rates.
 
 \subsection{Methodology}
 
@@ -112,12 +113,14 @@ correspond to measurable shifts in gun violence rates.
 The project followed the process below to achieve the goal described above:
 \begin{enumerate}
 	\item Dataset selection and join strategy design
-	\item Data analysis and cleaning outside Tableau
+	\item Data analysis outside Tableau
 	\item Research questions derived from data exploration
 	\item Visualization types needed to answer each question and storytell
 	\item Data source connection, relationships, and calculated fields in Tableau
 	\item Tableau feature selection (parameters, sets, filters, actions, tooltips)
 	\item Dashboard design and interactive storytelling
+	\item Use of AI for further Data Analysis aside from Tableau for more complex
+	      visualizations (extra)
 \end{enumerate}
 
 \subsection{Sources}
@@ -126,7 +129,7 @@ The project followed the process below to achieve the goal described above:
 Numerous sources are used throughout the project such as:
 
 \begin{itemize}
-	\item Official dataset documentation and codebooks
+	\item Official dataset documentation
 	\item Harvard Dataverse and Tufts CTSI dataset metadata
 	\item Academic literature on firearm ownership proxies and gun law effects
 	\item Tableau official documentation
