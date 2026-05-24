@@ -287,6 +287,7 @@ valid join for that entity.
 
 \subsection{Research Questions}
 
+\par
 Three questions were formulated based on data exploration and storytelling intent:
 
 \begin{enumerate}
@@ -303,37 +304,42 @@ Three questions were formulated based on data exploration and storytelling inten
 \subsubsection{Question 1: Homicide Rates and the Law Landscape}\label{q1}
 
 \par
-Question 1 establishes the cross-sectional baseline of the project. A
-choropleth map provides a geographic overview of firearm homicide rates across
-all U.S.\ states for a user-selected year. A linked scatter plot then plots
-estimated gun ownership (FSS) against total law count per state, colored by
-firearm homicide rate, allowing the viewer to examine whether states with
-higher homicide rates cluster in particular regions of the law-count space.
-A law-categorization parameter lets the viewer switch the color encoding
-between law quantity tier and law type group, enabling a richer reading
-of which types of legislation are associated with lower homicide rates.
+This question is the entry point of the analysis. Before drawing any
+temporal or causal conclusions, it is necessary to establish whether a
+cross-sectional pattern even exists: do states that have enacted more laws,
+or certain types of laws, tend to have lower firearm homicide rates? The
+question is intentionally descriptive --- it does not assert causation but
+asks whether the law landscape and the violence landscape are associated
+when viewed together. FSS is included as a contextual variable to show
+where estimated gun ownership sits in this picture, without treating it
+as an outcome or a direct cause.
 
 \subsubsection{Question 2: Homicide Trends by Law Profile Over Time}\label{q2}
 
 \par
-Question 2 introduces a temporal dimension. The viewer can observe how
-firearm homicide rates have evolved from 1976 to 2023 for groups of states
-defined either by how many laws they have passed (law quantity tier) or by
-which categories of laws are present (law type group). The toggle between
-these two groupings is controlled by the same law-categorization parameter
-used in Question 1, making the two questions part of a continuous analytical
-narrative.
+If a cross-sectional association exists, the natural follow-up is whether
+it has strengthened or weakened over time. This question was chosen because
+the datasets span nearly five decades, making a purely static view an
+underuse of the temporal depth available. By grouping states according to
+their law profile --- either by how many laws they have passed or by which
+categories of law are present --- it becomes possible to observe whether
+the trajectories of high-law and low-law states have diverged, and whether
+that divergence accelerated after key legislative periods such as the early
+1990s. The dual grouping toggle was motivated by the desire to distinguish
+between sheer legislative volume and the specific nature of the laws enacted.
 
 \subsubsection{Question 3: State-Level Law History and Homicide Standing}\label{q3}
 
 \par
-Question 3 narrows the focus to a single, user-selected state. It asks
-whether the trajectory of that state's law count over time is accompanied
-by a change in its firearm homicide rate, and how the state's current rate
-compares to all other states in a chosen year. This is deliberately
-exploration rather than causal inference: the viewer draws their own
-conclusion from the side-by-side evidence, without the project asserting
-a direct policy effect.
+The first two questions operate at an aggregate or grouped level. This
+third question was chosen to bring the analysis down to the individual
+state, making it personally relevant and explorable for any viewer. The
+motivation is to let someone examine their own state: when did it pass
+laws, how many, and does its current homicide ranking reflect that
+legislative history? Framing it as exploration rather than causal
+conclusion is deliberate --- the data alone cannot establish that laws
+caused a change in outcomes, but the side-by-side evidence of legislative
+growth and ranking shift is meaningful context for the viewer to interpret.
 
 \section{Visualization Prep}
 
