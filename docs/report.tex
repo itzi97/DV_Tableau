@@ -733,7 +733,7 @@ law history line, providing a seamless single-state deep-dive experience.
 \begin{table}[H]
 	\centering
 	\renewcommand{\arraystretch}{1.35}
-	\begin{tabular}{p{1.0cm} p{1.2cm} p{3.6cm} p{9.3cm}}
+	\begin{tabular}{p{1.0cm} p{1.0cm} p{3.6cm} p{10.0cm}}
 		\toprule
 		\rowcolor{utaddark}
 		\color{white}\textbf{Q}          &
@@ -834,39 +834,42 @@ factors such as poverty, urbanization, or policing levels.
 
 \par
 To complement the Tableau visualizations, an event-study style chart
-(Figure~\ref{fig:lawadoption}) was generated with AI to show how the average
-firearm homicide rate evolves around the moment a specific law is adopted.
-For each law, year~0 is the year of first adoption in a given state; the
-chart shows the average across all states that adopted the law, from five
-years before to ten years after adoption.
+(Figure~\ref{fig:lawadoption}) was generated with AI based on a detailed
+prompt to the Perplexity assistant. The goal was to compare how firearm
+homicide rates evolve around the adoption of popular versus evidence-based
+laws.
 
 \begin{quote}
-	\textbf{Prompt:} \textit{Generate a multi line event study showing the
-		average firearm homicide rate from 5 years before to 10 years after the
-		adoption of 3 popular firearm laws vs 3 evidence based firearm laws.
+	\textbf{Prompt to Perplexity:} \textit{Using the Kang et al. firearm ownership
+		proxy dataset and the Tufts CTSI State Firearm Law Database, generate a
+		multi line event study showing the average firearm homicide rate from
+		5 years before to 10 years after the adoption of 3 popular firearm laws
+		versus 3 evidence based firearm laws.
 
-		I want you to use the following laws for the study:
-
+		For the popular laws, use:
 		- Gun violence RO
 		- Assault weapons ban
 		- LCM Ban
 
-		as popular laws, and as evidence based laws use:
-
+		For the evidence-based laws, use:
 		- permit to purchase
 		- waiting period
 		- universal BG check
 
-		Also include some metrics to compare the average between these at the
-		bottom and simplify the axis labels to only show once for all charts.}
+		Plot a separate line for each law, grouped visually into popular and
+		evidence-based categories. Also include summary metrics comparing the
+		average post-adoption homicide rates between the two groups at the
+		bottom of the figure, and simplify the axis labels so they are shown
+		only once for all charts. Only output the code needed to build this
+		chart.}
 \end{quote}
 
 \begin{quote}
 	\textbf{Response summary:} Produced a Plotly multi-line chart with a vertical
-	reference line at year~0, solid colored lines for the three evidence-based laws
-	(Universal Background Checks, GVRO, Assault Restriction) and dashed grey lines
-	for the two popular laws (Concealed Carry Permit, Waiting Period). Direct
-	end-labels are used instead of a legend to reduce clutter.
+	reference line at year~0, solid colored lines for evidence-based laws and
+	dashed lines for popular laws, grouped in a single shared axis system with
+	common labels and a small table of average post-adoption homicide rates
+	by law group beneath the chart.
 \end{quote}
 
 \begin{figure}[H]
@@ -882,9 +885,9 @@ years before to ten years after adoption.
 	\item All five laws are associated with a decline in firearm homicide rate
 	      in the years following adoption, but the steepness of the decline
 	      differs substantially by law type.
-	\item Evidence-based laws (solid lines) show a noticeably steeper and more
-	      sustained post-adoption decline than popular laws (dashed lines),
-	      consistent with the findings from the Tableau bar chart
+	\item Evidence-based laws show a noticeably steeper and more
+	      sustained post-adoption decline than popular laws, consistent with the
+	      findings from the Tableau bar chart
 	      (Figure~\ref{fig:q3chart2}).
 	\item Universal Background Checks shows the sharpest improvement, followed
 	      by GVRO and Assault Restriction.
