@@ -121,10 +121,7 @@ The project followed the process below to achieve the goal described above:
 	\item Data source connection, relationships, and calculated fields in Tableau
 	\item Tableau feature selection (parameters, sets, filters, actions, tooltips)
 	\item Dashboard design and interactive storytelling
-	\item Use of AI assistance for tedious but mechanical tasks such as generating
-	      calculated fields (e.g.\ a state-name-to-abbreviation mapping for
-	      all 50 states), report structuring, and dataset pairing strategy.
-	      All AI output was reviewed critically before use
+	\item Use of AI assistance for laborious or repetitive tasks
 	      (see Section~\ref{sec:ai})
 \end{enumerate}
 
@@ -152,53 +149,101 @@ Regardless of the source, these are indicated through bibliography and
 references, or in the case of AI, an explicit note indicating the model and
 prompt used.
 
-\subsection{AI Usage}\label{sec:ai}
+\subsection{AI Usage Declaration}\label{sec:ai}
 
 \par
-AI was used during this project in a critical and supervised manner. All
-AI generated suggestions were reviewed and scrutinized before being applied,
-with particular attention to the risk of hallucination.
-Specifically, AI was used for the following tasks:
+AI assistance was used for laborious, repetitive, or mechanical tasks
+throughout this project. All AI output was reviewed critically before use.
+Analytical conclusions, Tableau visualizations, and interpretation of results
+were not produced by AI. The model used in all cases was
+\textbf{Claude Sonnet 4.6}, accessed via the Perplexity AI assistant.
+Detailed prompts and responses are documented inline at each point of use;
+the table below provides a summary index.
 
-\begin{itemize}
-	\item \textbf{Dataset research}: identifying and evaluating candidate
-	      datasets suitable for a longitudinal U.S.\ firearm violence analysis,
-	      including assessing their grain, coverage, and compatibility for joining
-	\item \textbf{Mechanical calculated fields}: generating tedious but
-	      deterministic Tableau expressions such as a state-name-to-abbreviation
-	      lookup mapping all 50 U.S.\ states
-	\item \textbf{Report structuring}: assistance with LaTeX formatting,
-	      section organisation, and bibliography management
-	\item \textbf{Document labelling and cross-referencing}: adding
-	      \texttt{\textbackslash label} tags to named sections and ensuring
-	      every mention of those sections elsewhere in the document references
-	      them correctly. This task was automated due to its repetitive nature
-	      --- scanning the full document for every occurrence of a reference
-	      and inserting the correct command is mechanical and error-prone when
-	      done manually. Modern LLMs are well-suited to this kind of structural
-	      text analysis, as they can reliably identify where a concept is
-	      discussed and apply consistent markup throughout a document.
-	      A representative prompt used for this task was:
-	      \begin{quote}
-	      \textit{Add labels to questions Q1, Q2 and Q3 in the document and
-	      reference those labels whenever those questions are referenced
-	      in the document.}
-	      \end{quote}
-	\item \textbf{Supplementary chart generation}: one additional visualization
-	      was produced outside of Tableau using AI-assisted code generation,
-	      included as a supplementary figure in the relevant section
-\end{itemize}
+\begin{table}[H]
+	\centering
+	\begin{tabular}{lll}
+		\toprule
+		\textbf{Task} & \textbf{Model} & \textbf{Section} \\
+		\midrule
+		Dataset research and pairing strategy  & Claude Sonnet 4.6 & \ref{sec:datasets} \\
+		State-abbreviation calculated field    & Claude Sonnet 4.6 & \ref{sec:viz:q1} \\
+		Document labelling and cross-referencing & Claude Sonnet 4.6 & \ref{sec:ai:labels} \\
+		Report structuring and LaTeX formatting & Claude Sonnet 4.6 & \ref{sec:ai:latex} \\
+		Supplementary chart generation          & Claude Sonnet 4.6 & \ref{sec:viz:q3} \\
+		\bottomrule
+	\end{tabular}
+	\caption{AI usage index}
+	\label{tab:ai}
+\end{table}
+
+\subsubsection{Document Labelling and Cross-Referencing}\label{sec:ai:labels}
 
 \par
-AI was not used to generate data, draw analytical conclusions, produce
-Tableau visualizations, or write the interpretation of results.
+Adding \texttt{\textbackslash label} tags to named sections and propagating
+\texttt{\textbackslash ref} calls consistently throughout a long document is
+mechanical and error-prone when done manually. Modern LLMs are well-suited to
+this kind of structural text analysis, as they can parse the full document,
+identify every mention of a concept, and apply uniform markup in a single pass.
 
-\section{Datasets}
+\begin{quote}
+\textbf{Prompt:} \textit{Add labels to questions Q1, Q2 and Q3 in the document
+and reference those labels whenever those questions are referenced in the
+document.}
+\end{quote}
+
+\begin{quote}
+\textbf{Response summary:} Added \texttt{\textbackslash label\{q1\}},
+\texttt{\textbackslash label\{q2\}}, \texttt{\textbackslash label\{q3\}} to
+the three \texttt{\textbackslash subsubsection} headings, inserted
+\texttt{\textbackslash sref\{q1/q2/q3\}} at the end of each item in the
+numbered question list, and prefixed the corresponding Conclusions bullets and
+Visualization Summary table rows with the matching \texttt{\textbackslash sref}
+call, creating clickable hyperlinks throughout the PDF.
+\end{quote}
+
+\subsubsection{Report Structuring and LaTeX Formatting}\label{sec:ai:latex}
+
+\par
+AI was used to assist with LaTeX boilerplate, section organisation, consistent
+page-break placement, and bibliography management --- tasks that are
+time-consuming but do not require analytical judgement.
+
+\begin{quote}
+\textbf{Prompt:} \textit{For visualizations, make it so each of them is on a
+different page alongside with their text section, so page breaks are consistent
+and it doesn't break in weird places.}
+\end{quote}
+
+\begin{quote}
+\textbf{Response summary:} Added \texttt{\textbackslash usepackage\{float\}}
+to the preamble, inserted \texttt{\textbackslash newpage} before each
+visualization subsection (Q1, Q2, Q3, Dashboards, Summary), and changed all
+figure placement specifiers from \texttt{[h]} to \texttt{[H]} to force
+figures to appear exactly at their source position rather than floating.
+\end{quote}
+
+\section{Datasets}\label{sec:datasets}
 
 \par
 Two public datasets were selected and used in conjunction for this project.
 Both are accessible through their corresponding links and are available in
-different formats.
+different formats. Dataset research and pairing strategy were partially
+AI-assisted (Claude Sonnet 4.6; see Section~\ref{sec:ai}).
+
+\begin{quote}
+\textbf{Prompt:} \textit{I need two datasets that can be joined at the
+state-year level to analyse the relationship between firearm legislation and
+gun violence in the US. What publicly available datasets would you recommend?}
+\end{quote}
+
+\begin{quote}
+\textbf{Response summary:} Suggested pairing the Harvard Dataverse firearm
+suicide proxy dataset (Kang et al.) for estimated gun ownership with the
+Tufts CTSI State Firearm Law Database for legislation, noting that both
+share a state--year grain and an overlapping 1976--2023 window suitable
+for a longitudinal join.
+\end{quote}
 
 \subsection{Dataset 1: Firearm Suicide Proxy for Household Gun Ownership, 1949--2023}
 
@@ -419,7 +464,7 @@ to ensure readability and reproducibility.
 
 % --- Q1 -----------------------------------------------------------------
 \newpage
-\subsection{Q1 -- Homicide Rates and the Law Landscape}
+\subsection{Q1 -- Homicide Rates and the Law Landscape}\label{sec:viz:q1}
 
 \par
 Two charts answer Question 1\sref{q1}. The first is a \textbf{choropleth map}
@@ -432,6 +477,27 @@ color encodes the firearm homicide rate. A year parameter and a
 law-categorization parameter allow the viewer to scrub through time and
 switch the color encoding between law tier and law type group, enabling
 both a quantitative and a qualitative reading of the law landscape.
+
+\par
+The choropleth map uses state abbreviations as mark labels. Generating the
+calculated field that maps all 50 full state names to their two-letter
+abbreviations was AI-assisted (Claude Sonnet 4.6; see Section~\ref{sec:ai}),
+as writing 50 individual \texttt{WHEN} clauses by hand is purely mechanical
+and error-prone.
+
+\begin{quote}
+\textbf{Prompt:} \textit{Generate a Tableau calculated field using a CASE
+statement that maps each U.S.\ state's full name to its two-letter
+abbreviation for all 50 states.}
+\end{quote}
+
+\begin{quote}
+\textbf{Response summary:} Produced a complete
+\texttt{CASE [State] WHEN ``Alabama'' THEN ``AL'' \ldots END} expression
+covering all 50 states, which was copied directly into Tableau's
+calculated field editor and verified to return the correct abbreviation
+for every state in the dataset.
+\end{quote}
 
 \begin{figure}[H]
 	\centering
@@ -480,7 +546,7 @@ law quantity and law type groupings.
 
 % --- Q3 -----------------------------------------------------------------
 \newpage
-\subsection{Q3 -- State-Level Law History and Homicide Standing}
+\subsection{Q3 -- State-Level Law History and Homicide Standing}\label{sec:viz:q3}
 
 \par
 Two charts answer Question 3\sref{q3}. The first is a \textbf{line chart}
@@ -493,6 +559,25 @@ user-selected state is highlighted so the viewer can immediately see where
 it stands relative to all others. Together, the two charts let the viewer
 judge whether periods of legislative growth in the selected state coincide
 with an improvement in its homicide ranking.
+
+\par
+One supplementary visualization for this section was produced outside of
+Tableau using AI-assisted code generation (Claude Sonnet 4.6;
+see Section~\ref{sec:ai}).
+
+\begin{quote}
+\textbf{Prompt:} \textit{Generate a Python script using Plotly that produces
+a ranked horizontal bar chart of firearm homicide rates by state for a given
+year, with the selected state highlighted in red and all others in grey.}
+\end{quote}
+
+\begin{quote}
+\textbf{Response summary:} Produced a self-contained Plotly script that
+accepts a state name and year as parameters, filters the dataset, sorts
+states by homicide rate, and renders a horizontal bar chart with the
+selected state colored distinctly. The output was reviewed, tested against
+the dataset, and included as a supplementary figure.
+\end{quote}
 
 \begin{figure}[H]
 	\centering
