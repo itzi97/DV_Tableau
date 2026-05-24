@@ -229,7 +229,7 @@ was reviewed before being included in the project. The analytical conclusions,
 Tableau visualizations, and interpretation of results are entirely my own. The
 model used throughout was \textbf{Claude Sonnet 4.6}, accessed via the
 Perplexity AI assistant. Prompts and short response summaries are noted at
-each point of use; Table~\ref{tab:ai} lists them in one place.
+each point of use, and Table~\ref{tab:ai} lists them in one place.
 
 \begin{table}[H]
 	\centering
@@ -301,7 +301,7 @@ details with no effect on the content or analysis.
 \par
 Two public datasets were used. Both are available online and share a
 state-year structure, making them straightforward to combine in Tableau.
-The first dataset was chosen independently; AI helped identify the second one.
+The first dataset was chosen independently, and AI helped identify the second one.
 
 \begin{quote}
 	\textbf{Prompt:} \textit{I already have a state-year level dataset on
@@ -336,7 +336,7 @@ Dataverse.
 \end{itemize}
 
 \par
-FSS is not a literal count of guns; it is a proxy measure with a long track
+FSS is not a literal count of guns. It is a proxy measure with a long track
 record in public health and policy research\autocite{extendingfss}. In this
 project it appears only as background context in the scatter plot. The primary
 outcome variable throughout is firearm homicide rate.
@@ -350,7 +350,7 @@ firearm law provisions was in effect in each U.S.\ state for every year from
 1976 to 2024.
 
 \begin{itemize}
-	\item \textbf{Source}: Tufts CTSI --- State Firearm Law Database\autocite{statefirearmlaw}
+	\item \textbf{Source}: Tufts CTSI, State Firearm Law Database\autocite{statefirearmlaw}
 	\item \textbf{Grain}: One row per U.S. state per year
 	\item \textbf{Key columns}: State, Year, 72 binary law indicators
 	      (e.g.\ permit requirements, background checks, waiting periods,
@@ -425,8 +425,8 @@ rates? FSS is included only as background context on estimated ownership.
 
 \par
 Q2 extends Q1 by adding the time dimension. States are grouped by their law
-profile --- either by quantity tier or by law type category
-(see Section~\ref{sec:lawcat}) --- and their homicide rate trends are compared
+profile, either by quantity tier or by law type category
+(see Section~\ref{sec:lawcat}), and their homicide rate trends are compared
 across the full 1976--2023 period.
 
 \subsubsection{Question 3: State-Level Law History and Homicide Standing}\label{q3}
@@ -454,9 +454,9 @@ The project is structured as four acts. Act~1 sets the scene with a geographic
 and cross-sectional view of homicide rates and the law landscape. Act~2 adds
 time, comparing how rates have evolved across the law categories in
 Section~\ref{sec:lawcat}. Act~3 zooms into individual states to connect each
-one's law history to its homicide standing. Act~4 compares the two law
-groups --- Popular and Evidence-Based --- directly, to see which one shows a
-stronger association with lower homicide rates.
+one's law history to its homicide standing. Act~4 compares the two law groups,
+Popular and Evidence-Based, to see which one shows a stronger association with
+lower homicide rates.
 
 % -----------------------------------------------------------------------
 \subsection{Law Categorization}\label{sec:lawcat}
@@ -467,7 +467,7 @@ Two grouping schemes are used across the visualizations. A shared parameter
 lets the viewer switch between them at any point.
 
 \par
-\textbf{By quantity} --- states are divided into three tiers based on their
+\textbf{By quantity}, states are divided into three tiers based on their
 total law count (\texttt{lawtotal}):
 
 \begin{itemize}
@@ -477,17 +477,17 @@ total law count (\texttt{lawtotal}):
 \end{itemize}
 
 \par
-\textbf{By type} --- rather than using all 72 laws, the analysis uses a
+\textbf{By type}, rather than using all 72 laws, the analysis uses a
 smaller subset: the three most commonly adopted laws (``Popular'') and the
 three with the strongest evidence base in the research literature
 (``Evidence-Based''). States fall into one of four categories depending on
 how many laws from each group they have adopted:
 
 \begin{itemize}
-	\item \textbf{Weak} --- fewer than two Popular laws and fewer than two Evidence-Based laws
-	\item \textbf{Popular} --- at least two Popular laws, but fewer than two Evidence-Based laws
-	\item \textbf{Evidence} --- at least two Evidence-Based laws, but fewer than two Popular laws
-	\item \textbf{Both} --- at least two laws from each group
+	\item \textbf{Weak}: fewer than two Popular laws and fewer than two Evidence-Based laws
+	\item \textbf{Popular}: at least two Popular laws, but fewer than two Evidence-Based laws
+	\item \textbf{Evidence}: at least two Evidence-Based laws, but fewer than two Popular laws
+	\item \textbf{Both}: at least two laws from each group
 \end{itemize}
 
 % -----------------------------------------------------------------------
@@ -582,9 +582,10 @@ are the main analytical lenses.
 Q2\sref{q2} uses an \textbf{interactive line chart} (Figure~\ref{fig:q2chart}).
 The X axis covers 1976--2023, the Y axis shows firearm homicide rate, and each
 line represents a group of states. The grouping is controlled by the same
-law-group \textbf{parameter} as Figure~\ref{fig:q1chart2}: quantity mode shows
-Low, Medium, and High; type mode shows Weak, Popular, Evidence, and Both.
-A vertical \textbf{reference line} marks notable legislative periods.
+law-group \textbf{parameter} as Figure~\ref{fig:q1chart2}. In quantity mode
+the groups are Low, Medium, and High, and in type mode they are Weak, Popular,
+Evidence, and Both. A vertical \textbf{reference line} marks notable
+legislative periods.
 
 \begin{figure}[H]
 	\centering
@@ -658,7 +659,7 @@ simultaneously.
 \textbf{Dashboard 2} (Figure~\ref{fig:db2}) is built around Q3\sref{q3},
 with the choropleth map (Figure~\ref{fig:q1chart1}) kept as a geographic
 reference. The bar chart (Figure~\ref{fig:q3chart2}) and the state law history
-line chart (Figure~\ref{fig:q3chart1}) are linked by the shared state
+line chart (Figure~\ref{fig:q3chart1}) are both linked by the shared state
 \textbf{parameter}, so selecting any state updates both views at once.
 
 \begin{figure}[H]
@@ -728,7 +729,7 @@ The visualizations point to the following patterns:
 	\item Q1\sref{q1}: States with fewer firearm laws tend to have higher firearm
 	      homicide rates, visible in both the map and the scatter plot
 	      (Figure~\ref{fig:q1chart2}).
-	\item Q2\sref{q2}: States with more laws --- by quantity or by type --- show
+	\item Q2\sref{q2}: States with more laws, whether by quantity or by type, show
 	      a stronger decline in firearm homicide from the 1990s onward
 	      (Figure~\ref{fig:q2chart}).
 	\item Q3\sref{q3}: In several states, legislative growth aligns with an
