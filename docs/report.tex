@@ -457,33 +457,30 @@ Three questions were formulated based on data exploration and storytelling inten
 \par
 This is the entry point of the analysis. Before drawing any temporal or causal
 conclusions, it is necessary to establish whether a cross-sectional pattern
-exists: do states that have enacted more laws or certain types of laws, tend to
-have lower firearm homicide rates? The question is meant to ask whether the law
-and violence landscape are associated when viewed together. FSS is included as
-a contextual variable to show where estimated gun ownership sits in this
-picture, without treating it as an outcome or a direct cause.
+exists: do states that have enacted more laws or certain types of laws tend to
+have lower firearm homicide rates? FSS is included as a contextual variable
+to show where estimated gun ownership sits in this picture, without treating
+it as an outcome or a direct cause.
 
 \subsubsection{Question 2: Homicide Trends by Law Profile Over Time}\label{q2}
 
 \par
-If a cross-sectional association exists, the natural follow up is whether it
-has strengthened or weakened over time. This question was chosen because the
-datasets span nearly five decades, allowing for more temporal depth. By
-grouping states according to their law profile (types of laws or number of laws
-passed), it becomes possible to observe whether the trajectories have diverged,
-and whether that divergence accelerated after key legislative periods such as
-the early 1990s.
+If a cross-sectional association exists, the natural follow-up is whether it
+has strengthened or weakened over time. By grouping states according to their
+law profile --- either by quantity tier (low, medium, high) or by law type
+(the three most widely adopted laws versus the three with the strongest
+evidence base) --- it becomes possible to observe whether homicide trajectories
+have diverged, and whether that divergence accelerated after key legislative
+periods such as the early 1990s.
 
 \subsubsection{Question 3: State-Level Law History and Homicide Standing}\label{q3}
 
 \par
-The first two questions analyze the broader picture whilst this third question
-brings the analysis down to the individual state, making it personally relevant
-and explorable for any viewer. The motivation is to let someone examine their
-own state: when did it pass laws, how many, and does its current homicide
-ranking reflect that legislative history? It is an exploration due to the
-nature of each state being individualized, making it harder to draw causality
-unlike with the broader analysis.
+Q1 and Q2 analyze the broader picture; Q3 brings the analysis down to the
+individual state, making it personally relevant and explorable for any viewer.
+The motivation is to let someone examine their own state: when did it pass
+laws, how many, and does its current homicide ranking reflect that legislative
+history?
 
 % ======================================================================
 \section{Visualization Prep}
@@ -499,13 +496,17 @@ requirements.
 % -----------------------------------------------------------------------
 
 \par
-The project follows a four-act structure: Act 1 establishes the geographic
+The project follows a four-act structure. Act~1 establishes the geographic
 and cross-sectional baseline (where is violence highest; what does the law
-landscape look like); Act 2 adds the temporal dimension (how have homicide
-rates diverged by law profile over 1976--2023); Act 3 narrows to individual
-states, tracing each state's legislative history against its homicide ranking;
-and Act 4 zooms in to individual law provisions, comparing average homicide
-trends across all 72 laws.
+landscape look like). Act~2 adds the temporal dimension, showing how homicide
+rates have diverged by law profile over 1976--2023, using two categorizations:
+law quantity tier (low, medium, high) and law type (the three most widely
+adopted laws versus the three with the strongest evidence base). Act~3
+narrows to individual states, tracing each state's legislative history against
+its homicide ranking relative to all others. Act~4 zooms into the selected
+law provisions directly, comparing the average homicide trend for each of
+the six tracked laws to assess which category shows the more consistent
+association with changes in homicide rates.
 
 % -----------------------------------------------------------------------
 \subsection{Colors and Themes}\label{colors}
@@ -542,18 +543,18 @@ Section~\ref{colors}.
 \subsection{Q1 -- Homicide Rates and the Law Landscape}\label{sec:viz:q1}
 
 \par
-Two charts answer Question 1\sref{q1}. The first is a \textbf{choropleth map}
+Two charts answer Q1\sref{q1}. The first is a \textbf{choropleth map}
 (Figure~\ref{fig:q1chart1}) displaying the firearm homicide rate across all
 U.S.\ states for a user-selected year, encoded with an orange gradient so
-darker states indicate higher rates. A \textbf{parameter} (\texttt{P Year})
-drives the year selection, and a calculated field (\texttt{CF StateAbbreviation})
-supplies the two-letter labels shown on each state mark.
+darker states indicate higher rates. A \textbf{parameter} drives the year
+selection, and a \textbf{calculated field} supplies the two-letter
+abbreviation labels shown on each state mark.
 
 \par
-Generating \texttt{CF StateAbbreviation} was AI-assisted (Claude Sonnet 4.6;
-see Section~\ref{sec:ai}), as writing all 50 \texttt{WHEN} clauses by hand is
-purely mechanical and error-prone. The prompt and response are shown
-below (Prompt~\ref{prompt:abbr}).
+Generating the state abbreviation calculated field was AI-assisted
+(Claude Sonnet 4.6; see Section~\ref{sec:ai}), as writing all 50
+\texttt{WHEN} clauses by hand is purely mechanical and error-prone.
+The prompt and response are shown below (Prompt~\ref{prompt:abbr}).
 
 \begin{quote}\label{prompt:abbr}
 \textbf{Prompt:} \textit{Generate a Tableau calculated field using a CASE
@@ -586,9 +587,9 @@ The second chart (Figure~\ref{fig:q1chart2}) is a \textbf{scatter plot}
 where each point represents one state: the X axis shows estimated gun
 ownership (FSS) as contextual background, the Y axis shows the total law
 count (\texttt{lawtotal}), and color encodes the firearm homicide rate.
-A second \textbf{parameter} (\texttt{P LawGroup}) lets the viewer toggle
-between a law-quantity tier view and a law-type group view, switching the
-color encoding across the entire chart without rebuilding it.
+A \textbf{parameter} lets the viewer toggle between a law-quantity tier
+view and a law-type group view, switching the color encoding across the
+entire chart without rebuilding it.
 
 \begin{figure}[H]
 	\centering
@@ -608,16 +609,16 @@ are the primary analytical lenses.
 
 \par
 An \textbf{interactive line chart} (Figure~\ref{fig:q2chart}) answers
-Question 2\sref{q2}. The X axis shows year (1976--2023), the Y axis shows
-firearm homicide rate, and each line represents a group of states defined
-by the active \texttt{P LawGroup} parameter --- shared with
-Figure~\ref{fig:q1chart2} so both charts respond to the same toggle.
-When set to ``Law Quantity Tier'', states are grouped into few-law,
-average-law, and high-law tertiles based on \texttt{lawtotal}; when set
-to ``Law Type Group'', lines reflect groups defined by the categories of
-laws present. A vertical \textbf{reference line} marks notable legislative
-periods, making it possible to observe whether trajectories shifted around
-key policy events.
+Q2\sref{q2}. The X axis shows year (1976--2023), the Y axis shows firearm
+homicide rate, and each line represents a group of states defined by the
+active law-group \textbf{parameter} --- shared with Figure~\ref{fig:q1chart2}
+so both charts respond to the same toggle. When set to ``Law Quantity Tier'',
+states are grouped into low, medium, and high tertiles based on
+\texttt{lawtotal}; when set to ``Law Type Group'', lines represent the
+three most widely adopted laws versus the three with the strongest evidence
+base. A vertical \textbf{reference line} marks notable legislative periods,
+making it possible to observe whether trajectories shifted around key
+policy events.
 
 \begin{figure}[H]
 	\centering
@@ -628,27 +629,26 @@ key policy events.
 
 \textbf{Insights}: States grouped by higher law counts show a steeper
 decline in firearm homicide rates from the 1990s onward. The divergence
-between groups widens over time, and the pattern holds across both the
-law quantity and law type groupings.
+between groups widens over time, and the pattern holds across both
+categorizations.
 
 % --- Q3 -----------------------------------------------------------------
 \newpage
 \subsection{Q3 -- State-Level Law History and Homicide Standing}\label{sec:viz:q3}
 
 \par
-Two charts answer Question 3\sref{q3}. The first (Figure~\ref{fig:q3chart1})
-is a \textbf{line chart} showing the total number of firearm laws in effect
-over time for a user-selected state, driven by a \textbf{parameter}
-(\texttt{P State}). This makes it easy to identify when a state underwent
-major legislative shifts. The second (Figure~\ref{fig:q3chart2}) is a
-\textbf{bar chart} ranking all states by firearm homicide rate in a selected
-year: bars are colored by law-group category, and the state chosen via
-\texttt{P State} is highlighted using a \textbf{set} so the viewer can
-immediately see where it stands relative to all others. A national average
-\textbf{reference line} is overlaid on the bar chart to provide immediate
-context. Together, Figures~\ref{fig:q3chart1} and~\ref{fig:q3chart2} let
-the viewer judge whether periods of legislative growth coincide with an
-improvement in that state's homicide ranking.
+Two charts answer Q3\sref{q3}. The first (Figure~\ref{fig:q3chart1}) is a
+\textbf{line chart} showing the total number of firearm laws in effect over
+time for a user-selected state, driven by a \textbf{parameter}. This makes
+it easy to identify when a state underwent major legislative shifts. The
+second (Figure~\ref{fig:q3chart2}) is a \textbf{bar chart} ranking all
+states by firearm homicide rate in a selected year: bars are colored by
+law-group category, and the selected state is highlighted using a \textbf{set}
+so the viewer can immediately see where it stands relative to all others.
+A national average \textbf{reference line} is overlaid on the bar chart to
+provide immediate context. Together, Figures~\ref{fig:q3chart1}
+and~\ref{fig:q3chart2} let the viewer judge whether periods of legislative
+growth coincide with an improvement in that state's homicide ranking.
 
 \begin{figure}[H]
 	\centering
@@ -681,34 +681,34 @@ experience.
 \par
 \textbf{Dashboard 1} (Figure~\ref{fig:db1}) combines the choropleth map
 (Figure~\ref{fig:q1chart1}), the scatter plot (Figure~\ref{fig:q1chart2}),
-and the law profile line chart (Figure~\ref{fig:q2chart}). A
-\textbf{dashboard set action} on the map highlights the selected state in
-the scatter and updates the line chart automatically. The shared
-\texttt{P LawGroup} parameter applies across all three views, so a single
-toggle switches the analytical lens for the entire dashboard, giving the
-viewer a complete overview of the geographic, cross-sectional, and trend
-dimensions simultaneously.
+and the law profile line chart (Figure~\ref{fig:q2chart}), addressing
+Q1\sref{q1} and Q2\sref{q2} together. A \textbf{dashboard set action} on
+the map highlights the selected state in the scatter and updates the line
+chart automatically. The shared law-group \textbf{parameter} applies across
+all three views, so a single toggle switches the analytical lens for the
+entire dashboard.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.95\textwidth]{../figures/Dashboard1.png}
-	\caption{Dashboard 1 -- Geographic Overview, Law--Homicide Scatter, and Law Profile Trends}
+	\caption{Dashboard 1 -- Geographic Overview, Law--Homicide Scatter, and Law Profile Trends (Q1 + Q2)}
 	\label{fig:db1}
 \end{figure}
 
 \par
-\textbf{Dashboard 2} (Figure~\ref{fig:db2}) combines the choropleth map
+\textbf{Dashboard 2} (Figure~\ref{fig:db2}) addresses Q3\sref{q3} while
+tying it back to Q1\sref{q1} and Q2\sref{q2} through the choropleth map
 (Figure~\ref{fig:q1chart1}), the state ranking bar chart
 (Figure~\ref{fig:q3chart2}), and the state law history line chart
-(Figure~\ref{fig:q3chart1}). The shared \texttt{P State} parameter drives
+(Figure~\ref{fig:q3chart1}). The shared state \textbf{parameter} drives
 both the bar chart highlight and the line chart, letting the viewer select
-any state and instantly see where it stands relative to all others
-and how its legislative history has evolved over time.
+any state and instantly see where it stands relative to all others and how
+its legislative history has evolved over time.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.95\textwidth]{../figures/Dashboard2.png}
-	\caption{Dashboard 2 -- Geographic Map, State Homicide Ranking Bar Chart, and Selected State Law History}
+	\caption{Dashboard 2 -- Geographic Map, State Homicide Ranking, and Selected State Law History (Q3 + Q1/Q2)}
 	\label{fig:db2}
 \end{figure}
 
@@ -716,7 +716,6 @@ and how its legislative history has evolved over time.
 \newpage
 \subsection{Visualization Summary}
 
-% Column widths: Q=1.0cm, Chart=2.0cm, Chart Type=4.2cm, Tableau Feature=6.0cm
 \begin{table}[H]
   \centering
   \renewcommand{\arraystretch}{1.35}
@@ -730,17 +729,22 @@ and how its legislative history has evolved over time.
     \midrule
     \rowcolor{utadrow}
     Q1\sref{q1} & Fig.~\ref{fig:q1chart1} & Choropleth map
-      & Param.\ (\texttt{P Year}), calc.\ field (\texttt{CF StateAbbreviation}), color encoding \\
+      & Parameter, calculated field, color encoding \\
     Q1\sref{q1} & Fig.~\ref{fig:q1chart2} & Scatter plot
-      & Param.\ (\texttt{P LawGroup}), \texttt{lawtotal}, color encoding \\
+      & Parameter, color encoding \\
     \rowcolor{utadrow}
     Q2\sref{q2} & Fig.~\ref{fig:q2chart}  & Line chart (interactive)
-      & Param.\ (\texttt{P LawGroup}), year reference line \\
+      & Parameter, reference line \\
     Q3\sref{q3} & Fig.~\ref{fig:q3chart1} & Line chart (per state)
-      & Param.\ (\texttt{P State}), filter \\
+      & Parameter, filter \\
     \rowcolor{utadrow}
     Q3\sref{q3} & Fig.~\ref{fig:q3chart2} & Bar chart (comparative)
-      & Set highlight, avg.\ reference line, set action \\
+      & Set, reference line, set action \\
+    Q1+Q2       & Fig.~\ref{fig:db1}      & Dashboard
+      & Set action, parameter, filter \\
+    \rowcolor{utadrow}
+    Q3+Q1/Q2    & Fig.~\ref{fig:db2}      & Dashboard
+      & Parameter, set action, filter \\
     \bottomrule
   \end{tabular}
   \caption{Visualization summary}
