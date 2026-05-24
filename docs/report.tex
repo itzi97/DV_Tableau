@@ -102,10 +102,9 @@ not treated as the primary explanatory factor. Evidence from countries such as
 Finland and Switzerland where high gun ownership coexists with low rates of gun
 violence, suggests that the regulatory environment surrounding firearms may
 matter more than ownership prevalence alone. This project therefore focuses on
-whether the strength of state firearm laws is associated with lower rates of
-firearm homicide (not FSS since that is used as an estimator for estimated gun
-ownership) and whether changes in legislation over time correspond to
-measurable shifts in gun violence rates.
+whether the strength and type of state firearm laws is associated with lower
+rates of firearm homicide, and whether changes in legislation over time
+correspond to measurable shifts in a state's gun violence standing.
 
 \subsection{Methodology}
 
@@ -208,12 +207,9 @@ This dataset was chosen because it provides a long term, population adjusted,
 and academically validated measure of gun prevalence that can be compared
 across states and over time. FSS is not a literal count of guns per household
 but an indirect proxy widely used in public health and policy
-research\autocite{extendingfss}. However, since FSS is derived from suicide
-data, it is not used as an outcome variable in this project, doing so would
-introduce circularity when analysing the effect of gun laws on violence.
-Instead, FSS is retained as a contextual indicator of estimated gun prevalence,
-while firearm homicide rate serves as the primary outcome measure
-for policy effect analysis.
+research\autocite{extendingfss}. FSS is retained in this project as a
+contextual indicator of estimated gun prevalence on the scatter plot;
+firearm homicide rate serves as the primary outcome measure throughout.
 
 \subsection{Dataset 2: State Firearm Law Database, 1976--2024}
 
@@ -291,40 +287,50 @@ valid join for that entity.
 Three questions were formulated based on data exploration and storytelling intent:
 
 \begin{enumerate}
-	\item Is the combination of high estimated gun ownership and few firearm
-	      laws associated with higher firearm homicide and suicide rates?
-	\item How has the gap in firearm violence rates between high-law and
-	      low-law states changed over time?
-	\item When states increase the number of firearm laws, do firearm
-	      homicide and suicide rates change in subsequent years?
+	\item Is a state's firearm homicide rate associated with the number
+	      and type of firearm laws it has in place?
+	\item How have firearm homicide rates evolved over time depending on
+	      the firearm laws passed in each state --- whether measured by
+	      the quantity of laws or by the categories of law types enacted?
+	\item For a specific state, does passing more firearm laws correspond
+	      to a reduction in firearm homicide rates, and how does this
+	      affect its ranking relative to other states?
 \end{enumerate}
 
-\subsubsection{Question 1: Ownership, Laws, and Violence}\label{q1}
+\subsubsection{Question 1: Homicide Rates and the Law Landscape}\label{q1}
 
 \par
-Question 1 establishes the core hypothesis of the project. A choropleth map
-provides a geographic baseline of firearm homicide rates across all U.S.\ states,
-encoding intensity with a sequential red palette. A linked scatter plot then
-plots estimated gun ownership (FSS) against total law count per state,
-colored by firearm homicide rate and filterable by year, allowing the viewer
-to assess whether the high-ownership, low-law quadrant clusters the worst outcomes.
+Question 1 establishes the cross-sectional baseline of the project. A
+choropleth map provides a geographic overview of firearm homicide rates across
+all U.S.\ states for a user-selected year. A linked scatter plot then plots
+estimated gun ownership (FSS) against total law count per state, colored by
+firearm homicide rate, allowing the viewer to examine whether states with
+higher homicide rates cluster in particular regions of the law-count space.
+A law-categorization parameter lets the viewer switch the color encoding
+between law quantity tier and law type group, enabling a richer reading
+of which types of legislation are associated with lower homicide rates.
 
-\subsubsection{Question 2: High-Law vs.\ Low-Law States Over Time}\label{q2}
-
-\par
-Question 2 introduces a temporal dimension. By comparing gun violence trends
-between states that have progressively added laws and those that have not,
-the viewer can assess whether the two groups have diverged over time and
-in which direction.
-
-\subsubsection{Question 3: Lagged Effect of Law Changes}\label{q3}
+\subsubsection{Question 2: Homicide Trends by Law Profile Over Time}\label{q2}
 
 \par
-Question 3 is the most analytically ambitious. Using the \texttt{nextyearfss}
-column already present in the ownership proxy dataset, it asks whether an
-increase in law count in a given year is associated with a lower ownership
-proxy or lower violence rates the following year. This introduces a lagged
-structure that approximates a policy effect without requiring regression.
+Question 2 introduces a temporal dimension. The viewer can observe how
+firearm homicide rates have evolved from 1976 to 2023 for groups of states
+defined either by how many laws they have passed (law quantity tier) or by
+which categories of laws are present (law type group). The toggle between
+these two groupings is controlled by the same law-categorization parameter
+used in Question 1, making the two questions part of a continuous analytical
+narrative.
+
+\subsubsection{Question 3: State-Level Law History and Homicide Standing}\label{q3}
+
+\par
+Question 3 narrows the focus to a single, user-selected state. It asks
+whether the trajectory of that state's law count over time is accompanied
+by a change in its firearm homicide rate, and how the state's current rate
+compares to all other states in a chosen year. This is deliberately
+exploration rather than causal inference: the viewer draws their own
+conclusion from the side-by-side evidence, without the project asserting
+a direct policy effect.
 
 \section{Visualization Prep}
 
@@ -337,11 +343,12 @@ requirements.
 
 \par
 The project follows a four-act narrative structure. Act 1 opens with the
-geographic baseline: where gun violence is highest and what the ownership
-proxy looks like across states. Act 2 introduces the policy dimension:
-how many laws each state has passed and how that has changed. Act 3 connects
-both dimensions in the ownership-laws-violence scatter. Act 4 closes with the
-policy effect question: do states that added laws show improved outcomes?
+geographic baseline: where gun violence is highest and what the law landscape
+looks like across states. Act 2 introduces the temporal dimension: how
+homicide rates have diverged between state groups defined by their law
+profile over time. Act 3 connects both dimensions in the ownership-laws-violence
+scatter. Act 4 closes with the state-level exploration: does a specific
+state's legislative history correspond to an improvement in its standing?
 The viewer moves from observation to exploration to interpretation.
 
 \subsection{Colors and Themes}\label{colors}
@@ -355,7 +362,7 @@ Colors were chosen to encode meaning consistently:
 	\item A \textbf{diverging palette} separates high-law from low-law states
 	      in trend and comparison views.
 	\item \textbf{Set-based color} encodes user-selected states (highlighted)
-	      vs.\ unselected states (grey) in the interactive line chart.
+	      vs.\ unselected states (grey) in the interactive bar chart.
 	\item Backgrounds are white and gridlines are minimal to reduce visual
 	      noise and keep focus on data marks.
 \end{itemize}
@@ -369,14 +376,15 @@ The following Tableau features were planned and used across this project:
 	\item \textbf{Calculated fields}: Composite law count score (sum of
 	      72 binary columns), law category classification, above/below
 	      national average flag, estimated gun-owning households
-	\item \textbf{Parameters}: Year selector and Top N selector for
-	      ranked bar chart
+	\item \textbf{Parameters}: Year selector, Top N selector for
+	      ranked bar chart, State selector, Law-categorization toggle
+	      (law quantity tier vs.\ law type group)
 	\item \textbf{Sets and Combined Sets}: Selected states set for
-	      interactive line chart, top/bottom N sets combined for
+	      interactive bar chart, top/bottom N sets combined for
 	      ranked bar chart
 	\item \textbf{Filters}: State multiselect, year range
-	\item \textbf{Dashboard actions}: Set action (click state to add
-	      to selected set and update line chart)
+	\item \textbf{Dashboard actions}: Set action (click state on map to
+	      highlight it in the bar chart and update the state line chart)
 	\item \textbf{Reference lines}: National average in trend views
 	\item \textbf{Trend lines}: Linear trend in scatter plot
 	      (from Analytics pane)
@@ -390,18 +398,19 @@ across all visualizations. Field names are self-explanatory (e.g.\
 \texttt{CF\_law\_count}, \texttt{CF\_show\_state}, \texttt{P\_year})
 to ensure readability and reproducibility.
 
-\subsection{Q1 -- Ownership, Laws, and Violence}
+\subsection{Q1 -- Homicide Rates and the Law Landscape}
 
 \par
 Two charts answer Question 1\sref{q1}. The first is a \textbf{choropleth map}
 displaying the firearm homicide rate across all U.S.\ states for a
 user-selected year, encoded with a sequential red palette so darker states
 indicate higher rates. The second is a \textbf{scatter plot} where each
-point represents one state: the X axis shows estimated gun ownership (FSS),
-the Y axis shows the composite law count, and color encodes the firearm
-homicide rate. A year parameter and a law-categorization parameter allow
-the viewer to scrub through time and switch between coloring by law tier
-or law type group.
+point represents one state: the X axis shows estimated gun ownership (FSS)
+as contextual background, the Y axis shows the composite law count, and
+color encodes the firearm homicide rate. A year parameter and a
+law-categorization parameter allow the viewer to scrub through time and
+switch the color encoding between law tier and law type group, enabling
+both a quantitative and a qualitative reading of the law landscape.
 
 \begin{figure}[h]
 	\centering
@@ -413,69 +422,72 @@ or law type group.
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=\textwidth]{../figures/Q1Chart2.png}
-	\caption{Q1 -- Gun Ownership (FSS) vs.\ Law Count, colored by Firearm Homicide Rate (Scatter Plot)}
+	\caption{Q1 -- Law Count vs.\ Estimated Gun Ownership (FSS), colored by Firearm Homicide Rate (Scatter Plot)}
 	\label{fig:q1chart2}
 \end{figure}
 
-\textbf{Insights}: States in the high-ownership, low-law quadrant
-consistently show the darkest color (highest firearm homicide rates).
-States with high ownership but strong laws perform comparably to
-low-ownership states, consistent with the international evidence from
-Finland and Switzerland.
+\textbf{Insights}: States with fewer laws cluster towards higher firearm
+homicide rates. The FSS axis provides ownership context but is not
+treated as a causal variable; the law count and law type dimensions
+are the primary analytical lenses.
 
-\subsection{Q2 -- High-Law vs.\ Low-Law State Trends}
+\subsection{Q2 -- Homicide Trends by Law Profile Over Time}
 
 \par
 An \textbf{interactive line chart} answers Question 2\sref{q2}. The X axis
 shows year (1976--2023), the Y axis shows firearm homicide rate, and each
-line represents a law tier group (high-law / mid-law / low-law) derived from
-a calculated field that classifies states by their total law count into
-tertiles. A law-categorization parameter lets the viewer switch between
-grouping by law tier or by law type category, and a Set Action on the
-dashboard allows direct comparison of individual states.
+line represents a group of states defined by the active law-categorization
+parameter. When set to ``Law Quantity Tier'', states are grouped into
+few-law, average-law, and high-law tertiles based on total law count.
+When set to ``Law Type Group'', lines reflect groups defined by the
+categories of laws present. This toggle makes it possible to analyse
+both the volume and the nature of legislation in a single chart.
 
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=\textwidth]{../figures/Q2Chart.png}
-	\caption{Q2 -- Firearm Violence Trends by Law Tier, 1976--2023}
+	\caption{Q2 -- Firearm Homicide Rate Over Time by Law Profile (1976--2023)}
 	\label{fig:q2chart}
 \end{figure}
 
-\textbf{Insights}: High-law states show a steeper decline in firearm
-homicide rates from the 1990s onward compared to low-law states.
-The gap between tiers has widened over time, particularly after 1993.
+\textbf{Insights}: States grouped by higher law counts show a steeper
+decline in firearm homicide rates from the 1990s onward. The divergence
+between groups widens over time, and the pattern holds across both the
+law quantity and law type groupings.
 
-\subsection{Q3 -- Lagged Effect of Law Changes}
+\subsection{Q3 -- State-Level Law History and Homicide Standing}
 
 \par
 Two charts answer Question 3\sref{q3}. The first is a \textbf{line chart}
-showing the number of firearm laws passed over time for a user-selected
-state (driven by the \texttt{P\_State} parameter), making it easy to
-spot when a specific state underwent major legislative shifts and whether
-those shifts precede changes in violence rates. The second is a
-\textbf{bar chart} comparing the firearm homicide rates of multiple states
-in a given year: bars are colored by law-group category, and the
-user-selected state is highlighted to provide a personal reference point
-within the comparative view.
+showing the total number of firearm laws in effect over time for a
+user-selected state (driven by the \texttt{P\_State} parameter). This
+makes it easy to identify when a state underwent major legislative shifts.
+The second is a \textbf{bar chart} ranking all states by firearm homicide
+rate in a selected year: bars are colored by law-group category, and the
+user-selected state is highlighted so the viewer can immediately see where
+it stands relative to all others. Together, the two charts let the viewer
+judge whether periods of legislative growth in the selected state coincide
+with an improvement in its homicide ranking.
 
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=\textwidth]{../figures/Q3Chart1.png}
-	\caption{Q3 -- Laws Passed Over Time for Selected State (Line Chart)}
+	\caption{Q3 -- Firearm Laws in Effect Over Time for Selected State (Line Chart)}
 	\label{fig:q3chart1}
 \end{figure}
 
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=\textwidth]{../figures/Q3Chart2.png}
-	\caption{Q3 -- Firearm Homicide Rate by State for Selected Year, colored by Law Group, highlighted state (Bar Chart)}
+	\caption{Q3 -- Firearm Homicide Rate by State for Selected Year, colored by Law Group, Selected State Highlighted (Bar Chart)}
 	\label{fig:q3chart2}
 \end{figure}
 
-\textbf{Insights}: In several states, notable increases in law count are
-followed by measurable reductions in firearm homicide rates in subsequent
-years. The relationship is not uniform across all states, and no causal
-interpretation is claimed.
+\textbf{Insights}: In several states, sustained increases in law count
+coincide with a visible improvement in homicide ranking relative to other
+states. The relationship is not uniform and no causal interpretation is
+claimed; the viewer is invited to explore individual state trajectories
+interactively.
 
 \subsection{Dashboards}
 
@@ -484,29 +496,32 @@ Two dashboards integrate the individual charts into a cohesive interactive
 experience.
 
 \textbf{Dashboard 1} combines the choropleth map (Q1Chart1), the scatter
-plot (Q1Chart2), and the law tiers line chart (Q2Chart). A click action on
-the map filters the scatter to highlight the selected state; the law tiers
-line provides immediate temporal context. This gives the viewer a complete
-overview of the geographic, cross-sectional, and trend dimensions in one view.
+plot (Q1Chart2), and the law profile line chart (Q2Chart). A click action
+on the map filters the scatter to highlight the selected state; the law
+profile line chart provides immediate temporal context. The shared
+law-categorization parameter applies across all three views, meaning a
+single toggle switches the analytical lens for the entire dashboard.
+This gives the viewer a complete overview of the geographic, cross-sectional,
+and trend dimensions simultaneously.
 
 \textbf{Dashboard 2} combines the choropleth map (Q1Chart1), the comparative
-bar chart (Q3Chart2), and the single-state laws-over-time line chart
+bar chart (Q3Chart2), and the single-state law history line chart
 (Q3Chart1). A shared state parameter drives both the bar chart highlight
 and the line chart, letting the viewer select any state and instantly
 see where it stands relative to all others and how its legislative
-history unfolded.
+history has unfolded over time.
 
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=\textwidth]{../figures/Dashboard1.png}
-	\caption{Dashboard 1 -- Geographic Overview, Ownership--Law Scatter, and Law Tier Trends}
+	\caption{Dashboard 1 -- Geographic Overview, Law--Homicide Scatter, and Law Profile Trends}
 	\label{fig:db1}
 \end{figure}
 
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=\textwidth]{../figures/Dashboard2.png}
-	\caption{Dashboard 2 -- Geographic Map, State Comparison Bar Chart, and Selected State Law History}
+	\caption{Dashboard 2 -- Geographic Map, State Homicide Ranking Bar Chart, and Selected State Law History}
 	\label{fig:db2}
 \end{figure}
 
@@ -555,18 +570,19 @@ Table~\ref{tab:summary} summarizes:
 Visualizations reveal the following:
 
 \begin{itemize}
-	\item States combining high estimated gun ownership with few firearm laws
-	      consistently show the highest firearm homicide rates
-		      [Fig.~\ref{fig:q1chart2}].
-	\item High-law states have seen steeper declines in firearm violence
-	      since the 1990s, widening the gap with low-law states over time
-		      [Fig.~\ref{fig:q2chart}].
-	\item In several states, increases in law count appear to precede
-	      reductions in violence rates in subsequent years, though no
-	      causal claim is made [Fig.~\ref{fig:q3chart1}].
-	\item Gun ownership alone does not explain violence outcomes --- the
-	      regulatory context surrounding firearms appears to be the more
-	      significant variable, consistent with international evidence.
+	\item States with fewer firearm laws consistently show higher firearm
+	      homicide rates, both geographically and in the cross-sectional
+	      scatter view [Fig.~\ref{fig:q1chart2}].
+	\item States with more laws, whether measured by quantity or type
+	      category, have seen steeper declines in firearm homicide since
+	      the 1990s [Fig.~\ref{fig:q2chart}].
+	\item In several states, sustained legislative growth coincides with
+	      a visible improvement in homicide ranking relative to other
+	      states, though no causal claim is made [Fig.~\ref{fig:q3chart1},
+	      Fig.~\ref{fig:q3chart2}].
+	\item Gun ownership (FSS) provides useful contextual framing but is
+	      not treated as a causal variable; the regulatory environment
+	      is the primary analytical lens throughout the project.
 \end{itemize}
 
 \par
