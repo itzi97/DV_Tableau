@@ -501,13 +501,12 @@ depending on how many laws from each group they have adopted:
 % -----------------------------------------------------------------------
 
 \par
-A single consistent color palette is used throughout all visualizations to
-make it easy to compare charts and avoid relearning the legend. The same law
-profile colors (one per tier or category) appear identically in every chart
-that groups states by law profile. The choropleth map follows the same palette
-but adds an orange gradient to express severity: lighter shades indicate
-lower firearm homicide rates and darker shades indicate higher ones,
-extending the base color scheme to convey continuous magnitude.
+A single consistent color palette is used throughout all visualizations, so the
+same law profile colors appear identically in every chart that groups states
+by law profile. The choropleth map follows the same palette but adds an
+orange gradient to express severity: lighter shades indicate lower firearm
+homicide rates and darker shades indicate higher ones, extending the base
+scheme to convey continuous magnitude.
 
 \begin{itemize}
 	\item \textbf{Neutral colors} throughout to avoid implying a political stance.
@@ -574,13 +573,14 @@ END
 
 \textbf{Insights}:
 \begin{itemize}
-	\item States with fewer laws tend to cluster at higher firearm homicide rates,
-	      visible across years via the \texttt{P Year} parameter.
-	\item A clear geographic division emerges: states with lower firearm homicide
-	      rates cluster in the north and northeast, while those with higher rates
-	      concentrate in the south. This pattern correlates with the type and
-	      quantity of legislation in each region, with southern states generally
-	      maintaining fewer restrictive firearm laws.
+	\item States with fewer laws tend to have higher firearm homicide rates,
+	      visible across different years via the \texttt{P Year} parameter.
+	\item A clear geographic division emerges: states with lower rates cluster
+	      in the north and northeast, while those with higher rates concentrate
+	      in the south. This pattern correlates with the type and quantity of
+	      legislation in each region, with southern states generally maintaining
+	      fewer restrictive firearm laws, likely a reflection of the different
+	      legislative approaches on either side of this geographic divide.
 \end{itemize}
 
 \par
@@ -602,8 +602,8 @@ chart that groups states by law profile.
 \textbf{Insights}:
 \begin{itemize}
 	\item States with fewer laws tend to cluster at higher firearm homicide rates.
-	\item FSS provides ownership context, but law count and law type
-	      are the main analytical lenses.
+	\item FSS provides ownership context, but law count and law type are the main
+	      analytical lenses.
 \end{itemize}
 
 % --- Q2 -----------------------------------------------------------------
@@ -646,13 +646,12 @@ complementing \texttt{P LawCategorization} from Figure~\ref{fig:q1chart2}.
 
 \par
 The second chart (Figure~\ref{fig:q3chart2}) is a \textbf{bar chart} that ranks
-all states by firearm homicide rate for a chosen year. Bars are colored by law
-category using the law profile color scheme from Section~\ref{colors}.
-The selected state is highlighted using a \textbf{set}, and a national average
-\textbf{reference line} is overlaid for context. The reference line feature was
-first used in Figure~\ref{fig:q2chart} and is applied here in the same way.
-Viewed together, the two charts make it easy to see whether legislative growth
-in a state coincides with an improvement in its homicide ranking.
+all states by firearm homicide rate for a chosen year. The selected state is
+highlighted using a \textbf{set}, and a national average \textbf{reference
+line} is overlaid for context. The reference line feature was first used in
+Figure~\ref{fig:q2chart} and is applied here in the same way. Viewed together,
+the two charts make it easy to see whether legislative growth in a state
+coincides with an improvement in its homicide ranking.
 
 \begin{figure}[H]
 	\centering
@@ -675,8 +674,8 @@ in a state coincides with an improvement in its homicide ranking.
 	      compared to other states.
 	\item The line chart makes it difficult to isolate the impact of a single law
 	      as soon as it is introduced, since the cumulative law count changes
-	      gradually. The aggregate legislative posture of a state, rather than any
-	      single law change, is the more legible signal.
+	      gradually. The aggregate legislative posture of a state is the more
+	      legible signal rather than any individual law change.
 	\item In several states, sustained legislative growth aligns with a better
 	      position in the homicide ranking, though no causal claim is made.
 \end{itemize}
@@ -695,11 +694,11 @@ experience.
 and the Q2 line chart (Figure~\ref{fig:q2chart}), covering Q1\sref{q1} and
 Q2\sref{q2} in one view. Clicking a state on the map triggers a
 \textbf{filter action} that highlights the selected state in the scatter plot.
-Selecting a year via \texttt{P Year} updates the map and, simultaneously,
-drops a \textbf{reference line} at that year in the Q2 line chart, so the
-user can see where a specific year sits relative to the overall trend.
-The shared \texttt{P LawCategorization} parameter applies the same grouping
-across all three views at once.
+The \texttt{P Year} parameter controls the year shown on the map and,
+simultaneously, drops a \textbf{reference line} at that year in the Q2 line
+chart, so the user can see where a specific year sits relative to the overall
+trend. The shared \texttt{P LawCategorization} parameter applies the same law
+grouping across all three views at once.
 
 \begin{figure}[H]
 	\centering
@@ -754,7 +753,7 @@ law history line, providing a seamless single-state deep-dive experience.
 		Q3\sref{q3}                      & Fig.~\ref{fig:q3chart2}  & Bar chart (comparative)
 		                                 & Set, reference line (reused), set action, P State (reused)             \\
 		Q1+Q2                            & Fig.~\ref{fig:db1}       & Dashboard
-		                                 & Filter action, P Year reference line in line chart, P LawCategorization (reused) \\
+		                                 & Filter action (map to scatter), P Year reference line in line chart, P LawCategorization (reused) \\
 		\rowcolor{utadrow}
 		Q3+Q1/Q2                         & Fig.~\ref{fig:db2}       & Dashboard
 		                                 & P State (reused), filter action, map click action                      \\
