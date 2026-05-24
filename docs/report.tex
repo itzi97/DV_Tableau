@@ -733,7 +733,7 @@ law history line, providing a seamless single-state deep-dive experience.
 \begin{table}[H]
 	\centering
 	\renewcommand{\arraystretch}{1.35}
-	\begin{tabular}{p{1.0cm} p{1.5cm} p{4.0cm} p{9.0cm}}
+	\begin{tabular}{p{1.0cm} p{1.2cm} p{3.6cm} p{9.3cm}}
 		\toprule
 		\rowcolor{utaddark}
 		\color{white}\textbf{Q}          &
@@ -841,11 +841,24 @@ chart shows the average across all states that adopted the law, from five
 years before to ten years after adoption.
 
 \begin{quote}
-	\textbf{Prompt:} \textit{Generate a multi-line event-study chart showing the
+	\textbf{Prompt:} \textit{Generate a multi line event study showing the
 		average firearm homicide rate from 5 years before to 10 years after the
-		adoption of five key firearm laws, using the Kang et al.\ and Tufts CTSI
-		datasets. Solid lines for evidence-based laws, dashed for popular laws.
-		Only output the code.}
+		adoption of 3 popular firearm laws vs 3 evidence based firearm laws.
+
+		I want you to use the following laws for the study:
+
+		- Gun violence RO
+		- Assault weapons ban
+		- LCM Ban
+
+		as popular laws, and as evidence based laws use:
+
+		- permit to purchase
+		- waiting period
+		- universal BG check
+
+		Also include some metrics to compare the average between these at the
+		bottom and simplify the axis labels to only show once for all charts.}
 \end{quote}
 
 \begin{quote}
