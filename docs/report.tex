@@ -10,8 +10,8 @@
 
 % COLORS
 \usepackage[dvipsnames]{xcolor}
-\definecolor{background}{HTML}{f8fafc}
-\definecolor{surface}{HTML}{f8fafc}
+\definecolor{background}{HTML}{ffffff}
+\definecolor{surface}{HTML}{ffffff}
 \definecolor{textmuted}{HTML}{7a7974}
 \definecolor{accent}{HTML}{7b2020}
 \definecolor{grid}{HTML}{dcd9d5}
@@ -302,11 +302,12 @@ Three questions were formulated based on data exploration and storytelling inten
 \subsubsection{Question 1: Ownership, Laws, and Violence}\label{q1}
 
 \par
-Question 1 establishes the core hypothesis of the project. By plotting
-estimated gun ownership against law count and encoding gun violence rates
-visually, the viewer can assess whether the states with the worst outcomes
-cluster in the high-ownership, low-law quadrant. This is framed as an
-association analysis rather than a causal claim.
+Question 1 establishes the core hypothesis of the project. A choropleth map
+provides a geographic baseline of firearm homicide rates across all U.S.\ states,
+encoding intensity with a sequential red palette. A linked scatter plot then
+plots estimated gun ownership (FSS) against total law count per state,
+colored by firearm homicide rate and filterable by year, allowing the viewer
+to assess whether the high-ownership, low-law quadrant clusters the worst outcomes.
 
 \subsubsection{Question 2: High-Law vs.\ Low-Law States Over Time}\label{q2}
 
@@ -355,7 +356,7 @@ Colors were chosen to encode meaning consistently:
 	      in trend and comparison views.
 	\item \textbf{Set-based color} encodes user-selected states (highlighted)
 	      vs.\ unselected states (grey) in the interactive line chart.
-	\item Backgrounds are light and gridlines are minimal to reduce visual
+	\item Backgrounds are white and gridlines are minimal to reduce visual
 	      noise and keep focus on data marks.
 \end{itemize}
 
@@ -392,25 +393,27 @@ to ensure readability and reproducibility.
 \subsection{Q1 -- Ownership, Laws, and Violence}
 
 \par
-Two charts answer Question 1\sref{q1}. The first is a \textbf{scatter plot}
-where each point represents one state in a given year: the X axis shows
-estimated gun ownership (FSS), the Y axis shows the composite law count,
-and the color encodes the firearm homicide rate. A year parameter allows
-the viewer to scrub through time. The second chart provides a
-\textbf{choropleth map} view of firearm homicide rate across all states,
-giving geographic context to the scatter.
+Two charts answer Question 1\sref{q1}. The first is a \textbf{choropleth map}
+displaying the firearm homicide rate across all U.S.\ states for a
+user-selected year, encoded with a sequential red palette so darker states
+indicate higher rates. The second is a \textbf{scatter plot} where each
+point represents one state: the X axis shows estimated gun ownership (FSS),
+the Y axis shows the composite law count, and color encodes the firearm
+homicide rate. A year parameter and a law-categorization parameter allow
+the viewer to scrub through time and switch between coloring by law tier
+or law type group.
 
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=\textwidth]{../figures/Q1Chart1.png}
-	\caption{Q1 -- Gun Ownership (FSS) vs.\ Law Count, colored by Firearm Homicide Rate}
+	\caption{Q1 -- Firearm Homicide Rate by State (Choropleth Map)}
 	\label{fig:q1chart1}
 \end{figure}
 
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=\textwidth]{../figures/Q1Chart2.png}
-	\caption{Q1 -- Firearm Homicide Rate by State (Choropleth Map)}
+	\caption{Q1 -- Gun Ownership (FSS) vs.\ Law Count, colored by Firearm Homicide Rate (Scatter Plot)}
 	\label{fig:q1chart2}
 \end{figure}
 
@@ -424,10 +427,12 @@ Finland and Switzerland.
 
 \par
 An \textbf{interactive line chart} answers Question 2\sref{q2}. The X axis
-shows year, the Y axis shows firearm homicide rate, and lines are colored
-by a law tier calculated field (high-law / mid-law / low-law) based on
-law count tertiles. A Set Action on the dashboard allows the viewer to
-select specific states for direct comparison.
+shows year (1976--2023), the Y axis shows firearm homicide rate, and each
+line represents a law tier group (high-law / mid-law / low-law) derived from
+a calculated field that classifies states by their total law count into
+tertiles. A law-categorization parameter lets the viewer switch between
+grouping by law tier or by law type category, and a Set Action on the
+dashboard allows direct comparison of individual states.
 
 \begin{figure}[h]
 	\centering
@@ -443,24 +448,27 @@ The gap between tiers has widened over time, particularly after 1993.
 \subsection{Q3 -- Lagged Effect of Law Changes}
 
 \par
-Two charts answer Question 3\sref{q3}. The first is a
-\textbf{dual-axis line chart} showing firearm homicide rate and composite
-law count over time for a user-selected state, allowing the viewer to
-observe whether increases in law count precede decreases in violence rates.
-The second provides a \textbf{bar chart} view of year-on-year law count
-changes to make large legislative shifts easier to spot.
+Two charts answer Question 3\sref{q3}. The first is a \textbf{line chart}
+showing the number of firearm laws passed over time for a user-selected
+state (driven by the \texttt{P\_State} parameter), making it easy to
+spot when a specific state underwent major legislative shifts and whether
+those shifts precede changes in violence rates. The second is a
+\textbf{bar chart} comparing the firearm homicide rates of multiple states
+in a given year: bars are colored by law-group category, and the
+user-selected state is highlighted to provide a personal reference point
+within the comparative view.
 
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=\textwidth]{../figures/Q3Chart1.png}
-	\caption{Q3 -- Law Count vs.\ Firearm Violence Rate Over Time (Dual Axis)}
+	\caption{Q3 -- Laws Passed Over Time for Selected State (Line Chart)}
 	\label{fig:q3chart1}
 \end{figure}
 
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=\textwidth]{../figures/Q3Chart2.png}
-	\caption{Q3 -- Year-on-Year Law Count Changes by State}
+	\caption{Q3 -- Firearm Homicide Rate by State for Selected Year, colored by Law Group, highlighted state (Bar Chart)}
 	\label{fig:q3chart2}
 \end{figure}
 
@@ -473,22 +481,32 @@ interpretation is claimed.
 
 \par
 Two dashboards integrate the individual charts into a cohesive interactive
-experience. Dashboard 1 combines the Q1 scatter and map views, allowing the
-viewer to click a state on the map and highlight it in the scatter.
-Dashboard 2 combines the Q2 trend lines and Q3 dual-axis chart, with a
-shared state selector that drives both views simultaneously.
+experience.
+
+\textbf{Dashboard 1} combines the choropleth map (Q1Chart1), the scatter
+plot (Q1Chart2), and the law tiers line chart (Q2Chart). A click action on
+the map filters the scatter to highlight the selected state; the law tiers
+line provides immediate temporal context. This gives the viewer a complete
+overview of the geographic, cross-sectional, and trend dimensions in one view.
+
+\textbf{Dashboard 2} combines the choropleth map (Q1Chart1), the comparative
+bar chart (Q3Chart2), and the single-state laws-over-time line chart
+(Q3Chart1). A shared state parameter drives both the bar chart highlight
+and the line chart, letting the viewer select any state and instantly
+see where it stands relative to all others and how its legislative
+history unfolded.
 
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=\textwidth]{../figures/Dashboard1.png}
-	\caption{Dashboard 1 -- Ownership, Laws, and Violence (Q1)}
+	\caption{Dashboard 1 -- Geographic Overview, Ownership--Law Scatter, and Law Tier Trends}
 	\label{fig:db1}
 \end{figure}
 
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=\textwidth]{../figures/Dashboard2.png}
-	\caption{Dashboard 2 -- Trends and Lagged Effects (Q2 and Q3)}
+	\caption{Dashboard 2 -- Geographic Map, State Comparison Bar Chart, and Selected State Law History}
 	\label{fig:db2}
 \end{figure}
 
@@ -503,15 +521,15 @@ shared state selector that drives both views simultaneously.
 		\textbf{Question} & \textbf{Chart}             & \textbf{Chart Type}      & \textbf{Tableau Feature}            \\
 		\midrule
 		\midrule
-		Q1\sref{q1}       & Fig.~\ref{fig:q1chart1}    & Scatter plot             & Parameter, calc.\ field, trend line \\
+		Q1\sref{q1}       & Fig.~\ref{fig:q1chart1}    & Choropleth map           & Calc.\ field, color encoding, param.\\
 		\cmidrule{1-4}
-		Q1\sref{q1}       & Fig.~\ref{fig:q1chart2}    & Choropleth map           & Calc.\ field, color encoding        \\
+		Q1\sref{q1}       & Fig.~\ref{fig:q1chart2}    & Scatter plot             & Parameter, calc.\ field, trend line \\
 		\cmidrule{1-4}
 		Q2\sref{q2}       & Fig.~\ref{fig:q2chart}     & Line chart (interactive) & Set, set action, reference line     \\
 		\cmidrule{1-4}
-		Q3\sref{q3}       & Fig.~\ref{fig:q3chart1}    & Dual-axis line chart     & Calc.\ field, filter, tooltip       \\
+		Q3\sref{q3}       & Fig.~\ref{fig:q3chart1}    & Line chart (per state)   & Parameter, calc.\ field, filter     \\
 		\cmidrule{1-4}
-		Q3\sref{q3}       & Fig.~\ref{fig:q3chart2}    & Bar chart                & Calc.\ field, filter                \\
+		Q3\sref{q3}       & Fig.~\ref{fig:q3chart2}    & Bar chart (comparative)  & Calc.\ field, highlight, filter     \\
 		\bottomrule
 	\end{tabular}
 	\caption{Visualization summary table}
@@ -522,8 +540,8 @@ shared state selector that drives both views simultaneously.
 Table~\ref{tab:summary} summarizes:
 
 \begin{itemize}
-	\item 4 chart types used across the project: scatter plot, choropleth map,
-	      line chart, dual-axis line chart, and bar chart.
+	\item 4 chart types used across the project: choropleth map, scatter plot,
+	      line chart, and bar chart.
 	\item 7 Tableau features used: calculated fields, parameters, sets,
 	      combined sets, dashboard set actions, reference lines,
 	      and trend lines.
@@ -539,7 +557,7 @@ Visualizations reveal the following:
 \begin{itemize}
 	\item States combining high estimated gun ownership with few firearm laws
 	      consistently show the highest firearm homicide rates
-		      [Fig.~\ref{fig:q1chart1}].
+		      [Fig.~\ref{fig:q1chart2}].
 	\item High-law states have seen steeper declines in firearm violence
 	      since the 1990s, widening the gap with low-law states over time
 		      [Fig.~\ref{fig:q2chart}].
