@@ -294,7 +294,7 @@ Three questions were formulated based on data exploration and storytelling inten
 	\item Is a state's firearm homicide rate associated with the number
 	      and type of firearm laws it has in place?
 	\item How have firearm homicide rates evolved over time depending on
-	      the firearm laws passed in each state --- whether measured by
+	      the firearm laws passed in each state, whether measured by
 	      the quantity of laws or by the categories of law types enacted?
 	\item For a specific state, does passing more firearm laws correspond
 	      to a reduction in firearm homicide rates, and how does this
@@ -304,42 +304,35 @@ Three questions were formulated based on data exploration and storytelling inten
 \subsubsection{Question 1: Homicide Rates and the Law Landscape}\label{q1}
 
 \par
-This question is the entry point of the analysis. Before drawing any
-temporal or causal conclusions, it is necessary to establish whether a
-cross-sectional pattern even exists: do states that have enacted more laws,
-or certain types of laws, tend to have lower firearm homicide rates? The
-question is intentionally descriptive --- it does not assert causation but
-asks whether the law landscape and the violence landscape are associated
-when viewed together. FSS is included as a contextual variable to show
-where estimated gun ownership sits in this picture, without treating it
-as an outcome or a direct cause.
+This is the entry point of the analysis. Before drawing any temporal or causal
+conclusions, it is necessary to establish whether a cross-sectional pattern
+exists: do states that have enacted more laws or certain types of laws, tend to
+have lower firearm homicide rates? The question is meant to ask whether the law
+and violence landscape are associated when viewed together. FSS is included as
+a contextual variable to show where estimated gun ownership sits in this
+picture, without treating it as an outcome or a direct cause.
 
 \subsubsection{Question 2: Homicide Trends by Law Profile Over Time}\label{q2}
 
 \par
-If a cross-sectional association exists, the natural follow-up is whether
-it has strengthened or weakened over time. This question was chosen because
-the datasets span nearly five decades, making a purely static view an
-underuse of the temporal depth available. By grouping states according to
-their law profile --- either by how many laws they have passed or by which
-categories of law are present --- it becomes possible to observe whether
-the trajectories of high-law and low-law states have diverged, and whether
-that divergence accelerated after key legislative periods such as the early
-1990s. The dual grouping toggle was motivated by the desire to distinguish
-between sheer legislative volume and the specific nature of the laws enacted.
+If a cross-sectional association exists, the natural follow up is whether it
+has strengthened or weakened over time. This question was chosen because the
+datasets span nearly five decades, allowing for more temporal depth. By
+grouping states according to their law profile (types of laws or number of laws
+passed), it becomes possible to observe whether the trajectories have diverged,
+and whether that divergence accelerated after key legislative periods such as
+the early 1990s.
 
 \subsubsection{Question 3: State-Level Law History and Homicide Standing}\label{q3}
 
 \par
-The first two questions operate at an aggregate or grouped level. This
-third question was chosen to bring the analysis down to the individual
-state, making it personally relevant and explorable for any viewer. The
-motivation is to let someone examine their own state: when did it pass
-laws, how many, and does its current homicide ranking reflect that
-legislative history? Framing it as exploration rather than causal
-conclusion is deliberate --- the data alone cannot establish that laws
-caused a change in outcomes, but the side-by-side evidence of legislative
-growth and ranking shift is meaningful context for the viewer to interpret.
+The first two questions analyze the broader picture whilst this third question
+brings the analysis down to the individual state, making it personally relevant
+and explorable for any viewer. The motivation is to let someone examine their
+own state: when did it pass laws, how many, and does its current homicide
+ranking reflect that legislative history? It is an exploration due to the
+nature of each state being individualized, making it harder to draw causality
+unlike with the brader analysis.
 
 \section{Visualization Prep}
 
@@ -554,18 +547,18 @@ history has unfolded over time.
 	\centering
 	\begin{tabular}{rcll}
 		\toprule
-		\textbf{Question} & \textbf{Chart}             & \textbf{Chart Type}      & \textbf{Tableau Feature}            \\
+		\textbf{Question} & \textbf{Chart}          & \textbf{Chart Type}      & \textbf{Tableau Feature}             \\
 		\midrule
 		\midrule
-		Q1\sref{q1}       & Fig.~\ref{fig:q1chart1}    & Choropleth map           & Calc.\ field, color encoding, param.\\
+		Q1\sref{q1}       & Fig.~\ref{fig:q1chart1} & Choropleth map           & Calc.\ field, color encoding, param. \\
 		\cmidrule{1-4}
-		Q1\sref{q1}       & Fig.~\ref{fig:q1chart2}    & Scatter plot             & Parameter, calc.\ field, trend line \\
+		Q1\sref{q1}       & Fig.~\ref{fig:q1chart2} & Scatter plot             & Parameter, calc.\ field, trend line  \\
 		\cmidrule{1-4}
-		Q2\sref{q2}       & Fig.~\ref{fig:q2chart}     & Line chart (interactive) & Set, set action, reference line     \\
+		Q2\sref{q2}       & Fig.~\ref{fig:q2chart}  & Line chart (interactive) & Set, set action, reference line      \\
 		\cmidrule{1-4}
-		Q3\sref{q3}       & Fig.~\ref{fig:q3chart1}    & Line chart (per state)   & Parameter, calc.\ field, filter     \\
+		Q3\sref{q3}       & Fig.~\ref{fig:q3chart1} & Line chart (per state)   & Parameter, calc.\ field, filter      \\
 		\cmidrule{1-4}
-		Q3\sref{q3}       & Fig.~\ref{fig:q3chart2}    & Bar chart (comparative)  & Calc.\ field, highlight, filter     \\
+		Q3\sref{q3}       & Fig.~\ref{fig:q3chart2} & Bar chart (comparative)  & Calc.\ field, highlight, filter      \\
 		\bottomrule
 	\end{tabular}
 	\caption{Visualization summary table}
@@ -600,7 +593,7 @@ Visualizations reveal the following:
 	\item In several states, sustained legislative growth coincides with
 	      a visible improvement in homicide ranking relative to other
 	      states, though no causal claim is made [Fig.~\ref{fig:q3chart1},
-	      Fig.~\ref{fig:q3chart2}].
+			      Fig.~\ref{fig:q3chart2}].
 	\item Gun ownership (FSS) provides useful contextual framing but is
 	      not treated as a causal variable; the regulatory environment
 	      is the primary analytical lens throughout the project.
