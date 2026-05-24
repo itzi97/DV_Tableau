@@ -243,12 +243,18 @@ research\autocite{statefirearmlaw}.
 \subsection{Join Strategy}
 
 \par
-Both datasets were joined in Tableau on the shared keys \texttt{state} and
-\texttt{year}. The ownership proxy spans 1949--2023 and the law database spans
-1976--2024, giving an effective analysis window of \textbf{1976--2023}.
-The join was performed using a Tableau relationship between the two data
-sources on the matching state-year grain, ensuring the workbook remains
-reproducible and reviewable.
+Both datasets were connected in Tableau using a \textbf{relationship} on the
+shared keys \texttt{state} and \texttt{year}, configured with
+\textbf{many-to-many} cardinality and \textbf{some records match} referential
+integrity on both sides. Many-to-many cardinality is appropriate here because
+both tables share the same grain (one row per state per year) and neither side
+acts as a unique dimension table. The ``some records match'' setting instructs
+Tableau not to assume all keys are present in both tables, handling
+non-overlapping rows safely without discarding data prematurely. Tableau
+resolves the relationship by performing aggregations on each table
+independently before combining results, preventing row duplication. The
+overlapping date range of both datasets yields an effective analysis window
+of \textbf{1976--2023}.
 
 \subsection{Analysis}
 
