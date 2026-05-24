@@ -169,6 +169,21 @@ Specifically, AI was used for the following tasks:
 	      lookup mapping all 50 U.S.\ states
 	\item \textbf{Report structuring}: assistance with LaTeX formatting,
 	      section organisation, and bibliography management
+	\item \textbf{Document labelling and cross-referencing}: adding
+	      \texttt{\textbackslash label} tags to named sections and ensuring
+	      every mention of those sections elsewhere in the document references
+	      them correctly. This task was automated due to its repetitive nature
+	      --- scanning the full document for every occurrence of a reference
+	      and inserting the correct command is mechanical and error-prone when
+	      done manually. Modern LLMs are well-suited to this kind of structural
+	      text analysis, as they can reliably identify where a concept is
+	      discussed and apply consistent markup throughout a document.
+	      A representative prompt used for this task was:
+	      \begin{quote}
+	      \textit{Add labels to questions Q1, Q2 and Q3 in the document and
+	      reference those labels whenever those questions are referenced
+	      in the document.}
+	      \end{quote}
 	\item \textbf{Supplementary chart generation}: one additional visualization
 	      was produced outside of Tableau using AI-assisted code generation,
 	      included as a supplementary figure in the relevant section
