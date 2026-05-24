@@ -777,58 +777,6 @@ Across the project, Table~\ref{tab:summary} shows:
 \end{itemize}
 
 % ======================================================================
-\section{Conclusions}
-% ======================================================================
-
-\subsection*{Question 1\sref{q1}: Homicide Rates and the Law Landscape}
-
-\begin{itemize}
-	\item States with fewer firearm laws tend to have higher homicide rates,
-	      visible in both the choropleth map and the scatter plot
-	      (Figures~\ref{fig:q1chart1} and~\ref{fig:q1chart2}).
-	\item The map reveals a clear geographic division: lower-rate states cluster
-	      in the north and northeast, while higher-rate states concentrate in the
-	      south, correlating with the type and quantity of legislation in each region.
-\end{itemize}
-
-\subsection*{Question 2\sref{q2}: Trends Over Time}
-
-\begin{itemize}
-	\item States with more laws, whether by quantity or by type, show a stronger
-	      decline in firearm homicide from the 1990s onward
-	      (Figure~\ref{fig:q2chart}).
-	\item The gap between law profile groups widens over time, and the pattern
-	      holds under both the quantity-tier and the law-type grouping modes.
-\end{itemize}
-
-\subsection*{Question 3\sref{q3}: State-Level Law History and Ranking}
-
-\begin{itemize}
-	\item Although individual law introductions are difficult to track on a timely,
-	      state-by-state basis in the line chart, the effects become clearer when
-	      ranking states against each other.
-	\item States with more laws and more evidence-based laws consistently rank lower
-	      in firearm homicide rates than states with fewer or weaker legislation
-	      (Figures~\ref{fig:q3chart1} and~\ref{fig:q3chart2}).
-	\item Evidence-based laws appear to be a stronger indicator than the raw count
-	      of laws: even some states with a high total law count still record elevated
-	      homicide rates, suggesting that the \emph{quality and type} of legislation
-	      matters more than its quantity alone.
-	\item That said, more laws still generally outperform fewer laws, and
-	      evidence-based laws outperform popular laws when comparing group averages.
-\end{itemize}
-
-\par
-Overall, the regulatory environment is the main lens throughout the project.
-FSS serves as useful background context for estimated ownership, but high
-ownership alone does not explain the variation in homicide rates: the type
-and strength of a state's firearm legislation is consistently the more
-predictive factor. Some limitations apply: FSS is a proxy rather than a
-direct ownership measure, and the analysis does not control for confounding
-factors such as poverty, urbanization, or policing levels.
-
-% ======================================================================
-\newpage
 \section{Supplementary Analysis: Law Adoption and Homicide Rates Over Time}\label{sec:supp}
 % ======================================================================
 
@@ -891,21 +839,44 @@ laws.
 	      matters more than its prevalence alone.
 \end{itemize}
 
-\textbf{Conclusion}
-\par
-Even though the latter chart is not part of the Tableau dashboards, it was
-necessary to properly compare laws across the board for different states since
-different states adopt laws at different times and such an analysis is not easy
-to do within Tableau since there needed to be extensive data processing done
-to be able to chart data in such a way. Claude was used to do this with the
-prompt shown above since it was able to grab the data and correct the timeline
-to when certain laws were passed and help align that for all states for easier
-charting for 6 different laws.
+% ======================================================================
+\section{Conclusions}
+% ======================================================================
+
+\subsection*{Main findings across Q1--Q3 and the supplementary analysis}
 
 \par
-Overall, passing laws seems to have a significant impact on firearm homicide
-rates and within passing laws, passing those with evidence backing them have
-the better results.
+Taken together, the Tableau visualizations and the supplementary event-study
+chart point in the same direction. States with fewer firearm laws generally
+have higher firearm homicide rates\sref{q1}, and states that adopt more laws,
+particularly evidence-based ones, tend to see larger and more sustained
+declines in those rates over time\sref{q2}. At the state level, increases in
+law counts often align with improvements in homicide rankings, even if the
+impact of any single law is hard to isolate\sref{q3}.
+
+\par
+FSS is useful as a proxy for firearm ownership, but the patterns in this
+project suggest that policy design matters at least as much as the underlying
+level of gun prevalence. States that pair higher ownership with strong,
+evidence-based legislation can maintain relatively low homicide rates, while
+states with weaker law profiles tend to sit at the higher end of the homicide
+spectrum.
+
+\par
+The supplementary event-study analysis around law adoption uses the same data
+sources as the Tableau dashboards but re-organizes time around each law's
+first adoption year in each state (Figure~\ref{fig:lawadoption}). This
+alignment is difficult to implement cleanly inside Tableau, so AI was used to
+pre-process the data and generate the Plotly code based on the prompt in
+Section~\ref{sec:supp}. That chart reinforces the dashboard results: passing
+firearm laws is associated with meaningful reductions in firearm homicide
+rates, and laws with a stronger evidence base show the clearest improvements.
+
+\par
+Overall, the project does not prove causality or control for all possible
+confounders, but across multiple visualizations and groupings the main story is
+consistent: the type and strength of firearm legislation appear closely linked
+to how often guns are used to kill.
 
 \newpage
 
