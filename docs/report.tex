@@ -204,7 +204,7 @@ year. It is hosted on Harvard Dataverse.
 \end{itemize}
 
 \par
-This dataset was chosen because it provides a long-term, population-adjusted,
+This dataset was chosen because it provides a long term, population adjusted,
 and academically validated measure of gun prevalence that can be compared
 across states and over time. FSS is not a literal count of guns per household
 but an indirect proxy widely used in public health and policy
@@ -212,7 +212,7 @@ research\autocite{extendingfss}. However, since FSS is derived from suicide
 data, it is not used as an outcome variable in this project, doing so would
 introduce circularity when analysing the effect of gun laws on violence.
 Instead, FSS is retained as a contextual indicator of estimated gun prevalence,
-while \texttt{firearm\_homicide\_rate} serves as the primary outcome measure
+while firearm homicide rate serves as the primary outcome measure
 for policy effect analysis.
 
 \subsection{Dataset 2: State Firearm Law Database, 1976--2024}
@@ -224,7 +224,8 @@ absence of 72 firearm safety law provisions across all 50 U.S. states for
 every year from 1976 to 2024.
 
 \begin{itemize}
-	\item \textbf{Source}: Tufts CTSI --- State Firearm Law Database\autocite{statefirearmlaw}
+	\item \textbf{Source}: Tufts CTSI --- State Firearm Law
+	      Database\autocite{statefirearmlaw}
 	\item \textbf{Grain}: One row per U.S. state per year
 	\item \textbf{Key columns}: State, Year, 72 binary law indicator columns
 	      (e.g.\ permit required, background check, waiting period,
@@ -237,7 +238,7 @@ every year from 1976 to 2024.
 This dataset was chosen because it provides a historically accurate,
 year-by-year record of state firearm legislation, enabling analysis of
 whether law changes correspond to changes in gun violence rates. It is
-non-partisan by design and is widely used in academic public health
+non partisan by design and is widely used in academic public health
 research\autocite{statefirearmlaw}.
 
 \subsection{Join Strategy}
