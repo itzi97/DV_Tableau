@@ -20,19 +20,17 @@
 \definecolor{accent}{HTML}{0033A0}
 
 % -----------------------------------------------------------------------
-% FONT — full sans-serif (Source Sans / Fira Sans via TeX Gyre Heros)
-% TeX Gyre Heros is a high-quality Helvetica clone included in TeX Live
+% FONT — full sans-serif via TeX Gyre Heros (Helvetica clone, in TeX Live)
 % -----------------------------------------------------------------------
-\usepackage[T1]{fontenc}
-\usepackage{tgheros}          % TeX Gyre Heros = Helvetica clone
-\renewcommand{\familydefault}{\sfdefault}   % make sans the document default
+\usepackage{tgheros}
+\renewcommand{\familydefault}{\sfdefault}
 \usepackage{microtype}
 
 % Tables
 \usepackage{booktabs}
 \usepackage{siunitx}
 \usepackage{array}
-\usepackage{colortbl}         % row colouring in tables
+\usepackage{colortbl}
 
 % Float placement control
 \usepackage{float}
@@ -59,19 +57,18 @@
   urlcolor=accent,
   citecolor=accent,
   pdfborder={0 0 0},
-  pdftitle={Tableau Data Visualization Report},
+  pdftitle={Firearm Violence and Legislation in the US},
   pdfauthor={Itziar Morales Rodr\'{i}guez}
 }
 
 % -----------------------------------------------------------------------
 % HEADERS / FOOTERS
-% Page number: bottom-right; author: bottom-left; title: top-left
+% Header: title only (left); page number: bottom-right
 % -----------------------------------------------------------------------
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[L]{\small\color{textmuted} Tableau Data Visualization Report}
-\fancyhead[R]{\small\color{textmuted} Itziar Morales Rodr\'{i}guez}
+\fancyhead[L]{\small\color{textmuted} Firearm Violence and Legislation in the US}
 \fancyfoot[R]{\small\color{textmuted}\thepage}
 \fancyfoot[L]{\small\color{textmuted} U-tad}
 \renewcommand{\headrulewidth}{0.6pt}
@@ -97,16 +94,7 @@
 \titlespacing*{\subsection}{0pt}{1.3em}{0.5em}
 \titlespacing*{\subsubsection}{0pt}{1em}{0.4em}
 
-% -----------------------------------------------------------------------
-% MODERN TABLE STYLE
-% Redefine booktabs rules + alternating row colour helper
-% -----------------------------------------------------------------------
-% Use \tableheader{} inside tabular to paint the header row blue
-\newcommand{\tableheader}{\rowcolor{utaddark}}
-% Convenience: alternate body rows with \rowcolor{utadrow}
-% Applied manually per table or via a loop macro if desired
-
-% Override \toprule / \midrule / \bottomrule colours
+% Table style helpers
 \arrayrulecolor{grid}
 \setlength{\arrayrulewidth}{0.5pt}
 
@@ -118,7 +106,7 @@
 \setlist[enumerate]{leftmargin=*,itemsep=2pt,parsep=0pt}
 
 % -----------------------------------------------------------------------
-% PROMPT / RESPONSE BOX  (left-border, light blue tint)
+% PROMPT / RESPONSE BOX
 % -----------------------------------------------------------------------
 \usepackage{mdframed}
 \mdfdefinestyle{promptbox}{
@@ -147,24 +135,20 @@
 \pagecolor{background}\color{black}
 
 % ======================================================================
-% TITLE PAGE — single colour logo (U-tad-logo.jpg) in top bar only
+% TITLE PAGE
 % ======================================================================
 \begin{titlepage}
   \begin{tikzpicture}[remember picture, overlay]
-    % Dark blue top bar
     \fill[utaddark] (current page.north west)
       rectangle ($(current page.north east) + (0,-3.0cm)$);
-    % Thin accent stripe below bar
     \fill[accent] ($(current page.north west) + (0,-3.0cm)$)
       rectangle ($(current page.north east) + (0,-3.35cm)$);
-    % Light bottom strip
     \fill[utadlight] (current page.south west)
       rectangle ($(current page.south east) + (0,1.4cm)$);
     \fill[accent] ($(current page.south west) + (0,1.4cm)$)
       rectangle ($(current page.south east) + (0,1.1cm)$);
   \end{tikzpicture}
 
-  % ---- Single logo centred in top bar ----
   \vspace*{0.6cm}
   \begin{center}
     \includegraphics[height=1.9cm]{./assets/U-tad-logo.jpg}
@@ -172,10 +156,11 @@
 
   \vspace*{3.2cm}
   \begin{center}
-    {\fontsize{28}{34}\selectfont\bfseries\color{utaddark}
-      Tableau Data Visualization}\\[0.4em]
-    {\fontsize{20}{26}\selectfont\bfseries\color{accent}
-      Assignment Report}\\[2.0em]
+    {\fontsize{26}{32}\selectfont\bfseries\color{utaddark}
+      Firearm Violence and Legislation\\[0.25em]
+      in the United States}\\[0.5em]
+    {\fontsize{16}{22}\selectfont\color{accent}
+      Data Visualization Report}\\[2.0em]
     {\color{grid}\rule{0.55\textwidth}{0.8pt}}\\[1.8em]
     {\large\color{black} Itziar Morales Rodr\'{i}guez}\\[0.6em]
     {\normalsize\color{textmuted} Data Visualization --- U-tad}\\[0.4em]
@@ -256,11 +241,10 @@ were not produced by AI. The model used in all cases was
 Detailed prompts and responses are documented inline at each point of use;
 the table below provides a summary index.
 
-% Modern table: dark header row with white text, alternating body rows
 \begin{table}[H]
   \centering
   \renewcommand{\arraystretch}{1.35}
-  \begin{tabular}{>{}p{6.2cm} p{3.8cm} p{1.8cm}}
+  \begin{tabular}{p{8.0cm} p{3.6cm} p{1.6cm}}
     \toprule
     \rowcolor{utaddark}
     \color{white}\textbf{Task} &
@@ -606,55 +590,10 @@ abbreviation for all 50 states. Only output the code.}
 \begin{Verbatim}[fontsize=\footnotesize]
 CASE [State]
   WHEN "Alabama" THEN "AL"
-  WHEN "Alaska" THEN "AK"
-  WHEN "Arizona" THEN "AZ"
-  WHEN "Arkansas" THEN "AR"
-  WHEN "California" THEN "CA"
-  WHEN "Colorado" THEN "CO"
-  WHEN "Connecticut" THEN "CT"
-  WHEN "Delaware" THEN "DE"
-  WHEN "Florida" THEN "FL"
-  WHEN "Georgia" THEN "GA"
-  WHEN "Hawaii" THEN "HI"
-  WHEN "Idaho" THEN "ID"
-  WHEN "Illinois" THEN "IL"
-  WHEN "Indiana" THEN "IN"
-  WHEN "Iowa" THEN "IA"
-  WHEN "Kansas" THEN "KS"
-  WHEN "Kentucky" THEN "KY"
-  WHEN "Louisiana" THEN "LA"
-  WHEN "Maine" THEN "ME"
-  WHEN "Maryland" THEN "MD"
-  WHEN "Massachusetts" THEN "MA"
-  WHEN "Michigan" THEN "MI"
-  WHEN "Minnesota" THEN "MN"
-  WHEN "Mississippi" THEN "MS"
-  WHEN "Missouri" THEN "MO"
-  WHEN "Montana" THEN "MT"
-  WHEN "Nebraska" THEN "NE"
-  WHEN "Nevada" THEN "NV"
-  WHEN "New Hampshire" THEN "NH"
-  WHEN "New Jersey" THEN "NJ"
-  WHEN "New Mexico" THEN "NM"
-  WHEN "New York" THEN "NY"
-  WHEN "North Carolina" THEN "NC"
-  WHEN "North Dakota" THEN "ND"
-  WHEN "Ohio" THEN "OH"
-  WHEN "Oklahoma" THEN "OK"
-  WHEN "Oregon" THEN "OR"
-  WHEN "Pennsylvania" THEN "PA"
-  WHEN "Rhode Island" THEN "RI"
-  WHEN "South Carolina" THEN "SC"
-  WHEN "South Dakota" THEN "SD"
-  WHEN "Tennessee" THEN "TN"
-  WHEN "Texas" THEN "TX"
-  WHEN "Utah" THEN "UT"
-  WHEN "Vermont" THEN "VT"
-  WHEN "Virginia" THEN "VA"
-  WHEN "Washington" THEN "WA"
-  WHEN "West Virginia" THEN "WV"
+  WHEN "Alaska"  THEN "AK"
+  ...
   WHEN "Wisconsin" THEN "WI"
-  WHEN "Wyoming" THEN "WY"
+  WHEN "Wyoming"   THEN "WY"
 END
 \end{Verbatim}
 \end{quote}
