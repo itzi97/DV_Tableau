@@ -41,7 +41,7 @@
 \makeatother
 
 % Graphics and links
-\usepackage[demo]{graphicx}
+\usepackage{graphicx}
 \usepackage{hyperref}
 \hypersetup{
   colorlinks=true,
@@ -389,20 +389,29 @@ across all visualizations. Field names are self-explanatory (e.g.\
 \texttt{CF\_law\_count}, \texttt{CF\_show\_state}, \texttt{P\_year})
 to ensure readability and reproducibility.
 
-\subsection{Q1 -- Ownership, Laws, and Violence (Scatter Plot)}
+\subsection{Q1 -- Ownership, Laws, and Violence}
 
 \par
-A \textbf{scatter plot} answers Question 1\sref{q1}. Each point represents
-one state in a given year. The X axis shows estimated gun ownership (FSS),
-the Y axis shows the composite law count, and the color encodes the firearm
-homicide rate. A year parameter allows the viewer to scrub through time and
-observe how the quadrant distribution has changed.
+Two charts answer Question 1\sref{q1}. The first is a \textbf{scatter plot}
+where each point represents one state in a given year: the X axis shows
+estimated gun ownership (FSS), the Y axis shows the composite law count,
+and the color encodes the firearm homicide rate. A year parameter allows
+the viewer to scrub through time. The second chart provides a
+\textbf{choropleth map} view of firearm homicide rate across all states,
+giving geographic context to the scatter.
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=\textwidth]{../figures/q1_scatter.png}
-	\caption{Q1 -- Gun Ownership vs.\ Law Count, colored by Firearm Homicide Rate}
-	\label{fig:q1scatter}
+	\includegraphics[width=\textwidth]{../figures/Q1Chart1.png}
+	\caption{Q1 -- Gun Ownership (FSS) vs.\ Law Count, colored by Firearm Homicide Rate}
+	\label{fig:q1chart1}
+\end{figure}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\textwidth]{../figures/Q1Chart2.png}
+	\caption{Q1 -- Firearm Homicide Rate by State (Choropleth Map)}
+	\label{fig:q1chart2}
 \end{figure}
 
 \textbf{Insights}: States in the high-ownership, low-law quadrant
@@ -411,7 +420,7 @@ States with high ownership but strong laws perform comparably to
 low-ownership states, consistent with the international evidence from
 Finland and Switzerland.
 
-\subsection{Q2 -- High-Law vs.\ Low-Law State Trends (Line Chart)}
+\subsection{Q2 -- High-Law vs.\ Low-Law State Trends}
 
 \par
 An \textbf{interactive line chart} answers Question 2\sref{q2}. The X axis
@@ -422,35 +431,66 @@ select specific states for direct comparison.
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=\textwidth]{../figures/q2_trend.png}
+	\includegraphics[width=\textwidth]{../figures/Q2Chart.png}
 	\caption{Q2 -- Firearm Violence Trends by Law Tier, 1976--2023}
-	\label{fig:q2trend}
+	\label{fig:q2chart}
 \end{figure}
 
 \textbf{Insights}: High-law states show a steeper decline in firearm
 homicide rates from the 1990s onward compared to low-law states.
 The gap between tiers has widened over time, particularly after 1993.
 
-\subsection{Q3 -- Lagged Effect of Law Changes (Dual-Axis Line Chart)}
+\subsection{Q3 -- Lagged Effect of Law Changes}
 
 \par
-A \textbf{dual-axis line chart} answers Question 3\sref{q3}. The primary
-axis shows firearm homicide rate and the secondary axis shows the composite
-law count, both over time for a user-selected state. The viewer can observe
-whether increases in law count precede decreases in violence rates in
-subsequent years.
+Two charts answer Question 3\sref{q3}. The first is a
+\textbf{dual-axis line chart} showing firearm homicide rate and composite
+law count over time for a user-selected state, allowing the viewer to
+observe whether increases in law count precede decreases in violence rates.
+The second provides a \textbf{bar chart} view of year-on-year law count
+changes to make large legislative shifts easier to spot.
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=\textwidth]{../figures/q3_dual.png}
+	\includegraphics[width=\textwidth]{../figures/Q3Chart1.png}
 	\caption{Q3 -- Law Count vs.\ Firearm Violence Rate Over Time (Dual Axis)}
-	\label{fig:q3dual}
+	\label{fig:q3chart1}
+\end{figure}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\textwidth]{../figures/Q3Chart2.png}
+	\caption{Q3 -- Year-on-Year Law Count Changes by State}
+	\label{fig:q3chart2}
 \end{figure}
 
 \textbf{Insights}: In several states, notable increases in law count are
 followed by measurable reductions in firearm homicide rates in subsequent
 years. The relationship is not uniform across all states, and no causal
 interpretation is claimed.
+
+\subsection{Dashboards}
+
+\par
+Two dashboards integrate the individual charts into a cohesive interactive
+experience. Dashboard 1 combines the Q1 scatter and map views, allowing the
+viewer to click a state on the map and highlight it in the scatter.
+Dashboard 2 combines the Q2 trend lines and Q3 dual-axis chart, with a
+shared state selector that drives both views simultaneously.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\textwidth]{../figures/Dashboard1.png}
+	\caption{Dashboard 1 -- Ownership, Laws, and Violence (Q1)}
+	\label{fig:db1}
+\end{figure}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\textwidth]{../figures/Dashboard2.png}
+	\caption{Dashboard 2 -- Trends and Lagged Effects (Q2 and Q3)}
+	\label{fig:db2}
+\end{figure}
 
 \pagebreak
 
@@ -460,14 +500,18 @@ interpretation is claimed.
 	\centering
 	\begin{tabular}{rcll}
 		\toprule
-		\textbf{Question} & \textbf{Chart}           & \textbf{Chart Type}      & \textbf{Tableau Feature}            \\
+		\textbf{Question} & \textbf{Chart}             & \textbf{Chart Type}      & \textbf{Tableau Feature}            \\
 		\midrule
 		\midrule
-		Q1\sref{q1}       & Fig.~\ref{fig:q1scatter} & Scatter plot             & Parameter, calc.\ field, trend line \\
+		Q1\sref{q1}       & Fig.~\ref{fig:q1chart1}    & Scatter plot             & Parameter, calc.\ field, trend line \\
 		\cmidrule{1-4}
-		Q2\sref{q2}       & Fig.~\ref{fig:q2trend}   & Line chart (interactive) & Set, set action, reference line     \\
+		Q1\sref{q1}       & Fig.~\ref{fig:q1chart2}    & Choropleth map           & Calc.\ field, color encoding        \\
 		\cmidrule{1-4}
-		Q3\sref{q3}       & Fig.~\ref{fig:q3dual}    & Dual-axis line chart     & Calc.\ field, filter, tooltip       \\
+		Q2\sref{q2}       & Fig.~\ref{fig:q2chart}     & Line chart (interactive) & Set, set action, reference line     \\
+		\cmidrule{1-4}
+		Q3\sref{q3}       & Fig.~\ref{fig:q3chart1}    & Dual-axis line chart     & Calc.\ field, filter, tooltip       \\
+		\cmidrule{1-4}
+		Q3\sref{q3}       & Fig.~\ref{fig:q3chart2}    & Bar chart                & Calc.\ field, filter                \\
 		\bottomrule
 	\end{tabular}
 	\caption{Visualization summary table}
@@ -478,13 +522,13 @@ interpretation is claimed.
 Table~\ref{tab:summary} summarizes:
 
 \begin{itemize}
-	\item 4 chart types used across the project: scatter plot, line chart,
-	      dual-axis line chart, and choropleth map (dashboard overview).
+	\item 4 chart types used across the project: scatter plot, choropleth map,
+	      line chart, dual-axis line chart, and bar chart.
 	\item 7 Tableau features used: calculated fields, parameters, sets,
 	      combined sets, dashboard set actions, reference lines,
 	      and trend lines.
 	\item 2 data sources joined by state and year in Tableau,
-	      in two different file formats (\texttt{.tab} and \texttt{.xlsx}).
+	      in two different file formats (\texttt{.csv} and \texttt{.xlsx}).
 \end{itemize}
 
 \section{Conclusions}
@@ -495,13 +539,13 @@ Visualizations reveal the following:
 \begin{itemize}
 	\item States combining high estimated gun ownership with few firearm laws
 	      consistently show the highest firearm homicide rates
-		      [Fig.~\ref{fig:q1scatter}].
+		      [Fig.~\ref{fig:q1chart1}].
 	\item High-law states have seen steeper declines in firearm violence
 	      since the 1990s, widening the gap with low-law states over time
-		      [Fig.~\ref{fig:q2trend}].
+		      [Fig.~\ref{fig:q2chart}].
 	\item In several states, increases in law count appear to precede
 	      reductions in violence rates in subsequent years, though no
-	      causal claim is made [Fig.~\ref{fig:q3dual}].
+	      causal claim is made [Fig.~\ref{fig:q3chart1}].
 	\item Gun ownership alone does not explain violence outcomes --- the
 	      regulatory context surrounding firearms appears to be the more
 	      significant variable, consistent with international evidence.
