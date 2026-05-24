@@ -2,6 +2,7 @@
 
 % Page geometry
 \usepackage[margin=2.2cm,top=2.5cm,bottom=2.8cm]{geometry}
+\setlength{\headheight}{12.6pt}
 
 % Essential packages
 \usepackage[utf8]{inputenc}
@@ -553,15 +554,15 @@ analytical value, so this field was generated with AI
 
 \begin{quote}
 	\textbf{Response:}
-	\begin{Verbatim}[fontsize=\footnotesize,xleftmargin=0pt]
-		CASE [State]
-		WHEN "Alabama" THEN "AL"
-		WHEN "Alaska"  THEN "AK"
-		...
-		WHEN "Wisconsin" THEN "WI"
-		WHEN "Wyoming"   THEN "WY"
-		END
-	\end{Verbatim}
+\begin{Verbatim}[fontsize=\footnotesize,xleftmargin=0pt]
+CASE [State]
+WHEN "Alabama" THEN "AL"
+WHEN "Alaska"  THEN "AK"
+...
+WHEN "Wisconsin" THEN "WI"
+WHEN "Wyoming"   THEN "WY"
+END
+\end{Verbatim}
 \end{quote}
 
 \begin{figure}[H]
@@ -729,38 +730,36 @@ law history line, providing a seamless single-state deep-dive experience.
 \subsection{Visualization Summary}
 
 % A4 text width with 2.2cm margins = ~16.6cm.
-% Column widths: Q=0.5cm, Chart=1.8cm, ChartType=4.6cm, Features=9.3cm
-% Inter-column spacing: 3 gaps x ~0.167cm = ~0.5cm -> total ~16.7cm (fits)
 \begin{table}[H]
 	\centering
 	\renewcommand{\arraystretch}{1.35}
-	\begin{tabular}{p{0.5cm} p{1.8cm} p{4.6cm} p{9.3cm}}
+	\begin{tabular}{p{1.0cm} p{1.5cm} p{4.0cm} p{9.0cm}}
 		\toprule
 		\rowcolor{utaddark}
 		\color{white}\textbf{Q}          &
 		\color{white}\textbf{Chart}      &
 		\color{white}\textbf{Chart Type} &
-		\color{white}\textbf{Tableau Features}                                                                                             \\
+		\color{white}\textbf{Tableau Features}                                             \\
 		\midrule
 		\rowcolor{utadrow}
-		Q1\sref{q1}                      & Fig.~\ref{fig:q1chart1}                                              & Choropleth map
-		                                 & P Year, CF StateAbbreviation, orange severity gradient                                          \\
-		Q1\sref{q1}                      & Fig.~\ref{fig:q1chart2}                                              & Scatter plot
-		                                 & P LawCategorization (introduced here), color encoding                                           \\
+		Q1\sref{q1} & Fig.~\ref{fig:q1chart1} & Choropleth map
+		            & P Year, CF StateAbbreviation, orange severity gradient               \\
+		Q1\sref{q1} & Fig.~\ref{fig:q1chart2} & Scatter plot
+		            & P LawCategorization (introduced here), color encoding                \\
 		\rowcolor{utadrow}
-		Q2\sref{q2}                      & Fig.~\ref{fig:q2chart}                                               & Line chart (interactive)
-		                                 & P LawCategorization (reused), reference line (introduced here)                                  \\
-		Q3\sref{q3}                      & Fig.~\ref{fig:q3chart1}                                              & Line chart (per state)
-		                                 & P State (introduced here), filter                                                               \\
+		Q2\sref{q2} & Fig.~\ref{fig:q2chart}  & Line chart (interactive)
+		            & P LawCategorization (reused), reference line (introduced here)       \\
+		Q3\sref{q3} & Fig.~\ref{fig:q3chart1} & Line chart (per state)
+		            & P State (introduced here), filter                                    \\
 		\rowcolor{utadrow}
-		Q3\sref{q3}                      & Fig.~\ref{fig:q3chart2}                                              & Bar chart (comparative)
-		                                 & Set, reference line (reused), set action, P State (reused)                                      \\
-		Q1+Q2                            & Fig.~\ref{fig:db1}                                                   & Dashboard
-		                                 & Filter action (map to scatter), P Year reference line in line chart,
-		P LawCategorization (reused)                                                                                                       \\
+		Q3\sref{q3} & Fig.~\ref{fig:q3chart2} & Bar chart (comparative)
+		            & Set, reference line (reused), set action, P State (reused)           \\
+		Q1+Q2       & Fig.~\ref{fig:db1}      & Dashboard
+		            & Filter action (map to scatter), P Year reference line in line chart,
+		              P LawCategorization (reused)                                          \\
 		\rowcolor{utadrow}
-		Q3+Q1/Q2                         & Fig.~\ref{fig:db2}                                                   & Dashboard
-		                                 & P State (reused), filter action, map click action                                               \\
+		Q3+Q1/Q2    & Fig.~\ref{fig:db2}      & Dashboard
+		            & P State (reused), filter action, map click action                    \\
 		\bottomrule
 	\end{tabular}
 	\caption{Visualization summary}
