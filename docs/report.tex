@@ -265,7 +265,9 @@ understand structure, null patterns, and label consistency.
 Key observations:
 
 \begin{itemize}
-	\item State names required standardisation across both files
+	\item Both datasets use identical full state name format
+	      (e.g.\ \texttt{Alabama}, \texttt{North Carolina}),
+	      requiring no pre-processing to enable the join
 	\item The ownership proxy file includes several pre calculated rate
 	      columns derived from raw counts and population
 	\item The law database contains 72 binary columns but it also includes
@@ -280,7 +282,9 @@ Key observations:
 Key processing steps applied before and during connection to Tableau:
 
 \begin{itemize}
-	\item Standardised state name format across both files to enable the join
+	\item The District of Columbia was excluded via a Tableau filter, as it
+	      is present in the ownership proxy dataset but absent from the
+	      state firearm laws dataset, preventing a valid join for that entity
 	\item Created a composite \textbf{law count} calculated field in Tableau
 	      summing all 72 binary law indicator columns per state per year
 	\item Retained population-adjusted rates from the ownership proxy
