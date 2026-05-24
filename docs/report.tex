@@ -137,36 +137,36 @@
 % TITLE PAGE
 % ======================================================================
 \begin{titlepage}
-  \begin{tikzpicture}[remember picture, overlay]
-    \fill[utaddark] (current page.north west)
-      rectangle ($(current page.north east) + (0,-3.0cm)$);
-    \fill[accent] ($(current page.north west) + (0,-3.0cm)$)
-      rectangle ($(current page.north east) + (0,-3.35cm)$);
-    \fill[utadlight] (current page.south west)
-      rectangle ($(current page.south east) + (0,1.4cm)$);
-    \fill[accent] ($(current page.south west) + (0,1.4cm)$)
-      rectangle ($(current page.south east) + (0,1.1cm)$);
-  \end{tikzpicture}
+	\begin{tikzpicture}[remember picture, overlay]
+		\fill[utaddark] (current page.north west)
+		rectangle ($(current page.north east) + (0,-3.0cm)$);
+		\fill[accent] ($(current page.north west) + (0,-3.0cm)$)
+		rectangle ($(current page.north east) + (0,-3.35cm)$);
+		\fill[utadlight] (current page.south west)
+		rectangle ($(current page.south east) + (0,1.4cm)$);
+		\fill[accent] ($(current page.south west) + (0,1.4cm)$)
+		rectangle ($(current page.south east) + (0,1.1cm)$);
+	\end{tikzpicture}
 
-  \vspace*{0.6cm}
-  \begin{center}
-    \includegraphics[height=1.9cm]{./assets/U-tad-logo.jpg}
-  \end{center}
+	\vspace*{0.6cm}
+	\begin{center}
+		\includegraphics[height=1.9cm]{./assets/U-tad-logo.jpg}
+	\end{center}
 
-  \vspace*{3.2cm}
-  \begin{center}
-    {\fontsize{26}{32}\selectfont\bfseries\color{utaddark}
-      Firearm Violence and Legislation\\[0.25em]
-      in the United States}\\[0.5em]
-    {\fontsize{16}{22}\selectfont\color{accent}
-      Data Visualization Report}\\[2.0em]
-    {\color{grid}\rule{0.55\textwidth}{0.8pt}}\\[1.8em]
-    {\large\color{black} Itziar Morales Rodr\'{i}guez}\\[0.6em]
-    {\normalsize\color{textmuted} Data Visualization --- U-tad}\\[0.4em]
-    {\normalsize\color{textmuted}\today}
-  \end{center}
-  \vfill
-  \vspace{1.0cm}
+	\vspace*{3.2cm}
+	\begin{center}
+		{\fontsize{26}{32}\selectfont\bfseries\color{utaddark}
+			Firearm Violence and Legislation\\[0.25em]
+			in the United States}\\[0.5em]
+		{\fontsize{16}{22}\selectfont\color{accent}
+		Data Visualization Report}\\[2.0em]
+		{\color{grid}\rule{0.55\textwidth}{0.8pt}}\\[1.8em]
+		{\large\color{black} Itziar Morales Rodr\'{i}guez}\\[0.6em]
+		{\normalsize\color{textmuted} Data Visualization --- U-tad}\\[0.4em]
+		{\normalsize\color{textmuted}\today}
+	\end{center}
+	\vfill
+	\vspace{1.0cm}
 \end{titlepage}
 
 % ======================================================================
@@ -241,27 +241,27 @@ Detailed prompts and responses are documented inline at each point of use;
 the table below provides a summary index.
 
 \begin{table}[H]
-  \centering
-  \renewcommand{\arraystretch}{1.35}
-  \begin{tabular}{p{8.0cm} p{3.6cm} p{1.6cm}}
-    \toprule
-    \rowcolor{utaddark}
-    \color{white}\textbf{Task} &
-    \color{white}\textbf{Model} &
-    \color{white}\textbf{Section} \\
-    \midrule
-    \rowcolor{utadrow}
-    Dataset research and pairing strategy  & Claude Sonnet 4.6 & \ref{sec:datasets} \\
-    State-abbreviation calculated field    & Claude Sonnet 4.6 & \ref{sec:viz:q1} \\
-    \rowcolor{utadrow}
-    Document labelling and cross-referencing & Claude Sonnet 4.6 & \ref{sec:ai:labels} \\
-    Report structuring and LaTeX formatting & Claude Sonnet 4.6 & \ref{sec:ai:latex} \\
-    \rowcolor{utadrow}
-    Supplementary chart generation          & Claude Sonnet 4.6 & \ref{sec:viz:q3} \\
-    \bottomrule
-  \end{tabular}
-  \caption{AI usage index}
-  \label{tab:ai}
+	\centering
+	\renewcommand{\arraystretch}{1.35}
+	\begin{tabular}{p{8.0cm} p{3.6cm} p{1.6cm}}
+		\toprule
+		\rowcolor{utaddark}
+		\color{white}\textbf{Task}               &
+		\color{white}\textbf{Model}              &
+		\color{white}\textbf{Section}                                                      \\
+		\midrule
+		\rowcolor{utadrow}
+		Dataset research and pairing strategy    & Claude Sonnet 4.6 & \ref{sec:datasets}  \\
+		State-abbreviation calculated field      & Claude Sonnet 4.6 & \ref{sec:viz:q1}    \\
+		\rowcolor{utadrow}
+		Document labelling and cross-referencing & Claude Sonnet 4.6 & \ref{sec:ai:labels} \\
+		Report structuring and LaTeX formatting  & Claude Sonnet 4.6 & \ref{sec:ai:latex}  \\
+		\rowcolor{utadrow}
+		Supplementary chart generation           & Claude Sonnet 4.6 & \ref{sec:viz:q3}    \\
+		\bottomrule
+	\end{tabular}
+	\caption{AI usage index}
+	\label{tab:ai}
 \end{table}
 
 \subsubsection{Document Labelling and Cross-Referencing}\label{sec:ai:labels}
@@ -274,19 +274,19 @@ this kind of structural text analysis, as they can parse the full document,
 identify every mention of a concept, and apply uniform markup in a single pass.
 
 \begin{quote}
-\textbf{Prompt:} \textit{Add labels to questions Q1, Q2 and Q3 in the document
-and reference those labels whenever those questions are referenced in the
-document.}
+	\textbf{Prompt:} \textit{Add labels to questions Q1, Q2 and Q3 in the document
+		and reference those labels whenever those questions are referenced in the
+		document.}
 \end{quote}
 
 \begin{quote}
-\textbf{Response summary:} Added \texttt{\textbackslash label\{q1\}},
-\texttt{\textbackslash label\{q2\}}, \texttt{\textbackslash label\{q3\}} to
-the three \texttt{\textbackslash subsubsection} headings, inserted
-\texttt{\textbackslash sref\{q1/q2/q3\}} at the end of each item in the
-numbered question list, and prefixed the corresponding Conclusions bullets and
-Visualization Summary table rows with the matching \texttt{\textbackslash sref}
-call, creating clickable hyperlinks throughout the PDF.
+	\textbf{Response summary:} Added \texttt{\textbackslash label\{q1\}},
+	\texttt{\textbackslash label\{q2\}}, \texttt{\textbackslash label\{q3\}} to
+	the three \texttt{\textbackslash subsubsection} headings, inserted
+	\texttt{\textbackslash sref\{q1/q2/q3\}} at the end of each item in the
+	numbered question list, and prefixed the corresponding Conclusions bullets and
+	Visualization Summary table rows with the matching \texttt{\textbackslash sref}
+	call, creating clickable hyperlinks throughout the PDF.
 \end{quote}
 
 \subsubsection{Report Structuring and LaTeX Formatting}\label{sec:ai:latex}
@@ -297,17 +297,17 @@ page-break placement, and bibliography management --- tasks that are
 time-consuming but do not require analytical judgement.
 
 \begin{quote}
-\textbf{Prompt:} \textit{For visualizations, make it so each of them is on a
-different page alongside with their text section, so page breaks are consistent
-and it doesn't break in weird places.}
+	\textbf{Prompt:} \textit{For visualizations, make it so each of them is on a
+		different page alongside with their text section, so page breaks are consistent
+		and it doesn't break in weird places.}
 \end{quote}
 
 \begin{quote}
-\textbf{Response summary:} Added \texttt{\textbackslash usepackage\{float\}}
-to the preamble, inserted \texttt{\textbackslash newpage} before each
-visualization subsection (Q1, Q2, Q3, Dashboards, Summary), and changed all
-figure placement specifiers from \texttt{[h]} to \texttt{[H]} to force
-figures to appear exactly at their source position rather than floating.
+	\textbf{Response summary:} Added \texttt{\textbackslash usepackage\{float\}}
+	to the preamble, inserted \texttt{\textbackslash newpage} before each
+	visualization subsection (Q1, Q2, Q3, Dashboards, Summary), and changed all
+	figure placement specifiers from \texttt{[h]} to \texttt{[H]} to force
+	figures to appear exactly at their source position rather than floating.
 \end{quote}
 
 % ======================================================================
@@ -322,18 +322,18 @@ compatible second dataset was AI-assisted (Claude Sonnet 4.6;
 see Section~\ref{sec:ai}).
 
 \begin{quote}
-\textbf{Prompt:} \textit{I already have a state-year level dataset on
-estimated household gun ownership in the US. I need a second dataset that
-contains information about firearm legislation on a state-year basis so I
-can join them easily. What publicly available datasets would you recommend?}
+	\textbf{Prompt:} \textit{I already have a state-year level dataset on
+		estimated household gun ownership in the US. I need a second dataset that
+		contains information about firearm legislation on a state-year basis so I
+		can join them easily. What publicly available datasets would you recommend?}
 \end{quote}
 
 \begin{quote}
-\textbf{Response summary:} Recommended the Tufts CTSI State Firearm Law
-Database, noting that it tracks 72 binary law provisions per U.S.\ state
-per year from 1976 to 2024, shares the same state--year grain as the
-ownership proxy dataset, and is widely used in public health research,
-making it a straightforward join candidate.
+	\textbf{Response summary:} Recommended the Tufts CTSI State Firearm Law
+	Database, noting that it tracks 72 binary law provisions per U.S.\ state
+	per year from 1976 to 2024, shares the same state--year grain as the
+	ownership proxy dataset, and is widely used in public health research,
+	making it a straightforward join candidate.
 \end{quote}
 
 \subsection{Dataset 1: Firearm Suicide Proxy for Household Gun Ownership, 1949--2023}
@@ -468,8 +468,8 @@ it as an outcome or a direct cause.
 \par
 If a cross-sectional association exists, the natural follow-up is whether it
 has strengthened or weakened over time. By grouping states according to their
-law profile --- either by quantity tier or by law type category
-(see Section~\ref{sec:lawcat}) --- it becomes possible to observe whether
+law profile, either by quantity tier or by law type category
+(see Section~\ref{sec:lawcat}), it becomes possible to observe whether
 homicide trajectories have diverged, and whether that divergence accelerated
 after key legislative periods such as the early 1990s.
 
@@ -488,23 +488,22 @@ history?
 
 \par
 Before building charts in Tableau, design and structural decisions were made
-to align visualizations with the storytelling intent and assignment
-requirements.
+to align visualizations with the storytelling intent.
 
 % -----------------------------------------------------------------------
 \subsection{Storytelling}
 % -----------------------------------------------------------------------
 
 \par
-The project follows a four-act structure. Act~1 establishes the geographic
-and cross-sectional baseline (where is violence highest; what does the law
+The project follows a four act structure. Act~1 establishes the geographic
+and cross sectional baseline (where is violence highest, what does the law
 landscape look like). Act~2 adds the temporal dimension, showing how homicide
 rates have diverged by law profile over 1976--2023, using both categorization
 schemes defined in Section~\ref{sec:lawcat}: quantity tier and law type group
 (Popular vs.\ Evidence-Based). Act~3 narrows to individual states, tracing
 each state's legislative history against its homicide ranking relative to all
 others. Act~4 zooms into the selected law provisions directly, comparing the
-average homicide trend for the Popular and Evidence-Based groups to assess
+average homicide trend for the Popular and Evidence Based groups to assess
 which shows the more consistent association with changes in homicide rates.
 
 % -----------------------------------------------------------------------
@@ -594,22 +593,22 @@ Generating the state abbreviation calculated field was AI-assisted
 The prompt and response are shown below (Prompt~\ref{prompt:abbr}).
 
 \begin{quote}\label{prompt:abbr}
-\textbf{Prompt:} \textit{Generate a Tableau calculated field using a CASE
-statement that maps each U.S.\ state's full name to its two-letter
-abbreviation for all 50 states. Only output the code.}
+	\textbf{Prompt:} \textit{Generate a Tableau calculated field using a CASE
+		statement that maps each U.S.\ state's full name to its two-letter
+		abbreviation for all 50 states. Only output the code.}
 \end{quote}
 
 \begin{quote}
-\textbf{Response:}
-\begin{Verbatim}[fontsize=\footnotesize]
-CASE [State]
-  WHEN "Alabama" THEN "AL"
-  WHEN "Alaska"  THEN "AK"
-  ...
-  WHEN "Wisconsin" THEN "WI"
-  WHEN "Wyoming"   THEN "WY"
-END
-\end{Verbatim}
+	\textbf{Response:}
+	\begin{Verbatim}[fontsize=\footnotesize]
+		CASE [State]
+		WHEN "Alabama" THEN "AL"
+		WHEN "Alaska"  THEN "AK"
+		...
+		WHEN "Wisconsin" THEN "WI"
+		WHEN "Wyoming"   THEN "WY"
+		END
+	\end{Verbatim}
 \end{quote}
 
 \begin{figure}[H]
@@ -755,38 +754,38 @@ its legislative history has evolved over time.
 \subsection{Visualization Summary}
 
 \begin{table}[H]
-  \centering
-  \renewcommand{\arraystretch}{1.35}
-  \begin{tabular}{p{1.0cm} p{2.0cm} p{4.2cm} p{6.0cm}}
-    \toprule
-    \rowcolor{utaddark}
-    \color{white}\textbf{Q} &
-    \color{white}\textbf{Chart} &
-    \color{white}\textbf{Chart Type} &
-    \color{white}\textbf{Tableau Features} \\
-    \midrule
-    \rowcolor{utadrow}
-    Q1\sref{q1} & Fig.~\ref{fig:q1chart1} & Choropleth map
-      & Parameter, calculated field, color encoding \\
-    Q1\sref{q1} & Fig.~\ref{fig:q1chart2} & Scatter plot
-      & Parameter, color encoding \\
-    \rowcolor{utadrow}
-    Q2\sref{q2} & Fig.~\ref{fig:q2chart}  & Line chart (interactive)
-      & Parameter, reference line \\
-    Q3\sref{q3} & Fig.~\ref{fig:q3chart1} & Line chart (per state)
-      & Parameter, filter \\
-    \rowcolor{utadrow}
-    Q3\sref{q3} & Fig.~\ref{fig:q3chart2} & Bar chart (comparative)
-      & Set, reference line, set action \\
-    Q1+Q2       & Fig.~\ref{fig:db1}      & Dashboard
-      & Set action, parameter, filter \\
-    \rowcolor{utadrow}
-    Q3+Q1/Q2    & Fig.~\ref{fig:db2}      & Dashboard
-      & Parameter, set action, filter \\
-    \bottomrule
-  \end{tabular}
-  \caption{Visualization summary}
-  \label{tab:summary}
+	\centering
+	\renewcommand{\arraystretch}{1.35}
+	\begin{tabular}{p{1.0cm} p{2.0cm} p{4.2cm} p{6.0cm}}
+		\toprule
+		\rowcolor{utaddark}
+		\color{white}\textbf{Q}          &
+		\color{white}\textbf{Chart}      &
+		\color{white}\textbf{Chart Type} &
+		\color{white}\textbf{Tableau Features}                                                                    \\
+		\midrule
+		\rowcolor{utadrow}
+		Q1\sref{q1}                      & Fig.~\ref{fig:q1chart1}                     & Choropleth map
+		                                 & Parameter, calculated field, color encoding                            \\
+		Q1\sref{q1}                      & Fig.~\ref{fig:q1chart2}                     & Scatter plot
+		                                 & Parameter, color encoding                                              \\
+		\rowcolor{utadrow}
+		Q2\sref{q2}                      & Fig.~\ref{fig:q2chart}                      & Line chart (interactive)
+		                                 & Parameter, reference line                                              \\
+		Q3\sref{q3}                      & Fig.~\ref{fig:q3chart1}                     & Line chart (per state)
+		                                 & Parameter, filter                                                      \\
+		\rowcolor{utadrow}
+		Q3\sref{q3}                      & Fig.~\ref{fig:q3chart2}                     & Bar chart (comparative)
+		                                 & Set, reference line, set action                                        \\
+		Q1+Q2                            & Fig.~\ref{fig:db1}                          & Dashboard
+		                                 & Set action, parameter, filter                                          \\
+		\rowcolor{utadrow}
+		Q3+Q1/Q2                         & Fig.~\ref{fig:db2}                          & Dashboard
+		                                 & Parameter, set action, filter                                          \\
+		\bottomrule
+	\end{tabular}
+	\caption{Visualization summary}
+	\label{tab:summary}
 \end{table}
 
 \par
