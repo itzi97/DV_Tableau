@@ -68,8 +68,9 @@
 \pagestyle{fancy}
 \fancyhf{}
 \fancyhead[L]{\small\color{textmuted} Firearm Violence and Legislation in the US}
+\fancyhead[R]{\small\color{textmuted} Itziar Morales Rodr\'{i}guez}
 \fancyfoot[R]{\small\color{textmuted}\thepage}
-\fancyfoot[L]{\small\color{textmuted} U-tad}
+\fancyfoot[L]{\raisebox{-2pt}{\includegraphics[height=10pt]{./assets/U-tad-logo.jpg}}}
 \renewcommand{\headrulewidth}{0.6pt}
 \renewcommand{\headrule}{\color{grid}\hrule height 0.6pt}
 \renewcommand{\footrulewidth}{0.4pt}
@@ -471,17 +472,22 @@ lets the viewer switch between them at any point.
 total law count (\texttt{lawtotal}):
 
 \begin{itemize}
-	\item \textbf{Low}
-	\item \textbf{Medium}
-	\item \textbf{High}
+	\item \textbf{Low}: 10 or fewer laws
+	\item \textbf{Medium}: 11 to 25 laws
+	\item \textbf{High}: more than 25 laws
 \end{itemize}
 
 \par
 \textbf{By type}, rather than using all 72 laws, the analysis uses a
 smaller subset: the three most commonly adopted laws (``Popular'') and the
 three with the strongest evidence base in the research literature
-(``Evidence-Based''). States fall into one of four categories depending on
-how many laws from each group they have adopted:
+(``Evidence-Based''). The three Popular laws are \texttt{permitconcealed}
+(concealed-carry permit requirement), \texttt{waiting} (waiting period for
+firearm purchase), and \texttt{statechecks} (state-level background check).
+The three Evidence-Based laws are \texttt{universal} (universal background
+checks), \texttt{gvro} (gun-violence restraining order), and \texttt{assault}
+(assault-weapon restrictions). States fall into one of four categories
+depending on how many laws from each group they have adopted:
 
 \begin{itemize}
 	\item \textbf{Weak}: fewer than two Popular laws and fewer than two Evidence-Based laws
@@ -512,7 +518,8 @@ Color choices were kept deliberate and minimal:
 
 \par
 All charts follow the color scheme from Section~\ref{colors} and the law
-categories from Section~\ref{sec:lawcat}.
+categories from Section~\ref{sec:lawcat}. Features introduced in earlier
+charts are reused and referenced where they appear again.
 
 % --- Q1 -----------------------------------------------------------------
 \newpage
@@ -522,8 +529,18 @@ categories from Section~\ref{sec:lawcat}.
 Two charts answer Q1\sref{q1}. The first is a \textbf{choropleth map}
 (Figure~\ref{fig:q1chart1}) showing the firearm homicide rate by state for a
 selected year. Darker states have higher rates. A \textbf{year parameter}
-controls the view, and a \textbf{calculated field} displays two-letter state
-abbreviations on each mark.
+(\texttt{P Year}) controls the view, and a \textbf{calculated field}
+(\texttt{CF StateAbbreviation}) displays two-letter state abbreviations on
+each mark. This is the first chart to introduce the year parameter and the
+state abbreviation calculated field; both are reused across subsequent charts
+and dashboards.
+
+\par
+Geographically, the map reveals a clear regional pattern. States with lower
+firearm homicide rates tend to cluster in the north and northeast, while states
+with higher rates concentrate in the south. This division suggests that
+geography and legislation are linked, with southern states generally having
+fewer restrictive firearm laws than their northern counterparts.
 
 \par
 Writing all 50 CASE clauses by hand would have been error-prone with no
@@ -538,15 +555,15 @@ analytical value, so this field was generated with AI
 
 \begin{quote}
 	\textbf{Response:}
-	\begin{Verbatim}[fontsize=\footnotesize]
-		CASE [State]
-		WHEN "Alabama" THEN "AL"
-		WHEN "Alaska"  THEN "AK"
-		...
-		WHEN "Wisconsin" THEN "WI"
-		WHEN "Wyoming"   THEN "WY"
-		END
-	\end{Verbatim}
+\begin{Verbatim}[fontsize=\footnotesize,xleftmargin=0pt]
+CASE [State]
+WHEN "Alabama" THEN "AL"
+WHEN "Alaska"  THEN "AK"
+...
+WHEN "Wisconsin" THEN "WI"
+WHEN "Wyoming"   THEN "WY"
+END
+\end{Verbatim}
 \end{quote}
 
 \begin{figure}[H]
@@ -560,8 +577,10 @@ analytical value, so this field was generated with AI
 The second chart (Figure~\ref{fig:q1chart2}) is a \textbf{scatter plot} where
 each point is a state. The X axis shows estimated gun ownership (FSS), the Y
 axis shows total law count (\texttt{lawtotal}), and color encodes the selected
-law profile. A \textbf{parameter} switches between the quantity-based and
-type-based groupings from Section~\ref{sec:lawcat}.
+law profile. A \textbf{parameter} (\texttt{P LawCategorization}, first
+introduced here) switches between the quantity-based and type-based groupings
+from Section~\ref{sec:lawcat}. This parameter is reused in every subsequent
+chart that groups states by law profile.
 
 \begin{figure}[H]
 	\centering
@@ -582,10 +601,10 @@ are the main analytical lenses.
 Q2\sref{q2} uses an \textbf{interactive line chart} (Figure~\ref{fig:q2chart}).
 The X axis covers 1976--2023, the Y axis shows firearm homicide rate, and each
 line represents a group of states. The grouping is controlled by the same
-law-group \textbf{parameter} as Figure~\ref{fig:q1chart2}. In quantity mode
-the groups are Low, Medium, and High, and in type mode they are Weak, Popular,
-Evidence, and Both. A vertical \textbf{reference line} marks notable
-legislative periods.
+\texttt{P LawCategorization} parameter introduced in
+Figure~\ref{fig:q1chart2}. In quantity mode the groups are Low, Medium, and
+High, and in type mode they are Weak, Popular, Evidence, and Both. A vertical
+\textbf{reference line} marks notable legislative periods.
 
 \begin{figure}[H]
 	\centering
@@ -605,13 +624,26 @@ widens over time. The pattern holds under both grouping modes.
 \par
 Two charts answer Q3\sref{q3}. The first (Figure~\ref{fig:q3chart1}) is a
 \textbf{line chart} showing how the total number of firearm laws in a selected
-state has changed over time. A \textbf{state parameter} drives the selection.
-The second (Figure~\ref{fig:q3chart2}) is a \textbf{bar chart} that ranks all
-states by firearm homicide rate for a chosen year. Bars are colored by law
-category, the selected state is highlighted using a \textbf{set}, and a
-national average \textbf{reference line} is overlaid for context. Viewed
-together, the two charts make it easy to see whether legislative growth in a
-state coincides with an improvement in its homicide ranking.
+state has changed over time. A \textbf{state parameter} (\texttt{P State})
+drives the selection; this is the second parameter introduced in the project,
+complementing \texttt{P LawCategorization} from Figure~\ref{fig:q1chart2}.
+
+\par
+The line chart makes it possible to trace when a state crossed a legislative
+threshold, but the gradual slope of many curves means it is difficult to
+pinpoint the precise moment a single law was passed and connect it to an
+immediate change in homicide rate. The aggregate trend, rather than individual
+law introductions, is the more legible signal.
+
+\par
+The second chart (Figure~\ref{fig:q3chart2}) is a \textbf{bar chart} that ranks
+all states by firearm homicide rate for a chosen year. Bars are colored by law
+category using the same color scheme introduced in Figure~\ref{fig:q1chart2}.
+The selected state is highlighted using a \textbf{set}, and a national average
+\textbf{reference line} is overlaid for context. The reference line feature was
+first used in Figure~\ref{fig:q2chart} and is applied here in the same way.
+Viewed together, the two charts make it easy to see whether legislative growth
+in a state coincides with an improvement in its homicide ranking.
 
 \begin{figure}[H]
 	\centering
@@ -627,9 +659,14 @@ state coincides with an improvement in its homicide ranking.
 	\label{fig:q3chart2}
 \end{figure}
 
-\textbf{Insights}: In several states, sustained legislative growth aligns with
-a better position in the homicide ranking. The pattern is not uniform, so no
-causal claim is made.
+\textbf{Insights}: The bar chart clearly shows that states with more laws and,
+in particular, more evidence-based laws tend to rank lower in firearm homicide
+rate compared to other states. The line chart, on the other hand, makes it
+hard to isolate the impact of a single law as soon as it is introduced, since
+the cumulative law count changes gradually. Together, the two charts suggest
+that the overall legislative posture of a state matters more than any single
+law change. In several states, sustained legislative growth aligns with a
+better position in the homicide ranking, though no causal claim is made.
 
 % --- Dashboards ---------------------------------------------------------
 \newpage
@@ -643,10 +680,14 @@ experience.
 \textbf{Dashboard 1} (Figure~\ref{fig:db1}) combines the choropleth map
 (Figure~\ref{fig:q1chart1}), the scatter plot (Figure~\ref{fig:q1chart2}),
 and the Q2 line chart (Figure~\ref{fig:q2chart}), covering Q1\sref{q1} and
-Q2\sref{q2} in one view. A \textbf{dashboard set action} on the map highlights
-the selected state in the scatter plot and updates the line chart. The shared
-law-group \textbf{parameter} applies the same grouping across all three views
-simultaneously.
+Q2\sref{q2} in one view. A \textbf{dashboard filter action} on the map
+highlights the corresponding state in the scatter plot and filters the
+line chart accordingly. A \textbf{highlighter} on the scatter plot also
+allows the user to highlight a specific state by name across all views,
+making it easy to trace a single state through both the cross-sectional and
+the time-series perspectives. The shared \texttt{P LawCategorization}
+parameter introduced in Figure~\ref{fig:q1chart2} applies the same grouping
+across all three views simultaneously.
 
 \begin{figure}[H]
 	\centering
@@ -659,8 +700,11 @@ simultaneously.
 \textbf{Dashboard 2} (Figure~\ref{fig:db2}) is built around Q3\sref{q3},
 with the choropleth map (Figure~\ref{fig:q1chart1}) kept as a geographic
 reference. The bar chart (Figure~\ref{fig:q3chart2}) and the state law history
-line chart (Figure~\ref{fig:q3chart1}) are both linked by the shared state
-\textbf{parameter}, so selecting any state updates both views at once.
+line chart (Figure~\ref{fig:q3chart1}) are both linked by the shared
+\texttt{P State} parameter introduced in Figure~\ref{fig:q3chart1}, so
+selecting any state updates both views at once. Clicking a state on the map
+also triggers a \textbf{filter action} that updates the bar chart and the
+law history line, providing a seamless single-state deep-dive experience.
 
 \begin{figure}[H]
 	\centering
@@ -676,7 +720,7 @@ line chart (Figure~\ref{fig:q3chart1}) are both linked by the shared state
 \begin{table}[H]
 	\centering
 	\renewcommand{\arraystretch}{1.35}
-	\begin{tabular}{p{1.0cm} p{2.0cm} p{4.2cm} p{6.0cm}}
+	\begin{tabular}{p{0.9cm} p{1.8cm} p{3.6cm} p{7.0cm}}
 		\toprule
 		\rowcolor{utaddark}
 		\color{white}\textbf{Q}          &
@@ -686,22 +730,22 @@ line chart (Figure~\ref{fig:q3chart1}) are both linked by the shared state
 		\midrule
 		\rowcolor{utadrow}
 		Q1\sref{q1}                      & Fig.~\ref{fig:q1chart1}                     & Choropleth map
-		                                 & Parameter, calculated field, color encoding                            \\
+		                                 & P Year, CF StateAbbreviation, color encoding                           \\
 		Q1\sref{q1}                      & Fig.~\ref{fig:q1chart2}                     & Scatter plot
-		                                 & Parameter, color encoding                                              \\
+		                                 & P LawCategorization (introduced here), color encoding                  \\
 		\rowcolor{utadrow}
 		Q2\sref{q2}                      & Fig.~\ref{fig:q2chart}                      & Line chart (interactive)
-		                                 & Parameter, reference line                                              \\
+		                                 & P LawCategorization (reused), reference line (introduced here)         \\
 		Q3\sref{q3}                      & Fig.~\ref{fig:q3chart1}                     & Line chart (per state)
-		                                 & Parameter, filter                                                      \\
+		                                 & P State (introduced here), filter                                      \\
 		\rowcolor{utadrow}
 		Q3\sref{q3}                      & Fig.~\ref{fig:q3chart2}                     & Bar chart (comparative)
-		                                 & Set, reference line, set action                                        \\
+		                                 & Set, reference line (reused), set action, P State (reused)             \\
 		Q1+Q2                            & Fig.~\ref{fig:db1}                          & Dashboard
-		                                 & Set action, parameter, filter                                          \\
+		                                 & Filter action, highlighter, P LawCategorization (reused)               \\
 		\rowcolor{utadrow}
 		Q3+Q1/Q2                         & Fig.~\ref{fig:db2}                          & Dashboard
-		                                 & Parameter, set action, filter                                          \\
+		                                 & P State (reused), filter action, map click action                      \\
 		\bottomrule
 	\end{tabular}
 	\caption{Visualization summary}
@@ -713,8 +757,8 @@ Across the project, Table~\ref{tab:summary} shows:
 
 \begin{itemize}
 	\item Four distinct chart types: choropleth map, scatter plot, line chart, bar chart
-	\item Tableau features used: calculated fields, parameters, sets, dashboard set actions,
-	      reference lines, filters, and custom tooltips
+	\item Tableau features used: calculated fields, parameters, sets, dashboard filter and set actions,
+	      reference lines, filters, highlighters, and custom tooltips
 	\item Two data sources joined by state and year, in two different formats (\texttt{.csv} and \texttt{.xlsx})
 \end{itemize}
 
@@ -728,14 +772,25 @@ The visualizations point to the following patterns:
 \begin{itemize}
 	\item Q1\sref{q1}: States with fewer firearm laws tend to have higher firearm
 	      homicide rates, visible in both the map and the scatter plot
-	      (Figure~\ref{fig:q1chart2}).
+	      (Figure~\ref{fig:q1chart2}). The map also reveals a clear geographic
+	      division: states with lower homicide rates cluster in the north, while
+	      those with higher rates concentrate in the south, a pattern that
+	      correlates with the type and quantity of legislation passed in each region.
 	\item Q2\sref{q2}: States with more laws, whether by quantity or by type, show
 	      a stronger decline in firearm homicide from the 1990s onward
 	      (Figure~\ref{fig:q2chart}).
-	\item Q3\sref{q3}: In several states, legislative growth aligns with an
-	      improvement in homicide ranking, though the pattern is not consistent
-	      enough to support a causal claim
-	      (Figures~\ref{fig:q3chart1} and~\ref{fig:q3chart2}).
+	\item Q3\sref{q3}: Although individual law introductions are difficult to track
+	      on a timely, state-by-state basis in the line chart, the effects become
+	      clearer when ranking states against each other: states with more laws
+	      and more evidence-based laws consistently rank lower in firearm homicide
+	      rates than states with fewer or weaker legislation
+	      (Figures~\ref{fig:q3chart1} and~\ref{fig:q3chart2}). Evidence-based
+	      laws appear to be a stronger indicator than the raw count of laws: the
+	      scatter plot shows that some states with a high total law count still
+	      record elevated homicide rates, suggesting that the quality and type of
+	      legislation matters more than its quantity alone. That said, more laws
+	      still generally outperform fewer laws, and evidence-based laws
+	      outperform popular laws when comparing group averages.
 	\item FSS serves as useful background context, but the regulatory environment
 	      is the main lens throughout the project.
 \end{itemize}
