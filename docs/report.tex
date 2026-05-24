@@ -279,13 +279,12 @@ Key observations:
 \subsection{Processing}
 
 \par
-Key processing steps applied before and during connection to Tableau:
-
-\begin{itemize}
-	\item The District of Columbia was excluded via a Tableau filter, as it
-	      is present in the ownership proxy dataset but absent from the
-	      state firearm laws dataset, preventing a valid join for that entity
-\end{itemize}
+Both source files were connected to Tableau without modification to the raw
+data. No column renaming, deduplication, or external pre-processing was
+required. The only structural adjustment was the exclusion of the District of
+Columbia via a Tableau filter, as it is present in the ownership proxy dataset
+but absent from the state firearm laws dataset, which would have prevented a
+valid join for that entity.
 
 \subsection{Research Questions}
 
