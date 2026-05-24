@@ -31,7 +31,6 @@
 \usepackage{siunitx}
 \usepackage{array}
 \usepackage{colortbl}
-\usepackage{tabularx}
 
 % Float placement control
 \usepackage{float}
@@ -729,13 +728,13 @@ law history line, providing a seamless single-state deep-dive experience.
 \newpage
 \subsection{Visualization Summary}
 
-% Column layout across \textwidth:
-%  Q col: 0.5cm  |  Chart col: 1.8cm  |  Chart Type: 4.5cm  |  Tableau Features: fills rest
-% Total fixed = 0.5 + 1.8 + 4.5 + 3*6pt(col sep ~0.5cm each) = ~8.3cm, X col takes ~8.3cm
+% A4 text width with 2.2cm margins = ~16.6cm.
+% Column widths: Q=0.5cm, Chart=1.8cm, ChartType=4.6cm, Features=9.3cm
+% Inter-column spacing: 3 gaps x ~0.167cm = ~0.5cm -> total ~16.7cm (fits)
 \begin{table}[H]
 	\centering
 	\renewcommand{\arraystretch}{1.35}
-	\begin{tabularx}{\textwidth}{p{0.55cm} p{1.7cm} p{4.5cm} X}
+	\begin{tabular}{p{0.5cm} p{1.8cm} p{4.6cm} p{9.3cm}}
 		\toprule
 		\rowcolor{utaddark}
 		\color{white}\textbf{Q}          &
@@ -757,12 +756,13 @@ law history line, providing a seamless single-state deep-dive experience.
 		Q3\sref{q3} & Fig.~\ref{fig:q3chart2} & Bar chart (comparative)
 		            & Set, reference line (reused), set action, P State (reused)           \\
 		Q1+Q2       & Fig.~\ref{fig:db1}      & Dashboard
-		            & Filter action (map to scatter), P Year reference line in line chart, P LawCategorization (reused) \\
+		            & Filter action (map to scatter), P Year reference line in line chart,
+		              P LawCategorization (reused)                                          \\
 		\rowcolor{utadrow}
 		Q3+Q1/Q2    & Fig.~\ref{fig:db2}      & Dashboard
 		            & P State (reused), filter action, map click action                    \\
 		\bottomrule
-	\end{tabularx}
+	\end{tabular}
 	\caption{Visualization summary}
 	\label{tab:summary}
 \end{table}
