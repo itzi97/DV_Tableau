@@ -169,6 +169,21 @@ Specifically, AI was used for the following tasks:
 	      lookup mapping all 50 U.S.\ states
 	\item \textbf{Report structuring}: assistance with LaTeX formatting,
 	      section organisation, and bibliography management
+	\item \textbf{Document labelling and cross-referencing}: adding
+	      \texttt{\textbackslash label} tags to named sections and ensuring
+	      every mention of those sections elsewhere in the document references
+	      them correctly. This task was automated due to its repetitive nature
+	      --- scanning the full document for every occurrence of a reference
+	      and inserting the correct command is mechanical and error-prone when
+	      done manually. Modern LLMs are well-suited to this kind of structural
+	      text analysis, as they can reliably identify where a concept is
+	      discussed and apply consistent markup throughout a document.
+	      A representative prompt used for this task was:
+	      \begin{quote}
+	      \textit{Add labels to questions Q1, Q2 and Q3 in the document and
+	      reference those labels whenever those questions are referenced
+	      in the document.}
+	      \end{quote}
 	\item \textbf{Supplementary chart generation}: one additional visualization
 	      was produced outside of Tableau using AI-assisted code generation,
 	      included as a supplementary figure in the relevant section
@@ -292,13 +307,13 @@ Three questions were formulated based on data exploration and storytelling inten
 
 \begin{enumerate}
 	\item Is a state's firearm homicide rate associated with the number
-	      and type of firearm laws it has in place?
+	      and type of firearm laws it has in place?\sref{q1}
 	\item How have firearm homicide rates evolved over time depending on
 	      the firearm laws passed in each state, whether measured by
-	      the quantity of laws or by the categories of law types enacted?
+	      the quantity of laws or by the categories of law types enacted?\sref{q2}
 	\item For a specific state, does passing more firearm laws correspond
 	      to a reduction in firearm homicide rates, and how does this
-	      affect its ranking relative to other states?
+	      affect its ranking relative to other states?\sref{q3}
 \end{enumerate}
 
 \subsubsection{Question 1: Homicide Rates and the Law Landscape}\label{q1}
@@ -332,7 +347,7 @@ and explorable for any viewer. The motivation is to let someone examine their
 own state: when did it pass laws, how many, and does its current homicide
 ranking reflect that legislative history? It is an exploration due to the
 nature of each state being individualized, making it harder to draw causality
-unlike with the brader analysis.
+unlike with the broader analysis.
 
 \section{Visualization Prep}
 
@@ -584,16 +599,16 @@ Table~\ref{tab:summary} summarizes:
 Visualizations reveal the following:
 
 \begin{itemize}
-	\item States with fewer firearm laws consistently show higher firearm
-	      homicide rates, both geographically and in the cross-sectional
+	\item Q1\sref{q1}: States with fewer firearm laws consistently show higher
+	      firearm homicide rates, both geographically and in the cross-sectional
 	      scatter view [Fig.~\ref{fig:q1chart2}].
-	\item States with more laws, whether measured by quantity or type
-	      category, have seen steeper declines in firearm homicide since
+	\item Q2\sref{q2}: States with more laws, whether measured by quantity or
+	      type category, have seen steeper declines in firearm homicide since
 	      the 1990s [Fig.~\ref{fig:q2chart}].
-	\item In several states, sustained legislative growth coincides with
-	      a visible improvement in homicide ranking relative to other
-	      states, though no causal claim is made [Fig.~\ref{fig:q3chart1},
-			      Fig.~\ref{fig:q3chart2}].
+	\item Q3\sref{q3}: In several states, sustained legislative growth coincides
+	      with a visible improvement in homicide ranking relative to other
+	      states, though no causal claim is made
+	      [Fig.~\ref{fig:q3chart1}, Fig.~\ref{fig:q3chart2}].
 	\item Gun ownership (FSS) provides useful contextual framing but is
 	      not treated as a causal variable; the regulatory environment
 	      is the primary analytical lens throughout the project.
