@@ -119,8 +119,11 @@ The project followed the process below to achieve the goal described above:
 	\item Data source connection, relationships, and calculated fields in Tableau
 	\item Tableau feature selection (parameters, sets, filters, actions, tooltips)
 	\item Dashboard design and interactive storytelling
-	\item Use of AI for further Data Analysis aside from Tableau for more complex
-	      visualizations (extra)
+	\item Use of AI assistance for tedious but mechanical tasks such as generating
+	      calculated fields (e.g.\ a state-name-to-abbreviation mapping for
+	      all 50 states), report structuring, and dataset pairing strategy.
+	      All AI output was reviewed critically before use
+	      (see Section~\ref{sec:ai})
 \end{enumerate}
 
 \subsection{Sources}
@@ -129,12 +132,17 @@ The project followed the process below to achieve the goal described above:
 Numerous sources are used throughout the project such as:
 
 \begin{itemize}
-	\item Official dataset documentation
-	\item Harvard Dataverse and Tufts CTSI dataset metadata
-	\item Academic literature on firearm ownership proxies and gun law effects
-	\item Tableau official documentation
+	\item Official dataset documentation and
+	      codebooks~\autocite{ownershipproxy,statefirearmlaw}
+	\item Harvard Dataverse and Tufts CTSI dataset
+	      metadata~\autocite{kang2023,statefirearmlaw}
+	\item Academic literature on firearm ownership
+	      proxies~\autocite{extendingfss,kang2023}
+	\item Academic literature on gun law
+	      effects~\autocite{kopernij1999,koper2004,donohue2022}
+	\item Tableau official documentation~\autocite{tableau}
 	\item Lecture notebooks and course materials
-	\item AI assistance (declared below)
+	\item AI assistance (declared in Section~\ref{sec:ai})
 \end{itemize}
 
 \par
@@ -142,14 +150,16 @@ Regardless of the source, these are indicated through bibliography and
 references, or in the case of AI, an explicit note indicating the model and
 prompt used.
 
-\subsection{AI Usage}
+\subsection{AI Usage}\label{sec:ai}
 
 \par
 AI was used during this project in a critical and supervised manner. All
 AI-generated suggestions were reviewed and scrutinized before being applied,
 with particular attention to the risk of hallucination. AI was consulted
-primarily for dataset pairing strategy, question framing, and Tableau workflow
-guidance, and was not used to generate data or conclusions directly.
+primarily for dataset pairing strategy, question framing, Tableau workflow
+guidance, and the generation of mechanical calculated fields such as a
+state-name-to-abbreviation lookup mapping all 50 U.S.\ states. It was not
+used to generate data, draw conclusions, or produce visualizations directly.
 
 \section{Datasets}
 
