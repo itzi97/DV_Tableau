@@ -554,15 +554,15 @@ analytical value, so this field was generated with AI
 
 \begin{quote}
 	\textbf{Response:}
-\begin{Verbatim}[fontsize=\footnotesize,xleftmargin=0pt]
-CASE [State]
-WHEN "Alabama" THEN "AL"
-WHEN "Alaska"  THEN "AK"
-...
-WHEN "Wisconsin" THEN "WI"
-WHEN "Wyoming"   THEN "WY"
-END
-\end{Verbatim}
+	\begin{Verbatim}[fontsize=\footnotesize,xleftmargin=0pt]
+		CASE [State]
+		WHEN "Alabama" THEN "AL"
+		WHEN "Alaska"  THEN "AK"
+		...
+		WHEN "Wisconsin" THEN "WI"
+		WHEN "Wyoming"   THEN "WY"
+		END
+	\end{Verbatim}
 \end{quote}
 
 \begin{figure}[H]
@@ -739,27 +739,27 @@ law history line, providing a seamless single-state deep-dive experience.
 		\color{white}\textbf{Q}          &
 		\color{white}\textbf{Chart}      &
 		\color{white}\textbf{Chart Type} &
-		\color{white}\textbf{Tableau Features}                                             \\
+		\color{white}\textbf{Tableau Features}                                                                                             \\
 		\midrule
 		\rowcolor{utadrow}
-		Q1\sref{q1} & Fig.~\ref{fig:q1chart1} & Choropleth map
-		            & P Year, CF StateAbbreviation, orange severity gradient               \\
-		Q1\sref{q1} & Fig.~\ref{fig:q1chart2} & Scatter plot
-		            & P LawCategorization (introduced here), color encoding                \\
+		Q1\sref{q1}                      & Fig.~\ref{fig:q1chart1}                                              & Choropleth map
+		                                 & P Year, CF StateAbbreviation, orange severity gradient                                          \\
+		Q1\sref{q1}                      & Fig.~\ref{fig:q1chart2}                                              & Scatter plot
+		                                 & P LawCategorization (introduced here), color encoding                                           \\
 		\rowcolor{utadrow}
-		Q2\sref{q2} & Fig.~\ref{fig:q2chart}  & Line chart (interactive)
-		            & P LawCategorization (reused), reference line (introduced here)       \\
-		Q3\sref{q3} & Fig.~\ref{fig:q3chart1} & Line chart (per state)
-		            & P State (introduced here), filter                                    \\
+		Q2\sref{q2}                      & Fig.~\ref{fig:q2chart}                                               & Line chart (interactive)
+		                                 & P LawCategorization (reused), reference line (introduced here)                                  \\
+		Q3\sref{q3}                      & Fig.~\ref{fig:q3chart1}                                              & Line chart (per state)
+		                                 & P State (introduced here), filter                                                               \\
 		\rowcolor{utadrow}
-		Q3\sref{q3} & Fig.~\ref{fig:q3chart2} & Bar chart (comparative)
-		            & Set, reference line (reused), set action, P State (reused)           \\
-		Q1+Q2       & Fig.~\ref{fig:db1}      & Dashboard
-		            & Filter action (map to scatter), P Year reference line in line chart,
-		              P LawCategorization (reused)                                          \\
+		Q3\sref{q3}                      & Fig.~\ref{fig:q3chart2}                                              & Bar chart (comparative)
+		                                 & Set, reference line (reused), set action, P State (reused)                                      \\
+		Q1+Q2                            & Fig.~\ref{fig:db1}                                                   & Dashboard
+		                                 & Filter action (map to scatter), P Year reference line in line chart,
+		P LawCategorization (reused)                                                                                                       \\
 		\rowcolor{utadrow}
-		Q3+Q1/Q2    & Fig.~\ref{fig:db2}      & Dashboard
-		            & P State (reused), filter action, map click action                    \\
+		Q3+Q1/Q2                         & Fig.~\ref{fig:db2}                                                   & Dashboard
+		                                 & P State (reused), filter action, map click action                                               \\
 		\bottomrule
 	\end{tabular}
 	\caption{Visualization summary}
@@ -840,28 +840,23 @@ homicide rates evolve around the adoption of popular versus evidence-based
 laws.
 
 \begin{quote}
-	\textbf{Prompt to Perplexity:} \textit{Using the Kang et al. firearm ownership
+	\textbf{Prompt to Perplexity:}
+	\textit{
+		Using the Kang et al. firearm ownership
 		proxy dataset and the Tufts CTSI State Firearm Law Database, generate a
 		multi line event study showing the average firearm homicide rate from
 		5 years before to 10 years after the adoption of 3 popular firearm laws
 		versus 3 evidence based firearm laws.
-
-		For the popular laws, use:
-		- Gun violence RO
-		- Assault weapons ban
-		- LCM Ban
-
-		For the evidence-based laws, use:
-		- permit to purchase
-		- waiting period
-		- universal BG check
-
+		For the popular laws, use, Gun violence RO, Assault weapons ban, LCM Ban.
+		For the evidence-based laws, use: permit to purchase, waiting period,
+		universal BG check.
 		Plot a separate line for each law, grouped visually into popular and
 		evidence-based categories. Also include summary metrics comparing the
 		average post-adoption homicide rates between the two groups at the
 		bottom of the figure, and simplify the axis labels so they are shown
 		only once for all charts. Only output the code needed to build this
-		chart.}
+		chart. (Prompt was better formatted, but \LaTeX doesn't let allow
+		proper formatting in quote blocks).}
 \end{quote}
 
 \begin{quote}
@@ -895,6 +890,22 @@ laws.
 	      but slower improvement, reinforcing the conclusion that the type of law
 	      matters more than its prevalence alone.
 \end{itemize}
+
+\textbf{Conclusion}
+\par
+Even though the latter chart is not part of the Tableau dashboards, it was
+necessary to properly compare laws across the board for different states since
+different states adopt laws at different times and such an analysis is not easy
+to do within Tableau since there needed to be extensive data processing done
+to be able to chart data in such a way. Claude was used to do this with the
+prompt shown above since it was able to grab the data and correct the timeline
+to when certain laws were passed and help align that for all states for easier
+charting for 6 different laws.
+
+\par
+Overall, passing laws seems to have a significant impact on firearm homicide
+rates and within passing laws, passing those with evidence backing them have
+the better results.
 
 \newpage
 
