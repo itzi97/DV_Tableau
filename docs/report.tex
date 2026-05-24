@@ -27,6 +27,9 @@
 \usepackage{booktabs}
 \usepackage{siunitx}
 
+% Float placement control
+\usepackage{float}
+
 % Bibliography
 \usepackage[style=numeric,autocite=superscript,backend=biber,sorting=none]{biblatex}
 \addbibresource{./report.bib}
@@ -390,7 +393,9 @@ The following Tableau features were planned and used across this project:
 	      (from Analytics pane)
 \end{itemize}
 
+% -----------------------------------------------------------------------
 \section{Visualizations}
+% -----------------------------------------------------------------------
 
 \par
 A consistent set of calculated fields and a shared color scheme were applied
@@ -398,6 +403,8 @@ across all visualizations. Field names are self-explanatory (e.g.\
 \texttt{CF\_law\_count}, \texttt{CF\_show\_state}, \texttt{P\_year})
 to ensure readability and reproducibility.
 
+% --- Q1 -----------------------------------------------------------------
+\newpage
 \subsection{Q1 -- Homicide Rates and the Law Landscape}
 
 \par
@@ -412,14 +419,14 @@ law-categorization parameter allow the viewer to scrub through time and
 switch the color encoding between law tier and law type group, enabling
 both a quantitative and a qualitative reading of the law landscape.
 
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{../figures/Q1Chart1.png}
 	\caption{Q1 -- Firearm Homicide Rate by State (Choropleth Map)}
 	\label{fig:q1chart1}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{../figures/Q1Chart2.png}
 	\caption{Q1 -- Law Count vs.\ Estimated Gun Ownership (FSS), colored by Firearm Homicide Rate (Scatter Plot)}
@@ -431,6 +438,8 @@ homicide rates. The FSS axis provides ownership context but is not
 treated as a causal variable; the law count and law type dimensions
 are the primary analytical lenses.
 
+% --- Q2 -----------------------------------------------------------------
+\newpage
 \subsection{Q2 -- Homicide Trends by Law Profile Over Time}
 
 \par
@@ -443,7 +452,7 @@ When set to ``Law Type Group'', lines reflect groups defined by the
 categories of laws present. This toggle makes it possible to analyse
 both the volume and the nature of legislation in a single chart.
 
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{../figures/Q2Chart.png}
 	\caption{Q2 -- Firearm Homicide Rate Over Time by Law Profile (1976--2023)}
@@ -455,6 +464,8 @@ decline in firearm homicide rates from the 1990s onward. The divergence
 between groups widens over time, and the pattern holds across both the
 law quantity and law type groupings.
 
+% --- Q3 -----------------------------------------------------------------
+\newpage
 \subsection{Q3 -- State-Level Law History and Homicide Standing}
 
 \par
@@ -469,14 +480,14 @@ it stands relative to all others. Together, the two charts let the viewer
 judge whether periods of legislative growth in the selected state coincide
 with an improvement in its homicide ranking.
 
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{../figures/Q3Chart1.png}
 	\caption{Q3 -- Firearm Laws in Effect Over Time for Selected State (Line Chart)}
 	\label{fig:q3chart1}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{../figures/Q3Chart2.png}
 	\caption{Q3 -- Firearm Homicide Rate by State for Selected Year, colored by Law Group, Selected State Highlighted (Bar Chart)}
@@ -489,12 +500,15 @@ states. The relationship is not uniform and no causal interpretation is
 claimed; the viewer is invited to explore individual state trajectories
 interactively.
 
+% --- Dashboards ---------------------------------------------------------
+\newpage
 \subsection{Dashboards}
 
 \par
 Two dashboards integrate the individual charts into a cohesive interactive
 experience.
 
+\par
 \textbf{Dashboard 1} combines the choropleth map (Q1Chart1), the scatter
 plot (Q1Chart2), and the law profile line chart (Q2Chart). A click action
 on the map filters the scatter to highlight the selected state; the law
@@ -504,6 +518,14 @@ single toggle switches the analytical lens for the entire dashboard.
 This gives the viewer a complete overview of the geographic, cross-sectional,
 and trend dimensions simultaneously.
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{../figures/Dashboard1.png}
+	\caption{Dashboard 1 -- Geographic Overview, Law--Homicide Scatter, and Law Profile Trends}
+	\label{fig:db1}
+\end{figure}
+
+\par
 \textbf{Dashboard 2} combines the choropleth map (Q1Chart1), the comparative
 bar chart (Q3Chart2), and the single-state law history line chart
 (Q3Chart1). A shared state parameter drives both the bar chart highlight
@@ -511,25 +533,18 @@ and the line chart, letting the viewer select any state and instantly
 see where it stands relative to all others and how its legislative
 history has unfolded over time.
 
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=\textwidth]{../figures/Dashboard1.png}
-	\caption{Dashboard 1 -- Geographic Overview, Law--Homicide Scatter, and Law Profile Trends}
-	\label{fig:db1}
-\end{figure}
-
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{../figures/Dashboard2.png}
 	\caption{Dashboard 2 -- Geographic Map, State Homicide Ranking Bar Chart, and Selected State Law History}
 	\label{fig:db2}
 \end{figure}
 
-\pagebreak
+% --- Summary table ------------------------------------------------------
+\newpage
+\subsection{Visualization Summary}
 
-\subsubsection{Visualization Summary}
-
-\begin{table}[htbp]
+\begin{table}[H]
 	\centering
 	\begin{tabular}{rcll}
 		\toprule
@@ -591,7 +606,7 @@ the absence of statistical controls for confounding variables such as
 poverty and urbanization, and the use of a static join on state name
 which may mask within-state variation.
 
-\pagebreak
+\newpage
 
 \section{References}
 \printbibliography[heading=none]
