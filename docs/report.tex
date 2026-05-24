@@ -434,7 +434,8 @@ data. No column renaming, deduplication, or external pre-processing was
 required. The only structural adjustment was the exclusion of the District of
 Columbia via a Tableau filter, as it is present in the ownership proxy dataset
 but absent from the state firearm laws dataset, which would have prevented a
-valid join for that entity.
+valid join for that entity. All visualizations are filtered to the years
+1976--2023, the window for which both datasets have complete data.
 
 \subsection{Research Questions}
 
@@ -467,11 +468,10 @@ it as an outcome or a direct cause.
 \par
 If a cross-sectional association exists, the natural follow-up is whether it
 has strengthened or weakened over time. By grouping states according to their
-law profile --- either by quantity tier (low, medium, high) or by law type
-(the three most widely adopted laws versus the three with the strongest
-evidence base) --- it becomes possible to observe whether homicide trajectories
-have diverged, and whether that divergence accelerated after key legislative
-periods such as the early 1990s.
+law profile --- either by quantity tier or by law type category
+(see Section~\ref{sec:lawcat}) --- it becomes possible to observe whether
+homicide trajectories have diverged, and whether that divergence accelerated
+after key legislative periods such as the early 1990s.
 
 \subsubsection{Question 3: State-Level Law History and Homicide Standing}\label{q3}
 
@@ -499,14 +499,50 @@ requirements.
 The project follows a four-act structure. Act~1 establishes the geographic
 and cross-sectional baseline (where is violence highest; what does the law
 landscape look like). Act~2 adds the temporal dimension, showing how homicide
-rates have diverged by law profile over 1976--2023, using two categorizations:
-law quantity tier (low, medium, high) and law type (the three most widely
-adopted laws versus the three with the strongest evidence base). Act~3
-narrows to individual states, tracing each state's legislative history against
-its homicide ranking relative to all others. Act~4 zooms into the selected
-law provisions directly, comparing the average homicide trend for each of
-the six tracked laws to assess which category shows the more consistent
-association with changes in homicide rates.
+rates have diverged by law profile over 1976--2023, using both categorization
+schemes defined in Section~\ref{sec:lawcat}: quantity tier and law type group
+(Popular vs.\ Evidence-Based). Act~3 narrows to individual states, tracing
+each state's legislative history against its homicide ranking relative to all
+others. Act~4 zooms into the selected law provisions directly, comparing the
+average homicide trend for the Popular and Evidence-Based groups to assess
+which shows the more consistent association with changes in homicide rates.
+
+% -----------------------------------------------------------------------
+\subsection{Law Categorization}\label{sec:lawcat}
+% -----------------------------------------------------------------------
+
+\par
+Two complementary categorization schemes are used across the visualizations
+to group states by their law profile. Both are applied through a shared
+parameter that lets the viewer toggle between them.
+
+\par
+\textbf{By quantity} --- states are assigned to one of three tiers based on
+their total law count (\texttt{lawtotal}) for a given year:
+
+\begin{itemize}
+	\item \textbf{Low} --- states with a relatively small number of laws in
+	      effect
+	\item \textbf{Medium} --- states in the middle tier
+	\item \textbf{High} --- states with a large number of laws in effect
+\end{itemize}
+
+\par
+\textbf{By type} --- rather than comparing all 72 laws, a focused subset was
+selected: the three most widely adopted laws (``Popular'') and the three laws
+with the strongest evidence base in the literature (``Evidence-Based''). States
+are then classified into four mutually exclusive categories based on whether
+they have enacted two or more laws from either group:
+
+\begin{itemize}
+	\item \textbf{Weak} --- fewer than two Popular laws and fewer than two
+	      Evidence-Based laws
+	\item \textbf{Popular} --- two or more Popular laws, but fewer than two
+	      Evidence-Based laws
+	\item \textbf{Evidence} --- two or more Evidence-Based laws, but fewer than
+	      two Popular laws
+	\item \textbf{Both} --- two or more laws from each group
+\end{itemize}
 
 % -----------------------------------------------------------------------
 \subsection{Colors and Themes}\label{colors}
@@ -536,7 +572,8 @@ clarity:
 
 \par
 All visualizations share a consistent color scheme as described in
-Section~\ref{colors}.
+Section~\ref{colors} and use the law categorization schemes defined in
+Section~\ref{sec:lawcat}.
 
 % --- Q1 -----------------------------------------------------------------
 \newpage
@@ -587,14 +624,14 @@ The second chart (Figure~\ref{fig:q1chart2}) is a \textbf{scatter plot}
 where each point represents one state: the X axis shows estimated gun
 ownership (FSS) as contextual background, the Y axis shows the total law
 count (\texttt{lawtotal}), and color encodes the firearm homicide rate.
-A \textbf{parameter} lets the viewer toggle between a law-quantity tier
-view and a law-type group view, switching the color encoding across the
-entire chart without rebuilding it.
+A \textbf{parameter} lets the viewer toggle between the quantity tier view
+and the law type group view (see Section~\ref{sec:lawcat}), switching the
+color encoding across the entire chart without rebuilding it.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.95\textwidth]{../figures/Q1Chart2.png}
-	\caption{Q1 -- Law Count vs.\ Estimated Gun Ownership (FSS), colored by Firearm Homicide Rate (Scatter Plot)}
+	\caption{Q1 -- Law Count vs.\ Estimated Gun Ownership (FSS), colored by Law Profile (Scatter Plot)}
 	\label{fig:q1chart2}
 \end{figure}
 
@@ -613,10 +650,10 @@ Q2\sref{q2}. The X axis shows year (1976--2023), the Y axis shows firearm
 homicide rate, and each line represents a group of states defined by the
 active law-group \textbf{parameter} --- shared with Figure~\ref{fig:q1chart2}
 so both charts respond to the same toggle. When set to ``Law Quantity Tier'',
-states are grouped into low, medium, and high tertiles based on
-\texttt{lawtotal}; when set to ``Law Type Group'', lines represent the
-three most widely adopted laws versus the three with the strongest evidence
-base. A vertical \textbf{reference line} marks notable legislative periods,
+states are grouped into the Low, Medium, and High tiers; when set to
+``Law Type Group'', lines represent the four type categories --- Weak,
+Popular, Evidence, and Both --- as defined in Section~\ref{sec:lawcat}.
+A vertical \textbf{reference line} marks notable legislative periods,
 making it possible to observe whether trajectories shifted around key
 policy events.
 
@@ -643,12 +680,13 @@ time for a user-selected state, driven by a \textbf{parameter}. This makes
 it easy to identify when a state underwent major legislative shifts. The
 second (Figure~\ref{fig:q3chart2}) is a \textbf{bar chart} ranking all
 states by firearm homicide rate in a selected year: bars are colored by
-law-group category, and the selected state is highlighted using a \textbf{set}
-so the viewer can immediately see where it stands relative to all others.
-A national average \textbf{reference line} is overlaid on the bar chart to
-provide immediate context. Together, Figures~\ref{fig:q3chart1}
-and~\ref{fig:q3chart2} let the viewer judge whether periods of legislative
-growth coincide with an improvement in that state's homicide ranking.
+law-group category (Section~\ref{sec:lawcat}), and the selected state is
+highlighted using a \textbf{set} so the viewer can immediately see where it
+stands relative to all others. A national average \textbf{reference line}
+is overlaid on the bar chart to provide immediate context. Together,
+Figures~\ref{fig:q3chart1} and~\ref{fig:q3chart2} let the viewer judge
+whether periods of legislative growth coincide with an improvement in that
+state's homicide ranking.
 
 \begin{figure}[H]
 	\centering
